@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #0d1b2a;
+  background: #ffffff;
+  font-family: "Fixel Text", Inter, Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(65, 190, 67, 0.25);
+}
+
+.focus-ring {
+  @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neugreen-green;
+}
+
+.section-pad {
+  @apply px-5 py-16 sm:px-6 lg:px-8 lg:py-24;
+}
+
+.container-wide {
+  @apply mx-auto w-full max-w-7xl;
+}
+
+.eyebrow {
+  @apply text-xs font-bold uppercase tracking-[0.18em] text-neugreen-blue;
+}
+
+.card-hover {
+  @apply transition duration-300 hover:-translate-y-1 hover:shadow-industrial;
+}
