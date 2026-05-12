@@ -5,7 +5,7 @@ import SectionHeader from '../components/SectionHeader.jsx';
 import { whatsappUrl } from '../utils/navigation.js';
 
 const contactOptions = [
-  { icon: 'wa',      label: 'WhatsApp', value: 444847 + 3705, href: whatsappUrl,               note: 'Respuesta en minutos en horario hábil' },
+  { icon: 'wa',      label: 'WhatsApp', value: '444 847 3705', href: whatsappUrl,               note: 'Respuesta en minutos en horario hábil' },
   { icon: 'mail',    label: 'Correo',   value: 'ventas@neugreen.mx', href: 'mailto:ventas@neugreen.mx', note: 'Respondemos en máx. 24 horas' },
   { icon: 'phone',   label: 'Teléfono', value: '444 847 3705', href: 'tel:+524448473705',       note: 'Lun–Vie 9:00–18:00, Sáb 9:00–13:00' },
 ];
