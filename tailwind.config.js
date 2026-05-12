@@ -4,18 +4,19 @@ export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
-      colors: {
-        neugreen: brandColors,
-      },
+      colors: { ng: brandColors },
       fontFamily: {
-        sans: ['"Fixel Text"', 'Inter', 'Arial', 'sans-serif'],
+        display: ['"Bricolage Grotesque"', 'Georgia', 'serif'],
+        sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        industrial: '0 24px 70px rgba(0, 31, 83, 0.12)',
+        card:  '0 2px 16px rgba(14,58,95,0.08)',
+        lift:  '0 8px 32px rgba(14,58,95,0.14)',
+        hero:  '0 24px 80px rgba(14,58,95,0.20)',
       },
       backgroundImage: {
-        'grid-blue':
-          'linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px)',
+        'grid-white': 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
+        'grid-dark':  'linear-gradient(rgba(14,58,95,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(14,58,95,.06) 1px, transparent 1px)',
       },
     },
   },

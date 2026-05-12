@@ -3,49 +3,68 @@
 @tailwind utilities;
 
 :root {
-  color: #0d1b2a;
-  background: #ffffff;
-  font-family: "Fixel Text", Inter, Arial, sans-serif;
+  color: #1A2832;
+  background: #fff;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   min-width: 320px;
+  font-family: "DM Sans", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-button,
-input,
-textarea,
-select {
-  font: inherit;
+button, input, textarea, select { font: inherit; }
+
+::selection { background: rgba(91,162,46,.22); }
+
+/* Utilities */
+.focus-ring { @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ng-green; }
+.section-pad { @apply px-5 py-16 sm:px-6 lg:px-8 lg:py-24; }
+.container-wide { @apply mx-auto w-full max-w-7xl; }
+.eyebrow { @apply text-xs font-semibold uppercase tracking-[0.20em] text-ng-green; }
+.display { font-family: "Bricolage Grotesque", Georgia, serif; }
+
+/* Entrance animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-::selection {
-  background: rgba(65, 190, 67, 0.25);
-}
+.anim-up   { animation: fadeUp    0.6s ease forwards; opacity: 0; }
+.anim-in   { animation: fadeIn    0.5s ease forwards; opacity: 0; }
+.anim-right{ animation: slideRight 0.5s ease forwards; opacity: 0; }
+.anim-scale{ animation: scaleIn   0.5s ease forwards; opacity: 0; }
 
-.focus-ring {
-  @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neugreen-green;
-}
+.delay-100 { animation-delay: .10s; }
+.delay-150 { animation-delay: .15s; }
+.delay-200 { animation-delay: .20s; }
+.delay-250 { animation-delay: .25s; }
+.delay-300 { animation-delay: .30s; }
+.delay-400 { animation-delay: .40s; }
+.delay-500 { animation-delay: .50s; }
+.delay-600 { animation-delay: .60s; }
 
-.section-pad {
-  @apply px-5 py-16 sm:px-6 lg:px-8 lg:py-24;
-}
+/* Card hover */
+.card-hover { transition: transform .25s ease, box-shadow .25s ease; }
+.card-hover:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(14,58,95,0.13); }
 
-.container-wide {
-  @apply mx-auto w-full max-w-7xl;
-}
-
-.eyebrow {
-  @apply text-xs font-bold uppercase tracking-[0.18em] text-neugreen-blue;
-}
-
-.card-hover {
-  @apply transition duration-300 hover:-translate-y-1 hover:shadow-industrial;
-}
+/* Stat strip */
+.stat-item { @apply flex flex-col items-center gap-1; }
+.stat-num  { font-family: "Bricolage Grotesque", serif; @apply text-3xl font-extrabold text-white; }
+.stat-label{ @apply text-xs font-medium uppercase tracking-[0.15em] text-white/60; }

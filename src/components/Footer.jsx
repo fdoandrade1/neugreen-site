@@ -1,3 +1,4 @@
+import logoImg from '../assets/logo-neugreen.png';
 import { navItems } from '../data/siteData.js';
 import { navigateTo, whatsappUrl } from '../utils/navigation.js';
 import Button from './Button.jsx';
@@ -5,73 +6,72 @@ import Icon from './Icon.jsx';
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const go = (href) => (e) => { e.preventDefault(); navigateTo(href); };
 
   return (
-    <footer className="bg-neugreen-navy text-white">
+    <footer className="bg-ng-navy text-white">
       <div className="container-wide px-5 py-14 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_.8fr_.8fr]">
+        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr]">
+
+          {/* Brand column */}
           <div>
-            <div className="flex items-center gap-3">
-              <span className="grid h-11 w-11 place-items-center rounded-md bg-white text-xl font-black text-neugreen-blue">
-                N
-              </span>
-              <div>
-                <p className="text-2xl font-black">Neugreen</p>
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/60">México</p>
-              </div>
-            </div>
-            <p className="mt-6 max-w-xl text-sm leading-7 text-white/72">
-              Biotecnología aplicada a limpieza, desinfección, manufactura química y tratamiento de agua para
-              empresas industriales, comerciales e institucionales.
+            <img src={logoImg} alt="Neugreen México" className="h-9 w-auto brightness-0 invert" />
+            <p className="mt-5 max-w-sm text-sm leading-7 text-white/60">
+              Biotecnología aplicada a limpieza, desinfección, manufactura química y tratamiento de agua para industrias, comercios e instituciones en México.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Button href={whatsappUrl} variant="primary" icon={<Icon name="phone" className="h-4 w-4" />}>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Button href={whatsappUrl} variant="primary" icon={<Icon name="wa" className="h-4 w-4" />}>
                 WhatsApp
               </Button>
-              <Button href="mailto:ventas@neugreen.mx" variant="secondary" icon={<Icon name="mail" className="h-4 w-4" />}>
+              <Button href="mailto:ventas@neugreen.mx" variant="ghost" icon={<Icon name="mail" className="h-4 w-4" />}>
                 ventas@neugreen.mx
               </Button>
             </div>
+            <div className="mt-6 space-y-1 text-sm text-white/50">
+              <p className="flex items-center gap-2">
+                <Icon name="phone" className="h-4 w-4 shrink-0" />
+                <a href="tel:+524448473705" className="hover:text-white transition">444 847 3705</a>
+              </p>
+              <p className="flex items-start gap-2 text-xs leading-5">
+                Prol. Pánfilo Natera 501A, La Angostura, Mexquitic de Carmona, 78483 SLP, México
+              </p>
+            </div>
           </div>
 
+          {/* Nav */}
           <div>
-            <h2 className="text-sm font-black uppercase tracking-[0.18em] text-white/55">Sitio</h2>
-            <div className="mt-5 grid gap-3">
+            <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-white/40">Sitio</h3>
+            <nav className="mt-5 grid gap-2.5">
               {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    navigateTo(item.href);
-                  }}
-                  className="text-sm font-semibold text-white/72 transition hover:text-white"
-                >
+                <a key={item.href} href={item.href} onClick={go(item.href)}
+                  className="text-sm text-white/65 transition hover:text-white">
                   {item.label}
                 </a>
               ))}
-            </div>
+            </nav>
           </div>
 
+          {/* Lines */}
           <div>
-            <h2 className="text-sm font-black uppercase tracking-[0.18em] text-white/55">Contacto</h2>
-            <div className="mt-5 grid gap-3 text-sm text-white/72">
-              <a className="transition hover:text-white" href="tel:+524448483705">
-                444 848 3705
-              </a>
-              <a className="transition hover:text-white" href="mailto:ventas@neugreen.mx">
-                ventas@neugreen.mx
-              </a>
-              <a className="transition hover:text-white" href="https://www.neugreen.mx" target="_blank" rel="noreferrer">
-                www.neugreen.mx
-              </a>
-              <p>San Luis Potosí, México</p>
+            <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-white/40">Líneas</h3>
+            <div className="mt-5 grid gap-2.5 text-sm text-white/65">
+              {['Productos de línea', 'Maquila y marca privada', 'Soluciones industriales', 'Tratamiento de agua'].map((l) => (
+                <span key={l}>{l}</span>
+              ))}
+            </div>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {['COFEPRIS', 'FDA', 'EPA', 'B2B'].map((tag) => (
+                <span key={tag} className="rounded-md border border-white/15 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-white/50">
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
         </div>
 
-        <div className="mt-12 border-t border-white/12 pt-6 text-xs text-white/50">
-          © {year} Neugreen México. Sitio corporativo B2B.
+        <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row sm:justify-between">
+          <span>© {year} Neugreen México. Sitio corporativo B2B.</span>
+          <a href="https://www.neugreen.mx" className="hover:text-white/70 transition">www.neugreen.mx</a>
         </div>
       </div>
     </footer>

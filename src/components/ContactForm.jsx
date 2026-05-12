@@ -2,61 +2,50 @@ import Button from './Button.jsx';
 
 export default function ContactForm() {
   return (
-    <form
-      name="contacto-neugreen"
-      method="POST"
-      data-netlify="true"
+    <form name="contacto-neugreen" method="POST" data-netlify="true"
       netlify-honeypot="bot-field"
-      className="rounded-md border border-neugreen-line bg-white p-5 shadow-industrial sm:p-7"
-    >
+      className="rounded-xl border border-ng-line bg-white p-6 shadow-lift sm:p-8">
       <input type="hidden" name="form-name" value="contacto-neugreen" />
-      <p className="hidden">
-        <label>
-          No llenar: <input name="bot-field" />
-        </label>
-      </p>
+      <p className="hidden"><label>No llenar: <input name="bot-field" /></label></p>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <label className="grid gap-2 text-sm font-bold text-neugreen-ink">
-          Nombre
-          <input className="focus-ring rounded-md border border-neugreen-line px-4 py-3 font-medium" name="nombre" required />
-        </label>
-        <label className="grid gap-2 text-sm font-bold text-neugreen-ink">
-          Empresa
-          <input className="focus-ring rounded-md border border-neugreen-line px-4 py-3 font-medium" name="empresa" required />
-        </label>
-        <label className="grid gap-2 text-sm font-bold text-neugreen-ink">
-          Teléfono
-          <input className="focus-ring rounded-md border border-neugreen-line px-4 py-3 font-medium" name="telefono" type="tel" required />
-        </label>
-        <label className="grid gap-2 text-sm font-bold text-neugreen-ink">
-          Correo
-          <input className="focus-ring rounded-md border border-neugreen-line px-4 py-3 font-medium" name="correo" type="email" required />
-        </label>
+        {[
+          { label: 'Nombre *',  name: 'nombre',  type: 'text',  ph: 'Tu nombre' },
+          { label: 'Empresa *', name: 'empresa', type: 'text',  ph: 'Nombre de la empresa' },
+          { label: 'Teléfono *',name: 'telefono',type: 'tel',   ph: '444 000 0000' },
+          { label: 'Correo *',  name: 'correo',  type: 'email', ph: 'correo@empresa.com' },
+        ].map(({ label, name, type, ph }) => (
+          <label key={name} className="flex flex-col gap-1.5 text-sm font-semibold text-ng-ink">
+            {label}
+            <input type={type} name={name} placeholder={ph} required
+              className="focus-ring rounded-lg border border-ng-line px-4 py-3 text-sm font-normal placeholder:text-ng-steel/50 focus:border-ng-blue transition" />
+          </label>
+        ))}
       </div>
 
-      <label className="mt-5 grid gap-2 text-sm font-bold text-neugreen-ink">
-        Línea de interés
-        <select className="focus-ring rounded-md border border-neugreen-line px-4 py-3 font-medium" name="linea" required>
-          <option value="">Seleccionar</option>
-          <option>Productos</option>
-          <option>Maquila</option>
-          <option>Industrial</option>
+      <label className="mt-5 flex flex-col gap-1.5 text-sm font-semibold text-ng-ink">
+        Línea de interés *
+        <select name="linea" required
+          className="focus-ring rounded-lg border border-ng-line px-4 py-3 text-sm font-normal focus:border-ng-blue transition">
+          <option value="">Seleccionar línea…</option>
+          <option value="Productos">Productos de línea (limpieza y desinfección)</option>
+          <option value="Maquila">Maquila y marca privada</option>
+          <option value="Industrial">Soluciones industriales y tratamiento de agua</option>
         </select>
       </label>
 
-      <label className="mt-5 grid gap-2 text-sm font-bold text-neugreen-ink">
-        Mensaje
-        <textarea
-          className="focus-ring min-h-36 rounded-md border border-neugreen-line px-4 py-3 font-medium"
-          name="mensaje"
-          required
-        />
+      <label className="mt-5 flex flex-col gap-1.5 text-sm font-semibold text-ng-ink">
+        Mensaje o requerimiento *
+        <textarea name="mensaje" required placeholder="Describe tu necesidad: tipo de cliente, volúmenes estimados, sector…"
+          className="focus-ring min-h-[120px] rounded-lg border border-ng-line px-4 py-3 text-sm font-normal placeholder:text-ng-steel/50 focus:border-ng-blue transition resize-none" />
       </label>
 
-      <Button type="submit" variant="dark" className="mt-6 w-full sm:w-auto">
-        Enviar solicitud
-      </Button>
+      <div className="mt-6 flex items-center justify-between gap-4">
+        <Button type="submit" variant="dark" className="sm:w-auto">
+          Enviar solicitud →
+        </Button>
+        <p className="text-xs text-ng-steel">Respondemos en máx. 24 horas hábiles.</p>
+      </div>
     </form>
   );
 }
