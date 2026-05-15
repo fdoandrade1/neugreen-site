@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Neugreen México — Biotecnología en limpieza y desinfección</title>
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<style>
+  /* Mock-only resets and section transitions */
+  *, *::before, *::after { box-sizing: border-box; }
+  body { background: var(--ng-cloud); color: var(--ng-ink); font-family: var(--font-text); }
+  ::selection { background: var(--ng-blue-100); color: var(--ng-blue-700); }
+
+  /* Hover behaviors that JSX can't easily express inline */
+  button:hover, a.btn-link:hover { filter: brightness(1.04); }
+  .ng-card-light:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    border-color: var(--ng-blue-100) !important;
+  }
+  .ng-card-dark:hover {
+    border-color: var(--ng-green) !important;
+    box-shadow: 0 12px 30px -10px rgba(0,63,197,.5);
+  }
+
+  /* ─────────────── Print styles ─────────────── */
+  @media print {
+    @page {
+      size: A4 portrait;
+      margin: 12mm;
+    }
+
+    /* Force background colors and shadows to render */
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      transition: none !important;
+      animation: none !important;
+    }
+
+    html, body {
+      background: var(--ng-cloud) !important;
+    }
+
+    /* Hide sticky header — duplicated chrome on every page is noise */
+    header {
+      position: static !important;
+      backdrop-filter: none !important;
+    }
+
+    /* Major sections start on a fresh page so they don't get awkwardly split */
+    section {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* Trim section padding so each section fits comfortably on a page */
+    section[style*="var(--section-pad-y)"],
+    section[style*="--section-pad-y"] {
+      padding-top: 24px !important;
+      padding-bottom: 24px !important;
+    }
+
+    /* Hero: cap height so it doesn't push beyond one page */
+    section[style*="rgba(0,63,197,.88)"] {
+      min-height: 0 !important;
+      padding: 48px 32px !important;
+      break-after: page;
+      page-break-after: always;
+    }
+
+    /* Disable hover transforms inherited from JSX class hooks */
+    .ng-card-light, .ng-card-dark {
+      transform: none !important;
+    }
+
+    /* Cards should not split across pages */
+    .ng-card-light, .ng-card-dark, [style*="border-radius: var(--r-lg)"], [style*="borderRadius: var(--r-lg)"] {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* StatsBar overlaps hero with negative margin — neutralize for print */
+    section[style*="margin: -72px auto 0"] {
+      margin: 16px auto 0 !important;
+    }
+
+    /* Footer: keep on its own page if it fits */
+    footer {
+      break-before: auto;
+      page-break-before: auto;
+    }
+
+    /* Avoid orphaned headings */
+    h1, h2, h3, h4 {
+      break-after: avoid;
+      page-break-after: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="Header.jsx"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="StatsBar.jsx"></script>
+<script type="text/babel" src="ProductLines.jsx"></script>
+<script type="text/babel" src="MaquilaBand.jsx"></script>
+<script type="text/babel" src="TechnicalSolutions.jsx"></script>
+<script type="text/babel" src="Infrastructure.jsx"></script>
+<script type="text/babel" src="ProcessSteps.jsx"></script>
+<script type="text/babel" src="ContactForm.jsx"></script>
+<script type="text/babel" src="CTAStrip.jsx"></script>
+<script type="text/babel" src="Footer.jsx"></script>
+
+<script type="text/babel">
+const { useState } = React;
+
+function App() {
+  const [activeRoute, setActiveRoute] = useState('home');
+
+  const handleNav = (id) => {
+    setActiveRoute(id);
+    const map = {
+      productos: 'productos-section',
+      maquila: 'maquila-section',
+      industrial: 'industrial-section',
+      nosotros: 'nosotros-section',
+      contacto: 'contacto',
+      cotizar: 'contacto',
+      home: 'top',
+    };
+    const target = document.getElementById(map[id] || id);
+    if (target) {
+      window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div data-screen-label="Marketing site · home">
+      <div id="top"></div>
+      <Header onNavClick={handleNav} activeRoute={activeRoute} />
+
+      <Hero
+        eyebrow="Biotecnología B2B · San Luis Potosí"
+        title={<>Soluciones profesionales en limpieza, desinfección y tratamiento de agua.</>}
+        lead="Fabricamos, suministramos y damos soporte técnico a operaciones industriales que no pueden detenerse. Planta propia. Respuesta en 24 h hábiles."
+        ctaPrimary="Solicitar cotización"
+        ctaSecondary="Ver capacidades"
+        onCtaClick={(t) => handleNav(t === 'primary' ? 'contacto' : 'nosotros')}
+      />
+
+      <StatsBar items={[
+        { value: '120+', label: 'SKUs activos en planta', color: 'blue' },
+        { value: '24 h', label: 'Respuesta hábil promedio', color: 'green' },
+        { value: '8',    label: 'PTARs operando hoy', color: 'blue' },
+        { value: '18 %', label: 'Ahorro químico promedio', color: 'green' },
+      ]} />
+
+      <div id="productos-section"></div>
+      <ProductLines />
+
+      <div id="maquila-section"></div>
+      <MaquilaBand />
+
+      <div id="industrial-section"></div>
+      <TechnicalSolutions />
+
+      <div id="nosotros-section"></div>
+      <Infrastructure />
+
+      <ProcessSteps />
+
+      <ContactForm />
+
+      <CTAStrip />
+
+      <Footer />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+// ─── Auto-print: wait for fonts + React render + Babel parse ───
+(async () => {
+  // Wait for fonts to load
+  if (document.fonts && document.fonts.ready) {
+    await document.fonts.ready;
+  }
+  // Extra settle delay for React + Babel
+  await new Promise(r => setTimeout(r, 800));
+  window.print();
+})();
+</script>
+</body>
+</html>

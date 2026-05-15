@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Neugreen México — Biotecnología en limpieza y desinfección</title>
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { background: var(--ng-cloud); color: var(--ng-ink); font-family: var(--font-text); }
+  ::selection { background: var(--ng-blue-100); color: var(--ng-blue-700); }
+
+  button { font: inherit; }
+  button:hover, a.btn-link:hover { filter: brightness(1.04); }
+
+  .ng-card-light:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    border-color: var(--ng-blue-100) !important;
+  }
+  .ng-card-dark:hover {
+    border-color: var(--ng-green) !important;
+    box-shadow: 0 12px 30px -10px rgba(0,63,197,.5);
+  }
+  .ng-selector-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px -16px rgba(0,85,184,.30);
+    border-color: var(--ng-blue) !important;
+  }
+  .ng-selector-card:hover .ng-arrow {
+    background: var(--ng-blue) !important;
+    color: #fff !important;
+    transform: translateX(3px);
+  }
+</style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="Header.jsx"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="Selector.jsx"></script>
+<script type="text/babel" src="ProductLines.jsx"></script>
+<script type="text/babel" src="MaquilaBand.jsx"></script>
+<script type="text/babel" src="TechnicalSolutions.jsx"></script>
+<script type="text/babel" src="Sectores.jsx"></script>
+<script type="text/babel" src="Diferenciadores.jsx"></script>
+<script type="text/babel" src="ProcessSteps.jsx"></script>
+<script type="text/babel" src="CapacidadesPlanta.jsx"></script>
+<script type="text/babel" src="CTAStrip.jsx"></script>
+<script type="text/babel" src="Footer.jsx"></script>
+
+<script type="text/babel">
+const { useState } = React;
+
+function App() {
+  const [activeRoute, setActiveRoute] = useState('home');
+
+  const handleNav = (id) => {
+    setActiveRoute(id);
+    // External pages
+    const externalRoutes = { productos: 'productos.html', maquila: 'maquila.html', industrial: 'industrial.html', contacto: 'contacto.html', proyectos: 'proyectos.html', nosotros: 'nosotros.html' };
+    if (externalRoutes[id]) {
+      window.location.href = externalRoutes[id];
+      return;
+    }
+    const map = {
+      home: 'top',
+      maquila: 'maquila-section',
+      industrial: 'industrial-section',
+      proyectos: 'capacidades-section',
+      nosotros: 'capacidades-section',
+      contacto: 'cta-section',
+      cotizar: 'cta-section',
+      asesor: 'cta-section',
+      selector: 'selector',
+    };
+    const target = document.getElementById(map[id] || id);
+    if (target) {
+      window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div data-screen-label="Marketing site · home">
+      <div id="top"></div>
+      <Header onNavClick={handleNav} activeRoute={activeRoute} />
+
+      <Hero
+        eyebrow="Biotecnología B2B · San Luis Potosí"
+        title={<>Soluciones químicas y biotecnológicas para limpieza, industria y tratamiento de agua.</>}
+        lead="Fabricamos, formulamos y acompañamos a empresas que necesitan resultados medibles — no solo productos."
+        ctaPrimary="Habla con un asesor técnico"
+        ctaSecondary="Conoce nuestras líneas"
+        onCtaClick={(t) => handleNav(t === 'primary' ? 'asesor' : 'selector')}
+      />
+
+      <Selector onPick={(line) => handleNav(line)} />
+
+      <div id="productos-section"></div>
+      <ProductLines />
+
+      <div id="maquila-section"></div>
+      <MaquilaBand />
+
+      <div id="industrial-section"></div>
+      <TechnicalSolutions />
+
+      <Sectores />
+
+      <Diferenciadores />
+
+      <ProcessSteps />
+
+      <div id="capacidades-section"></div>
+      <CapacidadesPlanta />
+
+      <div id="cta-section"></div>
+      <CTAStrip />
+
+      <Footer />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
