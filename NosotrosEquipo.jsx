@@ -28,7 +28,7 @@ function NosotrosEquipo() {
           </p>
         </div>
 
-        <div style={{
+        <div className="ng-equipo-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
           gap: 16,
@@ -83,6 +83,14 @@ function NosotrosEquipo() {
           Detrás operan también el químico de laboratorio, dos operadores de planta y la red de colaboradores externos. No fingimos que somos 200 — somos lo que necesitamos ser.
         </div>
       </div>
+      <style>{`
+        @media (max-width: 1024px) {
+          .ng-equipo-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 480px) {
+          .ng-equipo-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }
