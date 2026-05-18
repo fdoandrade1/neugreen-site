@@ -29,7 +29,7 @@ function OrbitVisual() {
   const fullEll  = (rx, ry) => `M ${250 - rx} 250 A ${rx} ${ry} 0 1 0 ${250 + rx} 250 A ${rx} ${ry} 0 1 0 ${250 - rx} 250 Z`;
 
   return (
-    <div style={{ position: 'relative', width: '100%', maxWidth: 560, aspectRatio: '1', margin: '0 auto' }}>
+    <div style={{ position: 'relative', width: '100%', maxWidth: 640, aspectRatio: '1', margin: '0 auto' }}>
       {/* Soft halo behind drop */}
       <div style={{
         position: 'absolute', inset: '28% 28%',
@@ -38,7 +38,7 @@ function OrbitVisual() {
         filter: 'blur(10px)',
       }}></div>
 
-      <svg viewBox="0 0 500 500" style={{ width: '100%', height: '100%', position: 'relative', zIndex: 1 }}>
+      <svg viewBox="30 30 440 440" style={{ width: '100%', height: '100%', position: 'relative', zIndex: 1 }}>
         {/* ───────── LAYER 1 — BACK arcs (all 3 orbits) ───────── */}
         {ORBITS.map(o => (
           <g key={`back-${o.id}`} transform={`rotate(${o.rot} 250 250)`}>
@@ -53,14 +53,14 @@ function OrbitVisual() {
         {/* ───────── LAYER 2 — DROP ───────── */}
         <g transform="translate(250 250)">
           {/* subtle ground shadow */}
-          <ellipse cx="0" cy="115" rx="60" ry="6" fill="rgba(0,85,184,0.08)"/>
+          <ellipse cx="0" cy="144" rx="75" ry="7" fill="rgba(0,85,184,0.08)"/>
 
-          {/* drop outline */}
+          {/* drop outline — scaled 1.25× from original */}
           <path
-            d="M 0 -110
-               C 50 -60, 78 -10, 78 30
-               A 78 78 0 1 1 -78 30
-               C -78 -10, -50 -60, 0 -110 Z"
+            d="M 0 -138
+               C 62 -75, 98 -12, 98 38
+               A 98 98 0 1 1 -98 38
+               C -98 -12, -62 -75, 0 -138 Z"
             fill="rgba(255,255,255,0.92)"
             stroke="#0055b8"
             strokeWidth="6"
@@ -69,7 +69,7 @@ function OrbitVisual() {
           />
           {/* inner highlight stroke */}
           <path
-            d="M -22 -20 C -28 8, -22 30, -10 42"
+            d="M -28 -25 C -35 10, -28 38, -13 53"
             fill="none"
             stroke="#0055b8"
             strokeWidth="6"
@@ -219,7 +219,7 @@ function Hero({ eyebrow, title, lead, ctaPrimary, ctaSecondary, onCtaClick }) {
         .ng-hero-grid h1 { font-size: 32px !important; }
         .ng-hero-ctas { flex-direction: column !important; }
         .ng-hero-ctas button { width: 100% !important; justify-content: center !important; }
-        .ng-hero-orbit { max-width: 320px !important; margin: 0 auto !important; }
+        .ng-hero-orbit { max-width: 360px !important; margin: 0 auto !important; }
         .ng-hero-float { display: none !important; }
       }
     `}</style>
