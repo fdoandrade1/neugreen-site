@@ -46,12 +46,16 @@ function MaquilaBand() {
           </div>
 
           <div className="ng-maquila-band-btns" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <button style={{
+            <button
+              onClick={() => { window.location.href = 'contacto.html'; }}
+              style={{
               background: 'var(--ng-blue)', color: '#fff',
               fontWeight: 700, fontSize: 14, padding: '14px 24px',
               borderRadius: 'var(--r)', border: 'none', cursor: 'pointer',
             }}>Solicitar propuesta de manufactura</button>
-            <button style={{
+            <button
+              onClick={() => { window.location.href = 'proyectos.html'; }}
+              style={{
               background: 'transparent', color: 'var(--ng-ink)',
               border: '1px solid var(--ng-line)',
               fontWeight: 700, fontSize: 14, padding: '14px 24px',
