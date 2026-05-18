@@ -159,7 +159,7 @@ function OrbitVisual() {
       </svg>
 
       {/* ─── Floating stat cards (HTML, absolutely positioned over SVG) ─── */}
-      <div style={{
+      <div className="ng-hero-float" style={{
         position: 'absolute', top: '-4%', left: '14%',
         background: '#fff', border: '1px solid var(--ng-line)',
         borderRadius: 14, padding: '14px 20px',
@@ -170,7 +170,7 @@ function OrbitVisual() {
         <div style={{ fontSize: 12, color: 'var(--ng-steel)', marginTop: 4 }}>SKUs disponibles</div>
       </div>
 
-      <div style={{
+      <div className="ng-hero-float" style={{
         position: 'absolute', top: '42%', right: '-4%',
         background: '#fff', border: '1px solid var(--ng-line)',
         borderRadius: 14, padding: '14px 20px',
@@ -181,7 +181,7 @@ function OrbitVisual() {
         <div style={{ fontSize: 12, color: 'var(--ng-steel)', marginTop: 4 }}>Respuesta local SLP</div>
       </div>
 
-      <div style={{
+      <div className="ng-hero-float" style={{
         position: 'absolute', bottom: '-2%', left: '24%',
         background: '#fff', border: '1px solid var(--ng-line)',
         borderRadius: 14, padding: '14px 20px',
@@ -209,6 +209,20 @@ function OrbitVisual() {
 
 function Hero({ eyebrow, title, lead, ctaPrimary, ctaSecondary, onCtaClick }) {
   return (
+    <>
+    <style>{`
+      @media (max-width: 1024px) {
+        .ng-hero-grid { gap: clamp(24px, 4vw, 48px) !important; }
+      }
+      @media (max-width: 768px) {
+        .ng-hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+        .ng-hero-grid h1 { font-size: 32px !important; }
+        .ng-hero-ctas { flex-direction: column !important; }
+        .ng-hero-ctas button { width: 100% !important; justify-content: center !important; }
+        .ng-hero-orbit { max-width: 320px !important; margin: 0 auto !important; }
+        .ng-hero-float { display: none !important; }
+      }
+    `}</style>
     <section style={{
       position: 'relative',
       padding: 'clamp(80px, 9vw, 128px) var(--section-pad-x) clamp(64px, 7vw, 96px)',
@@ -223,7 +237,7 @@ function Hero({ eyebrow, title, lead, ctaPrimary, ctaSecondary, onCtaClick }) {
         pointerEvents: 'none',
       }}></div>
 
-      <div style={{
+      <div className="ng-hero-grid" style={{
         maxWidth: 'var(--container-max)',
         margin: '0 auto',
         display: 'grid',
@@ -274,7 +288,7 @@ function Hero({ eyebrow, title, lead, ctaPrimary, ctaSecondary, onCtaClick }) {
             {lead}
           </p>
 
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          <div className="ng-hero-ctas" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <button onClick={() => onCtaClick && onCtaClick('primary')}
                     data-lead-source="hero-primary"
                     style={{
@@ -318,11 +332,12 @@ function Hero({ eyebrow, title, lead, ctaPrimary, ctaSecondary, onCtaClick }) {
         </div>
 
         {/* RIGHT — animated orbit visual */}
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="ng-hero-orbit" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <OrbitVisual />
         </div>
       </div>
     </section>
+    </>
   );
 }
 
