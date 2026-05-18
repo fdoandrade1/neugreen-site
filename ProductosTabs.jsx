@@ -323,10 +323,11 @@ function ProductosTabs() {
         <div role="tablist" className="ng-tablist" style={{
           display: 'flex',
           flexWrap: 'wrap',
-          gap: 4,
+          gap: 12,
           rowGap: 0,
           borderBottom: '1px solid var(--ng-line)',
           marginBottom: 56,
+          padding: '0 0 0 0',
           justifyContent: 'flex-start',
         }}>
           {TAB_DATA.map(t => {
@@ -339,13 +340,13 @@ function ProductosTabs() {
                 aria-selected={isActive}
                 onClick={() => setActive(t.id)}
                 style={{
-                  padding: '18px 22px',
+                  padding: '12px 20px',
                   background: 'transparent',
                   border: 'none',
                   borderBottom: `2px solid ${isActive ? (isGreen ? 'var(--ng-green)' : 'var(--ng-blue)') : 'transparent'}`,
                   marginBottom: -1,
                   fontFamily: 'var(--font-display)',
-                  fontSize: 15,
+                  fontSize: 14,
                   fontWeight: 700,
                   color: isActive ? 'var(--ng-ink)' : 'var(--ng-steel)',
                   letterSpacing: '-0.01em',
@@ -354,6 +355,7 @@ function ProductosTabs() {
                   display: 'flex', alignItems: 'center', gap: 10,
                   flexShrink: 0,
                   whiteSpace: 'nowrap',
+                  minHeight: 44,
                 }}>
                 <span style={{
                   fontFamily: 'var(--font-mono)',
@@ -382,7 +384,7 @@ if (typeof document !== 'undefined' && !document.getElementById('ng-tabs-respons
       .ng-tab-heading { grid-template-columns: 1fr !important; gap: 16px !important; }
       .ng-tab-heading > div:last-child { text-align: left !important; }
       .ng-subfam-grid { grid-template-columns: 1fr !important; }
-      .ng-tablist button { padding: 14px 16px !important; font-size: 13px !important; }
+      .ng-tablist button { padding: 12px 14px !important; font-size: 14px !important; min-height: 44px !important; }
       .ng-tab-cta-row { flex-direction: column !important; padding: 20px 16px !important; }
       .ng-tab-cta-btn { width: 100% !important; padding-left: 16px !important; padding-right: 16px !important; box-sizing: border-box !important; }
     }
