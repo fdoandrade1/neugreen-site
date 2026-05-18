@@ -1,6 +1,7 @@
 // NosotrosHero.jsx
 function NosotrosHero() {
   return (
+    <>
     <section style={{
       padding: 'clamp(80px, 9vw, 120px) var(--section-pad-x) 56px',
       background: 'var(--ng-cloud)',
@@ -25,7 +26,7 @@ function NosotrosHero() {
           <span style={{ color: 'var(--ng-ink)', fontWeight: 600 }}>Nosotros</span>
         </div>
         <div className="eyebrow" style={{ marginBottom: 14 }}>Sobre Neugreen</div>
-        <h1 style={{
+        <h1 className="ng-nosotros-h1" style={{
           fontFamily: 'var(--font-display)',
           fontSize: 'clamp(36px, 5vw, 60px)',
           fontWeight: 800, letterSpacing: '-0.025em', lineHeight: 1.05,
@@ -38,6 +39,10 @@ function NosotrosHero() {
         </p>
       </div>
     </section>
+    <style>{`
+      @media (max-width: 768px) { .ng-nosotros-h1 { font-size: 32px !important; } }
+    `}</style>
+    </>
   );
 }
 window.NosotrosHero = NosotrosHero;

@@ -14,7 +14,7 @@ function MaquilaBand() {
       padding: 'var(--section-pad-y) var(--section-pad-x)',
       background: 'var(--ng-cloud)',
     }}>
-      <div style={{
+      <div className="ng-maquila-band-grid" style={{
         maxWidth: 'var(--container-max)',
         margin: '0 auto',
         display: 'grid',
@@ -45,7 +45,7 @@ function MaquilaBand() {
             ))}
           </div>
 
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          <div className="ng-maquila-band-btns" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <button style={{
               background: 'var(--ng-blue)', color: '#fff',
               fontWeight: 700, fontSize: 14, padding: '14px 24px',
@@ -114,6 +114,12 @@ function MaquilaBand() {
           }}>Mockup · 5 SKUs marca privada</div>
         </div>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .ng-maquila-band-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+          .ng-maquila-band-btns button { width: 100% !important; }
+        }
+      `}</style>
     </section>
   );
 }

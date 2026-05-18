@@ -48,7 +48,7 @@ function MaquilaForm() {
       padding: 'clamp(80px, 8vw, 120px) var(--section-pad-x)',
       background: 'var(--ng-mist)',
     }}>
-      <div style={{
+      <div className="ng-maq-form-layout" style={{
         maxWidth: 'var(--container-max)', margin: '0 auto',
         display: 'grid', gridTemplateColumns: '1fr 1.4fr',
         gap: 64, alignItems: 'start',
@@ -91,7 +91,7 @@ function MaquilaForm() {
                 background: '#fff', border: '1px solid var(--ng-line)',
                 borderRadius: 'var(--r-xl)', padding: 36, boxShadow: 'var(--shadow-sm)',
               }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+          <div className="ng-maq-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
             <div>
               <label style={label}>Empresa</label>
               <input style={input} value={form.empresa} onChange={(e) => setForm({ ...form, empresa: e.target.value })} placeholder="Razón social" required />
@@ -102,7 +102,7 @@ function MaquilaForm() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+          <div className="ng-maq-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
             <div>
               <label style={label}>Correo corporativo</label>
               <input type="email" style={input} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="contacto@empresa.com" required />
@@ -127,7 +127,7 @@ function MaquilaForm() {
             </select>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+          <div className="ng-maq-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
             <div>
               <label style={label}>Volumen estimado / mes</label>
               <input style={input} value={form.volumen} onChange={(e) => setForm({ ...form, volumen: e.target.value })} placeholder="ej. 1 200 L" />
@@ -176,14 +176,14 @@ function MaquilaForm() {
                       placeholder="Contexto adicional: presentación deseada, normativa aplicable, claim del producto, antecedentes..."></textarea>
           </div>
 
-          <div style={{
+          <div className="ng-maq-submit-row" style={{
             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
             gap: 16, flexWrap: 'wrap',
           }}>
             <div style={{ fontSize: 12, color: 'var(--ng-steel)' }}>
               Respuesta &lt; 24 h hábiles · NDA disponible al solicitarla
             </div>
-            <button type="submit" style={{
+            <button type="submit" className="ng-maq-submit-btn" style={{
               background: 'var(--ng-green)', color: '#fff',
               fontWeight: 700, fontSize: 15,
               padding: '14px 26px', borderRadius: 'var(--r)',
@@ -197,6 +197,14 @@ function MaquilaForm() {
           </div>
         </form>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .ng-maq-form-layout { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .ng-maq-2col { grid-template-columns: 1fr !important; }
+          .ng-maq-submit-row { flex-direction: column !important; align-items: stretch !important; }
+          .ng-maq-submit-btn { width: 100% !important; justify-content: center !important; }
+        }
+      `}</style>
     </section>
   );
 }

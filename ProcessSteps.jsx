@@ -24,7 +24,7 @@ function ProcessSteps() {
           </p>
         </div>
 
-        <div style={{
+        <div className="ng-psteps-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
           gap: 4,
@@ -70,6 +70,14 @@ function ProcessSteps() {
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 1024px) {
+          .ng-psteps-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 480px) {
+          .ng-psteps-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }

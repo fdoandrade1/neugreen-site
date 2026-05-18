@@ -187,7 +187,7 @@ function TabPanel({ tab }) {
   return (
     <div>
       {/* Heading row */}
-      <div style={{
+      <div className="ng-tab-heading" style={{
         display: 'grid',
         gridTemplateColumns: '1.4fr 1fr',
         gap: 56,
@@ -236,7 +236,7 @@ function TabPanel({ tab }) {
       )}
 
       {/* Sub-family accordion grid */}
-      <div style={{
+      <div className={`ng-subfam-grid ng-subfam-col-${colCount}`} style={{
         display: 'grid',
         gridTemplateColumns: `repeat(${colCount}, 1fr)`,
         gap: 14,
@@ -369,6 +369,21 @@ function ProductosTabs() {
       </div>
     </section>
   );
+}
+
+// Responsive styles injected once via a global style tag
+if (typeof document !== 'undefined' && !document.getElementById('ng-tabs-responsive')) {
+  const s = document.createElement('style');
+  s.id = 'ng-tabs-responsive';
+  s.textContent = `
+    @media (max-width: 768px) {
+      .ng-tab-heading { grid-template-columns: 1fr !important; gap: 16px !important; }
+      .ng-tab-heading > div:last-child { text-align: left !important; }
+      .ng-subfam-grid { grid-template-columns: 1fr !important; }
+      .ng-tablist button { padding: 14px 16px !important; font-size: 13px !important; }
+    }
+  `;
+  document.head.appendChild(s);
 }
 
 window.ProductosTabs = ProductosTabs;

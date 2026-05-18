@@ -137,7 +137,7 @@ function MaquilaCasos() {
         </div>
 
         {/* Grid 3 cols × 2 rows · 7th card spans full width */}
-        <div style={{
+        <div className="ng-maquila-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
           gap: 18,
@@ -211,7 +211,7 @@ function MaquilaCasos() {
           ))}
 
           {/* 7th card — confidential, full row, distinct treatment */}
-          <div style={{
+          <div className="ng-maquila-nda" style={{
             gridColumn: '1 / -1',
             background: 'linear-gradient(135deg, #0e2237 0%, #102942 100%)',
             border: '1px solid #1f3d5e',
@@ -289,6 +289,16 @@ function MaquilaCasos() {
           </div>
         </div>
       </div>
+      <style>{`
+        @media (max-width: 1024px) {
+          .ng-maquila-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 768px) {
+          .ng-maquila-grid { grid-template-columns: 1fr !important; }
+          .ng-maquila-nda { grid-template-columns: 1fr !important; }
+          .ng-maquila-nda > div:last-child { text-align: left !important; }
+        }
+      `}</style>
     </section>
   );
 }

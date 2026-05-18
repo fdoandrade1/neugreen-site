@@ -18,7 +18,7 @@ function AsesorBlock() {
       padding: 'clamp(72px, 8vw, 112px) var(--section-pad-x)',
       background: 'var(--ng-mist)',
     }}>
-      <div style={{
+      <div className="ng-asesor-grid" style={{
         maxWidth: 'var(--container-max)', margin: '0 auto',
         display: 'grid', gridTemplateColumns: '1fr 1fr',
         gap: 64, alignItems: 'center',
@@ -78,7 +78,7 @@ function AsesorBlock() {
                   background: '#fff', border: '1px solid var(--ng-line)',
                   borderRadius: 'var(--r-xl)', padding: 36, boxShadow: 'var(--shadow-sm)',
                 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+            <div className="ng-asesor-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
               <div>
                 <label style={labelStyle}>Nombre</label>
                 <input style={inputStyle} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Tu nombre" />
@@ -112,6 +112,12 @@ function AsesorBlock() {
           </form>
         )}
       </div>
+    <style>{`
+      @media (max-width: 768px) {
+        .ng-asesor-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+        .ng-asesor-form-grid { grid-template-columns: 1fr !important; }
+      }
+    `}</style>
     </section>
   );
 }

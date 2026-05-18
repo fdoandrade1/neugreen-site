@@ -26,7 +26,7 @@ function NosotrosValores() {
             La cultura interna que aplica desde el laboratorio hasta el embarque.
           </p>
         </div>
-        <div style={{
+        <div className="ng-valores-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
           gap: 16,
@@ -59,6 +59,14 @@ function NosotrosValores() {
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 1024px) {
+          .ng-valores-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 480px) {
+          .ng-valores-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }

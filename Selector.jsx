@@ -139,7 +139,7 @@ function Selector({ onPick }) {
           </p>
         </div>
 
-        <div style={{
+        <div className="ng-selector-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
           gap: 18,
@@ -149,6 +149,15 @@ function Selector({ onPick }) {
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 1024px) {
+          .ng-selector-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 640px) {
+          .ng-selector-grid { grid-template-columns: 1fr !important; }
+          .ng-selector-grid button { width: 100% !important; }
+        }
+      `}</style>
     </section>
   );
 }

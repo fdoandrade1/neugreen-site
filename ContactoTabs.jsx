@@ -42,7 +42,7 @@ function ProductosFormCT() {
   if (s) return <FormSuccess onReset={() => { setS(false); setF({ empresa: '', email: '', sector: '', mensaje: '' }); }} />;
   return (
     <form onSubmit={(e) => { e.preventDefault(); setS(true); }} data-lead-source="contacto-productos">
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+      <div className="ng-ctabs-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
         <div><label style={labelStyle}>Empresa</label><input style={inputStyle} value={f.empresa} onChange={e => setF({ ...f, empresa: e.target.value })} placeholder="Razón social" required /></div>
         <div><label style={labelStyle}>Correo</label><input type="email" style={inputStyle} value={f.email} onChange={e => setF({ ...f, email: e.target.value })} placeholder="compras@empresa.com" required /></div>
       </div>
@@ -75,11 +75,11 @@ function MaquilaFormCT() {
   if (s) return <FormSuccess onReset={() => { setS(false); setF({ empresa: '', email: '', producto: '', volumen: '', formula: 'no', mensaje: '' }); }} accent="green" />;
   return (
     <form onSubmit={(e) => { e.preventDefault(); setS(true); }} data-lead-source="contacto-manufactura">
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+      <div className="ng-ctabs-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
         <div><label style={labelStyle}>Empresa</label><input style={inputStyle} value={f.empresa} onChange={e => setF({ ...f, empresa: e.target.value })} placeholder="Razón social" required /></div>
         <div><label style={labelStyle}>Correo</label><input type="email" style={inputStyle} value={f.email} onChange={e => setF({ ...f, email: e.target.value })} placeholder="contacto@empresa.com" required /></div>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+      <div className="ng-ctabs-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
         <div>
           <label style={labelStyle}>Producto a manufacturar</label>
           <select style={inputStyle} value={f.producto} onChange={e => setF({ ...f, producto: e.target.value })} required>
@@ -127,11 +127,11 @@ function IndustrialFormCT() {
   if (s) return <FormSuccess onReset={() => { setS(false); setF({ empresa: '', email: '', sector: '', problema: '', mensaje: '' }); }} />;
   return (
     <form onSubmit={(e) => { e.preventDefault(); setS(true); }} data-lead-source="contacto-industrial">
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+      <div className="ng-ctabs-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
         <div><label style={labelStyle}>Empresa</label><input style={inputStyle} value={f.empresa} onChange={e => setF({ ...f, empresa: e.target.value })} placeholder="Razón social" required /></div>
         <div><label style={labelStyle}>Correo</label><input type="email" style={inputStyle} value={f.email} onChange={e => setF({ ...f, email: e.target.value })} placeholder="ingeniero@empresa.com" required /></div>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+      <div className="ng-ctabs-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
         <div>
           <label style={labelStyle}>Sector</label>
           <select style={inputStyle} value={f.sector} onChange={e => setF({ ...f, sector: e.target.value })} required>
@@ -177,7 +177,7 @@ function ContactoTabs() {
       padding: '64px var(--section-pad-x) clamp(80px, 8vw, 120px)',
       background: 'var(--ng-cloud)',
     }}>
-      <div style={{
+      <div className="ng-ctabs-layout" style={{
         maxWidth: 'var(--container-max)', margin: '0 auto',
         display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 64, alignItems: 'start',
       }}>
@@ -274,6 +274,20 @@ function ContactoTabs() {
       </div>
     </section>
   );
+}
+
+// Responsive styles
+if (typeof document !== 'undefined' && !document.getElementById('ng-ctabs-responsive')) {
+  const s = document.createElement('style');
+  s.id = 'ng-ctabs-responsive';
+  s.textContent = `
+    @media (max-width: 768px) {
+      .ng-ctabs-layout { grid-template-columns: 1fr !important; gap: 40px !important; }
+      .ng-ctabs-layout aside { position: static !important; }
+      .ng-ctabs-2col { grid-template-columns: 1fr !important; }
+    }
+  `;
+  document.head.appendChild(s);
 }
 
 window.ContactoTabs = ContactoTabs;

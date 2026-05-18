@@ -71,7 +71,7 @@ function TechnicalSolutions() {
       position: 'relative',
     }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 32, marginBottom: 48, flexWrap: 'wrap' }}>
+        <div className="ng-tech-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 32, marginBottom: 48, flexWrap: 'wrap' }}>
           <div>
             <div className="eyebrow" style={{ color: '#A6C8FF', marginBottom: 12, fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase' }}>
               03 · Soluciones industriales
@@ -83,7 +83,7 @@ function TechnicalSolutions() {
               Para industria, agua y energía. Ingeniería de proyecto, suministro y soporte técnico en planta.
             </p>
           </div>
-          <button style={{
+          <button className="ng-tech-cta-btn" style={{
             background: 'transparent', color: '#fff',
             border: '1px solid rgba(255,255,255,.22)',
             fontWeight: 700, fontSize: 14, padding: '12px 22px',
@@ -101,6 +101,19 @@ function TechnicalSolutions() {
       </div>
     </section>
   );
+}
+
+// Responsive styles
+if (typeof document !== 'undefined' && !document.getElementById('ng-tech-responsive')) {
+  const s = document.createElement('style');
+  s.id = 'ng-tech-responsive';
+  s.textContent = `
+    @media (max-width: 768px) {
+      .ng-tech-header { flex-direction: column !important; align-items: stretch !important; }
+      .ng-tech-cta-btn { width: 100% !important; }
+    }
+  `;
+  document.head.appendChild(s);
 }
 
 window.TechnicalSolutions = TechnicalSolutions;

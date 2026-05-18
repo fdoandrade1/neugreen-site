@@ -11,7 +11,7 @@ function Infrastructure() {
       padding: 'var(--section-pad-y) var(--section-pad-x)',
       background: 'var(--ng-mist)',
     }}>
-      <div style={{
+      <div className="ng-infra-layout" style={{
         maxWidth: 'var(--container-max)',
         margin: '0 auto',
         display: 'grid',
@@ -84,6 +84,11 @@ function Infrastructure() {
           </div>
         </div>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .ng-infra-layout { grid-template-columns: 1fr !important; gap: 36px !important; }
+        }
+      `}</style>
     </section>
   );
 }

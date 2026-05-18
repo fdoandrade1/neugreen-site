@@ -2,7 +2,7 @@
 function CTAStrip() {
   return (
     <section style={{ padding: '0 var(--section-pad-x) 80px', background: 'var(--ng-cloud)' }}>
-      <div style={{
+      <div className="ng-cta-inner" style={{
         maxWidth: 'var(--container-max)',
         margin: '0 auto',
         background: 'var(--ng-blue)',
@@ -65,6 +65,12 @@ function CTAStrip() {
           WhatsApp directo
         </a>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .ng-cta-inner { flex-direction: column !important; align-items: flex-start !important; padding: 32px 24px !important; }
+          .ng-cta-inner a[href^="https://wa"] { width: 100% !important; justify-content: center !important; }
+        }
+      `}</style>
     </section>
   );
 }

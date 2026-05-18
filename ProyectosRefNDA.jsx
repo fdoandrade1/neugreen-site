@@ -18,7 +18,7 @@ function ProyectosRefNDA() {
       padding: 'clamp(80px, 8vw, 120px) var(--section-pad-x)',
       background: 'var(--ng-cloud)',
     }}>
-      <div style={{
+      <div className="ng-refnda-layout" style={{
         maxWidth: 'var(--container-max)', margin: '0 auto',
         display: 'grid', gridTemplateColumns: '1fr 1.2fr',
         gap: 56, alignItems: 'start',
@@ -70,7 +70,7 @@ function ProyectosRefNDA() {
                   background: '#fff', border: '1px solid var(--ng-line)',
                   borderRadius: 'var(--r-xl)', padding: 32, boxShadow: 'var(--shadow-sm)',
                 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+            <div className="ng-refnda-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
               <div><label style={lab}>Empresa</label><input style={input} value={f.empresa} onChange={e => setF({ ...f, empresa: e.target.value })} placeholder="Razón social" required /></div>
               <div><label style={lab}>Correo corporativo</label><input type="email" style={input} value={f.email} onChange={e => setF({ ...f, email: e.target.value })} placeholder="compras@empresa.com" required /></div>
             </div>
@@ -100,6 +100,12 @@ function ProyectosRefNDA() {
           </form>
         )}
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .ng-refnda-layout { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .ng-refnda-2col { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }

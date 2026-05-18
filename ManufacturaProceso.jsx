@@ -1,5 +1,5 @@
-// MaquilaProceso.jsx — 6-step horizontal process timeline
-function MaquilaProceso() {
+// ManufacturaProceso.jsx — 6-step process timeline (renamed from MaquilaProceso)
+function ManufacturaProceso() {
   const steps = [
     {
       n: '01',
@@ -64,14 +64,14 @@ function MaquilaProceso() {
         </div>
 
         {/* Process strip */}
-        <div style={{
+        <div className="ng-proceso-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(6, 1fr)',
           gap: 16,
           position: 'relative',
         }}>
-          {/* connecting line */}
-          <div style={{
+          {/* Connecting line — hidden on mobile via CSS */}
+          <div className="ng-proceso-line" style={{
             position: 'absolute',
             top: 34, left: '8.33%', right: '8.33%',
             height: 2,
@@ -133,9 +133,22 @@ function MaquilaProceso() {
             </div>
           ))}
         </div>
+
+        <style>{`
+          @media (max-width: 1024px) {
+            .ng-proceso-grid { grid-template-columns: repeat(3, 1fr) !important; }
+            .ng-proceso-line { display: none !important; }
+          }
+          @media (max-width: 768px) {
+            .ng-proceso-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+          }
+          @media (max-width: 480px) {
+            .ng-proceso-grid { grid-template-columns: 1fr !important; }
+          }
+        `}</style>
       </div>
     </section>
   );
 }
 
-window.MaquilaProceso = MaquilaProceso;
+window.ManufacturaProceso = ManufacturaProceso;

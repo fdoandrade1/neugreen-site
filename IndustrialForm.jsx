@@ -60,7 +60,7 @@ function IndustrialForm() {
         pointerEvents: 'none',
       }}></div>
 
-      <div style={{
+      <div className="ng-ind-form-layout" style={{
         maxWidth: 'var(--container-max)', margin: '0 auto',
         display: 'grid', gridTemplateColumns: '1fr 1.4fr',
         gap: 64, alignItems: 'start',
@@ -119,7 +119,7 @@ function IndustrialForm() {
                 borderRadius: 'var(--r-xl)',
                 padding: 36,
               }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+          <div className="ng-form-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
             <div>
               <label style={{ ...label, color: '#fff' }}>Empresa</label>
               <input style={input} value={form.empresa} onChange={(e) => setForm({ ...form, empresa: e.target.value })} placeholder="Razón social" required />
@@ -130,7 +130,7 @@ function IndustrialForm() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+          <div className="ng-form-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
             <div>
               <label style={{ ...label, color: '#fff' }}>Correo</label>
               <input type="email" style={input} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="ingeniero@empresa.com" required />
@@ -199,6 +199,12 @@ function IndustrialForm() {
           </p>
         </form>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .ng-ind-form-layout { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .ng-form-2col { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }
