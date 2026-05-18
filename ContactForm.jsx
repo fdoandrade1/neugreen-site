@@ -40,7 +40,7 @@ function ContactForm() {
       padding: 'var(--section-pad-y) var(--section-pad-x)',
       background: 'var(--ng-mist)',
     }}>
-      <div style={{
+      <div className="ng-contact-layout" style={{
         maxWidth: 'var(--container-max)',
         margin: '0 auto',
         display: 'grid',
@@ -90,7 +90,7 @@ function ContactForm() {
 
         <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
               style={{ background: '#fff', border: '1px solid var(--ng-line)', borderRadius: 'var(--r-xl)', padding: 36, boxShadow: 'var(--shadow-sm)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div className="ng-contact-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             <div>
               <label style={labelStyle}>Nombre</label>
               <input style={inputStyle} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Tu nombre" />
@@ -137,11 +137,11 @@ function ContactForm() {
                       placeholder="Proceso, volumen estimado, normativa aplicable..."></textarea>
           </div>
 
-          <div style={{ marginTop: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
+          <div className="ng-contact-submit-row" style={{ marginTop: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
             <div style={{ fontSize: 12, color: 'var(--ng-steel)', maxWidth: 280 }}>
               Te respondemos en <strong style={{ color: 'var(--ng-ink)' }}>menos de 24 h hábiles</strong>.
             </div>
-            <button type="submit" style={{
+            <button type="submit" className="ng-contact-submit-btn" style={{
               background: 'var(--ng-blue)', color: '#fff',
               fontWeight: 700, fontSize: 14, padding: '14px 26px',
               borderRadius: 'var(--r)', border: 'none', cursor: 'pointer',
@@ -153,6 +153,14 @@ function ContactForm() {
           </div>
         </form>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .ng-contact-layout { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .ng-contact-2col { grid-template-columns: 1fr !important; }
+          .ng-contact-submit-row { flex-direction: column !important; align-items: stretch !important; }
+          .ng-contact-submit-btn { width: 100% !important; justify-content: center !important; }
+        }
+      `}</style>
     </section>
   );
 }
