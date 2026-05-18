@@ -254,7 +254,7 @@ function TabPanel({ tab }) {
       </div>
 
       {/* CTA row */}
-      <div style={{
+      <div className="ng-tab-cta-row" style={{
         marginTop: 48,
         padding: '28px 32px',
         background: isGreen ? 'var(--ng-green-50)' : 'var(--ng-blue-50)',
@@ -274,6 +274,7 @@ function TabPanel({ tab }) {
         </div>
         <a
           href={`contacto.html?linea=${tab.id}`}
+          className="ng-tab-cta-btn"
           style={{
             background: isGreen ? 'var(--ng-green)' : 'var(--ng-blue)',
             color: '#fff',
@@ -281,7 +282,7 @@ function TabPanel({ tab }) {
             padding: '14px 24px',
             borderRadius: 'var(--r)',
             textDecoration: 'none',
-            display: 'inline-flex', alignItems: 'center', gap: 10,
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
             flexShrink: 0,
             boxShadow: isGreen
               ? '0 10px 24px -10px rgba(65,190,67,.45)'
@@ -314,6 +315,7 @@ function ProductosTabs() {
     <section style={{
       padding: '64px var(--section-pad-x) clamp(80px, 8vw, 120px)',
       background: 'var(--ng-cloud)',
+      overflowX: 'hidden',
     }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
 
@@ -381,6 +383,8 @@ if (typeof document !== 'undefined' && !document.getElementById('ng-tabs-respons
       .ng-tab-heading > div:last-child { text-align: left !important; }
       .ng-subfam-grid { grid-template-columns: 1fr !important; }
       .ng-tablist button { padding: 14px 16px !important; font-size: 13px !important; }
+      .ng-tab-cta-row { flex-direction: column !important; padding: 20px 16px !important; }
+      .ng-tab-cta-btn { width: 100% !important; padding-left: 16px !important; padding-right: 16px !important; box-sizing: border-box !important; }
     }
   `;
   document.head.appendChild(s);
