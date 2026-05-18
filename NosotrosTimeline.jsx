@@ -39,7 +39,7 @@ function NosotrosTimeline() {
           }}></div>
 
           {events.map((e, i) => (
-            <div key={i} style={{
+            <div key={i} className="ng-timeline-row" style={{
               position: 'relative',
               padding: '0 0 36px',
               display: 'grid',
@@ -78,6 +78,11 @@ function NosotrosTimeline() {
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 480px) {
+          .ng-timeline-row { grid-template-columns: 80px 1fr !important; gap: 16px !important; }
+        }
+      `}</style>
     </section>
   );
 }
