@@ -12,12 +12,12 @@ function Header({ onNavClick, activeRoute }) {
   }, []);
 
   const navItems = [
-    { id: 'productos',   label: 'Productos' },
-    { id: 'manufactura', label: 'Manufactura' },
-    { id: 'industrial',  label: 'Industrial' },
-    { id: 'proyectos',   label: 'Proyectos' },
-    { id: 'nosotros',    label: 'Nosotros' },
-    { id: 'contacto',    label: 'Contacto' },
+    { id: 'productos',   label: 'Productos',   href: 'productos.html' },
+    { id: 'manufactura', label: 'Manufactura', href: 'manufactura.html' },
+    { id: 'industrial',  label: 'Industrial',  href: 'industrial.html' },
+    { id: 'proyectos',   label: 'Proyectos',   href: 'proyectos.html' },
+    { id: 'nosotros',    label: 'Nosotros',    href: 'nosotros.html' },
+    { id: 'contacto',    label: 'Contacto',    href: 'contacto.html' },
   ];
 
   const handleNavClick = (id) => {
@@ -41,7 +41,7 @@ function Header({ onNavClick, activeRoute }) {
         }}>
 
           {/* Logo */}
-          <a href="#home" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
+          <a href="index.html" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
              style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
             <img src="assets/logos/neugreen-logo-extended.svg" alt="Neugreen" style={{ height: 32 }} />
           </a>
@@ -49,7 +49,7 @@ function Header({ onNavClick, activeRoute }) {
           {/* Desktop nav */}
           <nav className="ng-nav-desktop" style={{ display: 'flex', gap: 28, alignItems: 'center' }}>
             {navItems.map(n => (
-              <a key={n.id} href={`#${n.id}`}
+              <a key={n.id} href={n.href}
                  onClick={(e) => { e.preventDefault(); handleNavClick(n.id); }}
                  style={{
                    fontSize: 14, fontWeight: 600,
@@ -72,6 +72,7 @@ function Header({ onNavClick, activeRoute }) {
               +52 444 256 5697
             </a>
             <a className="btn btn-primary"
+               href="contacto.html"
                onClick={(e) => { e.preventDefault(); handleNavClick('asesor'); }}
                style={{
                  background: 'var(--ng-blue)', color: '#fff',
@@ -114,7 +115,7 @@ function Header({ onNavClick, activeRoute }) {
           }}>
             <nav style={{ display: 'flex', flexDirection: 'column', marginBottom: 16 }}>
               {navItems.map(n => (
-                <a key={n.id} href={`#${n.id}`}
+                <a key={n.id} href={n.href}
                    onClick={(e) => { e.preventDefault(); handleNavClick(n.id); }}
                    style={{
                      fontSize: 16, fontWeight: 600, padding: '14px 0',
@@ -135,7 +136,8 @@ function Header({ onNavClick, activeRoute }) {
                  }}>
                 +52 444 256 5697
               </a>
-              <a onClick={(e) => { e.preventDefault(); handleNavClick('asesor'); }}
+              <a href="contacto.html"
+                 onClick={(e) => { e.preventDefault(); handleNavClick('asesor'); }}
                  style={{
                    textAlign: 'center', padding: '14px 16px',
                    background: 'var(--ng-blue)', borderRadius: 'var(--r)',
