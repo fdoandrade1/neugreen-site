@@ -74,7 +74,7 @@ function CapacidadesPlanta() {
         </div>
 
         {/* floating stat card overlapping bottom */}
-        <div style={{
+        <div className="ng-cap-stats" style={{
           background: '#fff',
           border: '1px solid var(--ng-line)',
           borderRadius: 'var(--r-lg)',
@@ -107,6 +107,14 @@ function CapacidadesPlanta() {
           ))}
         </div>
       </div>
+    <style>{`
+      @media (max-width: 1024px) {
+        .ng-cap-stats { grid-template-columns: repeat(2, 1fr) !important; margin-left: 24px !important; margin-right: 24px !important; }
+      }
+      @media (max-width: 640px) {
+        .ng-cap-stats { grid-template-columns: 1fr !important; margin-left: 16px !important; margin-right: 16px !important; margin-top: 16px !important; }
+      }
+    `}</style>
     </section>
   );
 }
