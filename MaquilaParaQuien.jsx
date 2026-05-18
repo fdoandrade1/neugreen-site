@@ -47,7 +47,7 @@ function MaquilaParaQuien() {
           </p>
         </div>
 
-        <div style={{
+        <div className="ng-paraquien-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, 1fr)',
           gap: 18,
@@ -91,6 +91,11 @@ function MaquilaParaQuien() {
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .ng-paraquien-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }
