@@ -212,7 +212,7 @@ function Hero({ eyebrow, title, lead, ctaPrimary, ctaSecondary, onCtaClick }) {
     <>
     <style>{`
       @media (max-width: 1024px) {
-        .ng-hero-grid { gap: clamp(24px, 4vw, 48px) !important; }
+        .ng-hero-grid { grid-template-columns: 1fr 1fr !important; gap: clamp(24px, 4vw, 48px) !important; }
       }
       @media (max-width: 768px) {
         .ng-hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
@@ -241,8 +241,8 @@ function Hero({ eyebrow, title, lead, ctaPrimary, ctaSecondary, onCtaClick }) {
         maxWidth: 'var(--container-max)',
         margin: '0 auto',
         display: 'grid',
-        gridTemplateColumns: '1.05fr 1fr',
-        gap: 'clamp(40px, 6vw, 96px)',
+        gridTemplateColumns: 'minmax(480px, 1.2fr) 1fr',
+        gap: 'clamp(40px, 6vw, 80px)',
         alignItems: 'center',
         position: 'relative',
       }}>
