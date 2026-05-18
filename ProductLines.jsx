@@ -212,7 +212,7 @@ function ProductLines() {
       background: 'var(--ng-cloud)',
     }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 32, marginBottom: 48, flexWrap: 'wrap' }}>
+        <div className="ng-pl-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 32, marginBottom: 48, flexWrap: 'wrap' }}>
           <div>
             <div className="eyebrow" style={{ marginBottom: 12 }}>01 · Productos de línea</div>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px, 3.4vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', margin: '0 0 14px', color: 'var(--ng-ink)' }}>
@@ -245,6 +245,10 @@ function ProductLines() {
         <style>{`
           @media (max-width: 1024px) {
             .ng-pl-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          }
+          @media (max-width: 768px) {
+            .ng-pl-header { flex-direction: column !important; align-items: flex-start !important; }
+            .ng-pl-header a { width: 100% !important; justify-content: center !important; }
           }
           @media (max-width: 560px) {
             .ng-pl-grid { grid-template-columns: 1fr !important; }
