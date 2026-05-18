@@ -51,7 +51,7 @@ function Diferenciadores() {
           </p>
         </div>
 
-        <div style={{
+        <div className="ng-dif-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
           gap: 16,
@@ -113,6 +113,14 @@ function Diferenciadores() {
             </div>
           ))}
         </div>
+        <style>{`
+          @media (max-width: 1024px) {
+            .ng-dif-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          }
+          @media (max-width: 480px) {
+            .ng-dif-grid { grid-template-columns: 1fr !important; }
+          }
+        `}</style>
       </div>
     </section>
   );
