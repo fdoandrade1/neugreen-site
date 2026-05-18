@@ -1,9 +1,39 @@
 // Footer.jsx — navy footer with logo, columns, fine print
 function Footer() {
   const cols = [
-    { title: 'Productos', items: ['Enzimáticos', 'Desinfectantes', 'Multiusos', 'Lavandería', 'Jarciería', 'Consumibles'] },
-    { title: 'Servicios', items: ['Manufactura', 'Marca privada', 'Tratamiento de agua', 'Torres y calderas', 'Dosificación', 'Capacitación'] },
-    { title: 'Empresa', items: ['Sobre Neugreen', 'Planta SLP', 'Casos de cliente', 'Cumplimiento', 'Blog técnico', 'Trabaja con nosotros'] },
+    {
+      title: 'Productos',
+      items: [
+        { label: 'Enzimáticos',      href: 'https://neugreen.mx/productos.html?tab=enzimatica#enzimatica' },
+        { label: 'Desinfectantes',   href: 'https://neugreen.mx/productos.html?tab=desinfeccion#desinfeccion' },
+        { label: 'Multiusos',        href: 'https://neugreen.mx/productos.html?tab=convencional#convencional' },
+        { label: 'Lavandería',       href: 'https://neugreen.mx/productos.html?tab=convencional#convencional' },
+        { label: 'Jarciería',        href: 'https://neugreen.mx/productos.html?tab=jarciera#jarciera' },
+        { label: 'Aroma Experience', href: 'https://neugreen.mx/productos.html?tab=aroma#aroma' },
+      ],
+    },
+    {
+      title: 'Servicios',
+      items: [
+        { label: 'Manufactura',          href: 'https://neugreen.mx/manufactura.html' },
+        { label: 'Marca privada',        href: 'https://neugreen.mx/manufactura.html' },
+        { label: 'Tratamiento de agua',  href: 'https://neugreen.mx/industrial.html' },
+        { label: 'Torres y calderas',    href: 'https://neugreen.mx/industrial.html' },
+        { label: 'Suministro de equipo', href: 'https://neugreen.mx/industrial.html' },
+        { label: 'Proyectos integrales', href: 'https://neugreen.mx/industrial.html' },
+      ],
+    },
+    {
+      title: 'Empresa',
+      items: [
+        { label: 'Sobre Neugreen',   href: 'https://neugreen.mx/nosotros.html' },
+        { label: 'Planta SLP',       href: 'https://neugreen.mx/nosotros.html' },
+        { label: 'Casos de cliente', href: 'https://neugreen.mx/proyectos.html' },
+        { label: 'Cumplimiento',     href: '#' },
+        { label: 'Blog técnico',     href: '#' },
+        { label: 'Contacto',         href: 'https://neugreen.mx/contacto.html' },
+      ],
+    },
   ];
 
   return (
@@ -49,7 +79,7 @@ function Footer() {
               <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {c.items.map((it, j) => (
                   <li key={j}>
-                    <a href="#" style={{ color: '#fff', fontSize: 14, textDecoration: 'none', opacity: .85 }}>{it}</a>
+                    <a href={it.href} style={{ color: '#fff', fontSize: 14, textDecoration: 'none', opacity: .85 }}>{it.label}</a>
                   </li>
                 ))}
               </ul>
@@ -68,7 +98,7 @@ function Footer() {
           <div style={{ display: 'flex', gap: 24 }}>
             <a href="#" style={{ color: 'rgba(255,255,255,.5)', textDecoration: 'none' }}>Aviso de privacidad</a>
             <a href="#" style={{ color: 'rgba(255,255,255,.5)', textDecoration: 'none' }}>Términos</a>
-            <a href="#" style={{ color: 'rgba(255,255,255,.5)', textDecoration: 'none' }}>ventas@neugreen.mx</a>
+            <a href="mailto:ventas@neugreen.mx" style={{ color: 'rgba(255,255,255,.5)', textDecoration: 'none' }}>ventas@neugreen.mx</a>
           </div>
         </div>
       </div>
