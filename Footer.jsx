@@ -13,7 +13,7 @@ function Footer() {
       padding: '64px var(--section-pad-x) 32px',
     }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
-        <div style={{
+        <div className="ng-footer-grid" style={{
           display: 'grid',
           gridTemplateColumns: '1.4fr repeat(3, 1fr)',
           gap: 48,
@@ -57,7 +57,7 @@ function Footer() {
           ))}
         </div>
 
-        <div style={{
+        <div className="ng-footer-bottom" style={{
           paddingTop: 24,
           display: 'flex', justifyContent: 'space-between',
           alignItems: 'center', gap: 24, flexWrap: 'wrap',
@@ -72,6 +72,16 @@ function Footer() {
           </div>
         </div>
       </div>
+    <style>{`
+      @media (max-width: 1024px) {
+        .ng-footer-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 32px !important; }
+      }
+      @media (max-width: 640px) {
+        .ng-footer-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+        .ng-footer-bottom { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
+        .ng-footer-bottom > div { flex-direction: column !important; gap: 10px !important; }
+      }
+    `}</style>
     </footer>
   );
 }
