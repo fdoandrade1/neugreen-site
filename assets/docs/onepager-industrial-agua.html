@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>Neugreen · One Pager Industrial Avanzado</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<style>
+  /* ─── Page setup ──────────────────────────────────────────── */
+  @page { size: letter; margin: 0; }
+  html, body {
+    background: #2a3340;
+    color: var(--fg-1);
+    font-family: var(--font-text);
+  }
+  body {
+    margin: 0;
+    display: grid;
+    place-items: start center;
+    min-height: 100vh;
+    padding: 24px 0;
+  }
+
+  /* ─── Sheet ───────────────────────────────────────────────── */
+  .sheet {
+    width: 816px;
+    height: 1056px;
+    background: #fff;
+    color: var(--ng-ink);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,.45);
+    display: grid;
+    grid-template-rows: 110px 1fr auto;
+  }
+  @media print {
+    body { background: #fff; padding: 0; display: block; }
+    .sheet { box-shadow: none; width: 8.5in; height: 11in; }
+  }
+
+  /* ─── HEADER ──────────────────────────────────────────────── */
+  .header {
+    background: var(--ng-blue);
+    color: #fff;
+    padding: 0 28px;
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: "";
+    position: absolute;
+    right: -40px; bottom: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.10), transparent 60%);
+    pointer-events: none;
+  }
+  .header img.logo { width: 168px; height: auto; display: block; }
+  .header .copy { color: #fff; line-height: 1.15; }
+  .header .eyebrow-light {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.78);
+    margin-bottom: 6px;
+    display: block;
+  }
+  .header h1 {
+    font-family: var(--font-display);
+    font-size: 23px;
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin: 0 0 4px;
+  }
+  .header h1 .accent { color: #9be39c; }
+  .header .sub {
+    font-size: 11px;
+    color: rgba(255,255,255,.85);
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 0;
+  }
+
+  /* ─── BODY ────────────────────────────────────────────────── */
+  .body {
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    align-content: start;
+  }
+
+  /* Section title strip */
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 12px 24px 6px;
+  }
+  .sec-head h2 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0;
+  }
+  .sec-head .tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--ng-blue);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* ─── Section 1 — 10 service cards (5×2) ─────────────────── */
+  .services {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    padding: 0 24px 10px;
+  }
+  .svc {
+    background: var(--ng-mist);
+    border-radius: 10px;
+    padding: 10px 10px 11px;
+    border: 1px solid var(--ng-line);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+  }
+  .svc-num {
+    position: absolute;
+    top: 8px; right: 9px;
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    font-weight: 700;
+    color: var(--ng-blue);
+    letter-spacing: 0.04em;
+    opacity: 0.6;
+  }
+  .svc .ic {
+    width: 28px; height: 28px;
+    background: #fff;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    color: var(--ng-blue);
+    box-shadow: 0 1px 2px rgba(0,63,197,.10);
+  }
+  .svc .ic svg { width: 15px; height: 15px; stroke-width: 1.85; }
+  .svc .name {
+    font-family: var(--font-display);
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin: 0;
+  }
+  .svc .desc {
+    font-size: 9px;
+    line-height: 1.35;
+    color: var(--ng-steel);
+    margin: 0;
+    font-weight: 500;
+  }
+
+  /* ─── Section 2 — 3 pillars band ────────────────────────── */
+  .pillars {
+    background: #E8F0FB;
+    padding: 12px 24px 12px;
+    border-top: 1px solid var(--ng-line);
+    border-bottom: 1px solid var(--ng-line);
+  }
+  .pillars-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 16px;
+  }
+  .pillars-head h2 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0 0 2px;
+  }
+  .pillars-head h2 em {
+    font-style: normal;
+    color: var(--ng-blue);
+  }
+  .pillars-head .sub {
+    font-size: 10.5px;
+    color: var(--ng-steel);
+    margin: 0;
+    font-weight: 500;
+    max-width: 480px;
+  }
+  .pillars-head .stamp {
+    flex-shrink: 0;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    background: #fff;
+    border: 1px solid var(--ng-blue-100);
+    border-radius: 999px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .pillar {
+    background: #fff;
+    border: 1px solid var(--ng-line);
+    border-left: 3px solid var(--ng-blue);
+    border-radius: 10px;
+    padding: 10px 12px 11px;
+  }
+  .pillar-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+  }
+  .pillar-head .ic {
+    width: 28px; height: 28px;
+    background: var(--ng-blue-50);
+    border-radius: 8px;
+    display: grid; place-items: center;
+    color: var(--ng-blue);
+    flex-shrink: 0;
+  }
+  .pillar-head .ic svg { width: 15px; height: 15px; stroke-width: 1.85; }
+  .pillar-head .name {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin: 0;
+  }
+  .pillar .desc {
+    font-size: 9.5px;
+    line-height: 1.45;
+    color: var(--ng-steel);
+    margin: 0 0 6px;
+  }
+  .pillar .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+  .pillar .chips span {
+    font-size: 7.5px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--ng-blue-700);
+    background: var(--ng-blue-50);
+    border: 1px solid var(--ng-blue-100);
+    border-radius: 999px;
+    padding: 1.5px 5px;
+    white-space: nowrap;
+  }
+
+  /* ─── Section 3 — process timeline ──────────────────────── */
+  .process {
+    padding: 12px 24px 12px;
+  }
+  .process-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .process-head h2 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0;
+  }
+  .process-head .tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--ng-blue);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .timeline {
+    display: grid;
+    grid-template-columns: 1fr 16px 1fr 16px 1fr 16px 1fr;
+    align-items: stretch;
+    gap: 0;
+  }
+  .step {
+    background: var(--ng-mist);
+    border: 1px solid var(--ng-line);
+    border-radius: 10px;
+    padding: 10px 12px 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .step .num {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--ng-blue);
+    letter-spacing: 0.06em;
+  }
+  .step .num .dot {
+    width: 18px; height: 18px;
+    background: var(--ng-blue);
+    color: #fff;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: var(--font-display);
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+  .step .name {
+    font-family: var(--font-display);
+    font-size: 11.5px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin: 0;
+  }
+  .step .desc {
+    font-size: 9px;
+    line-height: 1.4;
+    color: var(--ng-steel);
+    margin: 0;
+    font-weight: 500;
+  }
+  .arrow {
+    display: grid; place-items: center;
+    color: var(--ng-blue);
+  }
+  .arrow svg { width: 14px; height: 14px; stroke-width: 2.2; }
+
+  /* ─── Section 4 — Value chips ───────────────────────────── */
+  .value {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 6px 24px 10px;
+  }
+  .chip {
+    background: #fff;
+    border: 1.5px solid var(--ng-green);
+    border-radius: 10px;
+    padding: 11px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .chip .check {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--ng-green);
+    color: #fff;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .chip .check svg { width: 14px; height: 14px; stroke-width: 3; }
+  .chip .text {
+    font-size: 10.5px;
+    line-height: 1.25;
+    color: var(--ng-ink);
+    font-weight: 600;
+  }
+  .chip .text strong {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    margin-bottom: 1px;
+  }
+  .chip .text span { color: var(--ng-steel); font-weight: 500; }
+
+  /* ─── FOOTER ───────────────────────────────────────────── */
+  .footer {
+    background: var(--ng-navy);
+    color: #fff;
+    padding: 10px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr 1.3fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .footer .f-logo img {
+    width: 130px;
+    height: auto;
+    display: block;
+  }
+  .footer .f-logo .tag {
+    font-size: 9px;
+    color: rgba(255,255,255,.55);
+    margin-top: 6px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .footer .contact {
+    font-size: 10.5px;
+    line-height: 1.55;
+    color: rgba(255,255,255,.92);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .footer .contact .row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer .contact .row svg {
+    width: 12px; height: 12px;
+    color: #9be39c;
+    flex-shrink: 0;
+  }
+  .footer .contact .row strong { font-weight: 700; color:#fff;}
+  .footer .cta {
+    background: #103559;
+    border: 1px solid #1f4d80;
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 10px;
+  }
+  .footer .cta .label {
+    font-size: 11.5px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.005em;
+    line-height: 1.15;
+  }
+  .footer .cta .label small {
+    display: block;
+    font-size: 9px;
+    font-weight: 500;
+    color: rgba(255,255,255,.7);
+    margin-top: 2px;
+    letter-spacing: 0;
+  }
+  .footer .cta .btn {
+    background: var(--ng-green);
+    color: #fff;
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 4px;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .footer .cta .btn svg { width: 12px; height: 12px; }
+</style>
+</head>
+<body>
+
+<div class="sheet" data-screen-label="One Pager Industrial Avanzado">
+
+  <!-- ═══════════════ HEADER ═══════════════ -->
+  <header class="header">
+    <img class="logo" src="assets/neugreen-logo-extended-white.svg" alt="Neugreen">
+    <div class="copy">
+      <span class="eyebrow-light">Soluciones Industriales · Agua y Proceso</span>
+      <h1>Tratamiento de agua y procesos industriales.<br><span class="accent">Del diagnóstico a la operación.</span></h1>
+      <p class="sub">Análisis técnico · Química especializada · Equipamiento · Ingeniería de proyecto · Soporte en campo</p>
+    </div>
+  </header>
+
+  <div class="body">
+
+    <!-- ═══════════════ SECCIÓN 1 — 10 SERVICIOS ═══════════════ -->
+    <div class="sec-head">
+      <h2>Cubrimos todo el ciclo del agua y proceso industrial</h2>
+      <span class="tag">01 · Servicios</span>
+    </div>
+
+    <div class="services">
+      <div class="svc">
+        <span class="svc-num">01</span>
+        <div class="ic"><i data-lucide="clipboard-list"></i></div>
+        <p class="name">Análisis técnico</p>
+        <p class="desc">Diagnóstico en campo, muestreo y plan de acción.</p>
+      </div>
+      <div class="svc">
+        <span class="svc-num">02</span>
+        <div class="ic"><i data-lucide="flask-conical"></i></div>
+        <p class="name">Laboratorio y normatividad</p>
+        <p class="desc">Análisis fisicoquímicos, microbiológicos y NOM.</p>
+      </div>
+      <div class="svc">
+        <span class="svc-num">03</span>
+        <div class="ic"><i data-lucide="droplets"></i></div>
+        <p class="name">Tratamiento de agua</p>
+        <p class="desc">Acondicionamiento, filtración y monitoreo de parámetros.</p>
+      </div>
+      <div class="svc">
+        <span class="svc-num">04</span>
+        <div class="ic"><i data-lucide="activity"></i></div>
+        <p class="name">PTAR y biología</p>
+        <p class="desc">Bioaumentación, control de olores y descarga.</p>
+      </div>
+      <div class="svc">
+        <span class="svc-num">05</span>
+        <div class="ic"><i data-lucide="refresh-cw"></i></div>
+        <p class="name">Reúso y pulimiento</p>
+        <p class="desc">Ósmosis inversa, filtración y reúso controlado.</p>
+      </div>
+      <div class="svc">
+        <span class="svc-num">06</span>
+        <div class="ic"><i data-lucide="wind"></i></div>
+        <p class="name">Torres de enfriamiento</p>
+        <p class="desc">Inhibición de corrosión, incrustación y microbiología.</p>
+      </div>
+      <div class="svc">
+        <span class="svc-num">07</span>
+        <div class="ic"><i data-lucide="flame"></i></div>
+        <p class="name">Calderas</p>
+        <p class="desc">Antiincrustantes, secuestrantes y eficiencia térmica.</p>
+      </div>
+      <div class="svc">
+        <span class="svc-num">08</span>
+        <div class="ic"><i data-lucide="sliders-horizontal"></i></div>
+        <p class="name">Dosificación y control</p>
+        <p class="desc">Bombas, sensores, tableros y automatización.</p>
+      </div>
+      <div class="svc">
+        <span class="svc-num">09</span>
+        <div class="ic"><i data-lucide="building-2"></i></div>
+        <p class="name">Ingeniería de proyecto</p>
+        <p class="desc">Diseño, construcción, puesta en marcha y arranque.</p>
+      </div>
+      <div class="svc">
+        <span class="svc-num">10</span>
+        <div class="ic"><i data-lucide="package"></i></div>
+        <p class="name">Suministro de equipo</p>
+        <p class="desc">Bombas, filtros, cisternas, membranas y refacciones.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════ SECCIÓN 2 — 3 PILARES ═══════════════ -->
+    <section class="pillars">
+      <div class="pillars-head">
+        <div>
+          <h2>Tres líneas que trabajan como <em>un solo sistema</em>.</h2>
+          <p class="sub">No vendemos solo químicos. Acompañamos el proceso completo.</p>
+        </div>
+        <span class="stamp">02 · Modelo</span>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar">
+          <div class="pillar-head">
+            <div class="ic"><i data-lucide="beaker"></i></div>
+            <h3 class="name">Química para tratamiento</h3>
+          </div>
+          <p class="desc">Coagulantes, floculantes, biocidas, inhibidores de corrosión e incrustación, enzimas y microorganismos para torres, calderas, PTAR y sistemas compactos.</p>
+          <div class="chips"><span>Formulación propia</span><span>HDS incluida</span><span>Entrega SLP</span></div>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar-head">
+            <div class="ic"><i data-lucide="hard-hat"></i></div>
+            <h3 class="name">Diseño y operación técnica</h3>
+          </div>
+          <p class="desc">Diseñamos, construimos y operamos plantas a medida. Integramos obra civil, hidráulica, eléctrica e instrumentación con red de colaboradores certificados.</p>
+          <div class="chips"><span>PTAR</span><span>Ingeniería integral</span><span>Red certificada</span></div>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar-head">
+            <div class="ic"><i data-lucide="cog"></i></div>
+            <h3 class="name">Equipamiento y suministro</h3>
+          </div>
+          <p class="desc">Bombas dosificadoras, filtros, suavizadores, tanques, cisternas, membranas, sensores y tableros. Selección técnica, instalación y soporte post-arranque.</p>
+          <div class="chips"><span>Equipos</span><span>Calibración</span><span>Post-arranque</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SECCIÓN 3 — PROCESO ═══════════════ -->
+    <section class="process">
+      <div class="process-head">
+        <h2>Del diagnóstico a la operación</h2>
+        <span class="tag">03 · Proceso</span>
+      </div>
+
+      <div class="timeline">
+        <div class="step">
+          <span class="num"><span class="dot">01</span> DIAGNÓSTICO</span>
+          <p class="name">Diagnóstico técnico</p>
+          <p class="desc">Visita en campo, análisis de agua y evaluación del sistema actual.</p>
+        </div>
+        <div class="arrow"><i data-lucide="chevron-right"></i></div>
+        <div class="step">
+          <span class="num"><span class="dot">02</span> PROPUESTA</span>
+          <p class="name">Propuesta técnica</p>
+          <p class="desc">Selección de química, equipo y alcance del proyecto con presupuesto detallado.</p>
+        </div>
+        <div class="arrow"><i data-lucide="chevron-right"></i></div>
+        <div class="step">
+          <span class="num"><span class="dot">03</span> ARRANQUE</span>
+          <p class="name">Implementación</p>
+          <p class="desc">Instalación de equipos, aplicación de química y arranque del sistema.</p>
+        </div>
+        <div class="arrow"><i data-lucide="chevron-right"></i></div>
+        <div class="step">
+          <span class="num"><span class="dot">04</span> OPERACIÓN</span>
+          <p class="name">Seguimiento técnico</p>
+          <p class="desc">Monitoreo de parámetros, ajuste de dosis y reporte de desempeño continuo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SECCIÓN 4 — VALOR ═══════════════ -->
+    <div class="value">
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>Diagnóstico gratuito</strong>
+          <span>Visita técnica en planta sin costo</span>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>1 proveedor integral</strong>
+          <span>Química + equipos + ingeniería</span>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>Soporte en campo</strong>
+          <span>Seguimiento de parámetros continuo</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer">
+    <div class="f-logo">
+      <img src="assets/neugreen-logo-extended-white.svg" alt="Neugreen">
+      <div class="tag">Biotecnología en limpieza y desinfección.</div>
+    </div>
+    <div class="contact">
+      <div class="row"><i data-lucide="mail"></i><span><strong>ventas@neugreen.mx</strong></span></div>
+      <div class="row"><i data-lucide="phone"></i><span><strong>+52 444 256 5697</strong></span></div>
+      <div class="row"><i data-lucide="globe"></i><span>neugreen.mx/industrial</span></div>
+    </div>
+    <div class="cta">
+      <div class="label">
+        Solicita diagnóstico técnico
+        <small>Evaluamos tu sistema sin costo.</small>
+      </div>
+      <a class="btn" href="https://neugreen.mx/whatsapp.html" target="_blank" rel="noopener">
+        Iniciar
+        <i data-lucide="arrow-right"></i>
+      </a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  if (window.lucide) lucide.createIcons({ attrs: { 'stroke-width': 2 } });
+</script>
+</body>
+</html>

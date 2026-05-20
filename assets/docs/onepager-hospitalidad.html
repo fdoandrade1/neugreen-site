@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>Neugreen · One Pager Hotelero</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<style>
+  /* ─── Page setup ──────────────────────────────────────────── */
+  @page { size: letter; margin: 0; }
+  html, body {
+    background: #2a3340;
+    color: var(--fg-1);
+    font-family: var(--font-text);
+  }
+  body {
+    margin: 0;
+    display: grid;
+    place-items: start center;
+    min-height: 100vh;
+    padding: 24px 0;
+  }
+
+  /* ─── Sheet ───────────────────────────────────────────────── */
+  .sheet {
+    width: 816px;
+    height: 1056px;
+    background: #fff;
+    color: var(--ng-ink);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,.45);
+    display: grid;
+    grid-template-rows: 104px 1fr auto;
+  }
+  @media print {
+    body { background: #fff; padding: 0; display: block; }
+    .sheet { box-shadow: none; width: 8.5in; height: 11in; }
+  }
+
+  /* ─── HEADER ──────────────────────────────────────────────── */
+  .header {
+    background: var(--ng-blue);
+    color: #fff;
+    padding: 0 28px;
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: "";
+    position: absolute;
+    right: -40px; bottom: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.10), transparent 60%);
+    pointer-events: none;
+  }
+  .header img.logo { width: 160px; height: auto; display: block; }
+  .header .copy { color: #fff; line-height: 1.15; }
+  .header .eyebrow-light {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.78);
+    margin-bottom: 6px;
+    display: block;
+  }
+  .header h1 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin: 0 0 4px;
+  }
+  .header h1 .accent { color: #9be39c; }
+  .header .sub {
+    font-size: 10.5px;
+    color: rgba(255,255,255,.85);
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 0;
+  }
+
+  /* ─── BODY ────────────────────────────────────────────────── */
+  .body {
+    display: grid;
+    align-content: start;
+  }
+
+  /* Section title strip */
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 10px 24px 5px;
+  }
+  .sec-head h2 {
+    font-family: var(--font-display);
+    font-size: 14.5px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0;
+  }
+  .sec-head .tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--ng-blue);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* ─── Section 1 — Portfolio grid ─────────────────────────── */
+  .portfolio {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 0 24px 8px;
+  }
+  .col {
+    background: var(--ng-mist);
+    border-radius: 10px;
+    padding: 12px 11px;
+    border: 1px solid var(--ng-line);
+    display: flex; flex-direction: column;
+  }
+  .col-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 7px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--ng-line);
+  }
+  .col-head .ic {
+    width: 26px; height: 26px;
+    background: #fff;
+    border-radius: 7px;
+    display: grid; place-items: center;
+    color: var(--ng-blue);
+    box-shadow: 0 1px 2px rgba(0,63,197,.10);
+    flex-shrink: 0;
+  }
+  .col-head .ic svg { width: 14px; height: 14px; stroke-width: 2; }
+  .col-head .label {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    line-height: 1.1;
+  }
+  .col-head .label small {
+    display: block;
+    font-size: 10.5px;
+    color: var(--ng-ink);
+    letter-spacing: -0.01em;
+    text-transform: none;
+    font-weight: 800;
+    margin-top: 2px;
+  }
+  .col ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 9.5px;
+    line-height: 1.35;
+    color: var(--ng-steel);
+  }
+  .col li {
+    position: relative;
+    padding-left: 9px;
+  }
+  .col li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 6px;
+    width: 3.5px; height: 3.5px;
+    background: var(--ng-blue);
+    border-radius: 50%;
+  }
+  .col li.hl {
+    margin-top: 4px;
+    padding: 5px 7px 5px 8px;
+    background: #fff;
+    border: 1px solid var(--ng-line);
+    border-left: 2px solid var(--ng-green);
+    border-radius: 6px;
+    color: var(--ng-ink);
+    font-weight: 600;
+    font-size: 9px;
+    line-height: 1.3;
+  }
+  .col li.hl::before { display: none; }
+  .col li.hl .seko-mark {
+    display: inline-block;
+    font-size: 7.5px;
+    color: var(--ng-green-700);
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    margin-right: 3px;
+    text-transform: uppercase;
+  }
+  .col .note {
+    margin-top: auto;
+    padding-top: 6px;
+    font-size: 8.5px;
+    line-height: 1.35;
+    color: var(--ng-blue-700);
+    font-style: italic;
+  }
+
+  /* ─── Section 2 — SEKO band ─────────────────────────────── */
+  .seko {
+    background: #E8F0FB;
+    padding: 10px 24px 10px;
+    border-top: 1px solid var(--ng-line);
+    border-bottom: 1px solid var(--ng-line);
+    position: relative;
+  }
+  .seko-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    gap: 16px;
+  }
+  .seko-head h2 {
+    font-family: var(--font-display);
+    font-size: 14.5px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0 0 2px;
+  }
+  .seko-head h2 .brand {
+    display: inline-block;
+    background: var(--ng-blue);
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    vertical-align: 2px;
+    margin: 0 2px;
+  }
+  .seko-head .sub {
+    font-size: 10px;
+    color: var(--ng-steel);
+    margin: 0;
+    font-weight: 500;
+    max-width: 480px;
+  }
+  .seko-head .stamp {
+    flex-shrink: 0;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    background: #fff;
+    border: 1px solid var(--ng-blue-100);
+    border-radius: 999px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+
+  .seko-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .seko-card {
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid var(--ng-line);
+    border-left: 3px solid var(--ng-blue);
+    padding: 8px 10px 9px;
+    display: grid;
+    grid-template-columns: 54px 1fr;
+    gap: 9px;
+    align-items: start;
+  }
+  .seko-card .img {
+    width: 54px; height: 54px;
+    background: var(--ng-mist);
+    border-radius: 8px;
+    display: grid; place-items: center;
+    overflow: hidden;
+  }
+  .seko-card .img img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    padding: 3px;
+    box-sizing: border-box;
+  }
+  .seko-card .name {
+    font-family: var(--font-display);
+    font-size: 11.5px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin: 0 0 2px;
+  }
+  .seko-card .area {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    margin: 0 0 4px;
+    line-height: 1.2;
+  }
+  .seko-card .desc {
+    font-size: 8.5px;
+    line-height: 1.4;
+    color: var(--ng-steel);
+    margin: 0 0 5px;
+  }
+  .seko-card .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+  .seko-card .chips span {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--ng-blue-700);
+    background: var(--ng-blue-50);
+    border: 1px solid var(--ng-blue-100);
+    border-radius: 999px;
+    padding: 1px 4.5px;
+    white-space: nowrap;
+  }
+  .seko-foot {
+    margin-top: 6px;
+    font-size: 8px;
+    color: var(--ng-steel);
+    font-style: italic;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .seko-foot svg { width: 10px; height: 10px; color: var(--ng-blue); flex-shrink: 0; }
+
+  /* ─── Section 3 — Aroma band ──────────────────────────── */
+  .aroma {
+    background: #EEF4FF;
+    padding: 10px 24px 10px;
+    border-bottom: 1px solid var(--ng-line);
+  }
+  .aroma-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 7px;
+  }
+  .aroma-head h2 {
+    font-family: var(--font-display);
+    font-size: 13.5px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0 0 2px;
+  }
+  .aroma-head h2 em {
+    font-style: normal;
+    color: var(--ng-blue);
+  }
+  .aroma-head .sub {
+    font-size: 9.5px;
+    color: var(--ng-steel);
+    margin: 0;
+    font-weight: 500;
+    max-width: 500px;
+  }
+  .aroma-head .stamp {
+    flex-shrink: 0;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    background: #fff;
+    border: 1px solid var(--ng-blue-100);
+    border-radius: 999px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+  .aroma-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .aroma-card {
+    background: #fff;
+    border: 1px solid var(--ng-line);
+    border-radius: 8px;
+    padding: 8px 9px;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 8px;
+    align-items: start;
+  }
+  .aroma-card .img {
+    width: 44px; height: 44px;
+    background: var(--ng-mist);
+    border-radius: 6px;
+    display: grid; place-items: center;
+    overflow: hidden;
+  }
+  .aroma-card .img img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    padding: 3px;
+    box-sizing: border-box;
+  }
+  .aroma-card .name {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    letter-spacing: -0.005em;
+    line-height: 1.1;
+    margin: 0 0 2px;
+  }
+  .aroma-card .use {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    margin: 0 0 3px;
+    line-height: 1.2;
+  }
+  .aroma-card .desc {
+    font-size: 8.5px;
+    line-height: 1.35;
+    color: var(--ng-steel);
+    margin: 0 0 5px;
+  }
+  .aroma-card .specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+  .aroma-card .specs span {
+    font-size: 6.5px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--ng-green-700);
+    background: var(--ng-green-50);
+    border: 1px solid #c9eccb;
+    border-radius: 999px;
+    padding: 1px 4px;
+    white-space: nowrap;
+  }
+  .aroma-foot {
+    margin-top: 6px;
+    font-size: 8px;
+    color: var(--ng-steel);
+    font-style: italic;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .aroma-foot svg { width: 10px; height: 10px; color: var(--ng-blue); flex-shrink: 0; }
+
+  /* ─── Section 4 — Technical (2 cols) ───────────────── */
+  .tech {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 8px 24px 8px;
+  }
+  .tech-card {
+    background: #fff;
+    border: 1px solid var(--ng-line);
+    border-left: 3px solid var(--ng-blue);
+    border-radius: 10px;
+    padding: 9px 12px 10px;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+  .tech-card.green { border-left-color: var(--ng-green); }
+  .tech-card .ic {
+    width: 32px; height: 32px;
+    background: var(--ng-blue-50);
+    border-radius: 8px;
+    display: grid; place-items: center;
+    color: var(--ng-blue);
+  }
+  .tech-card.green .ic {
+    background: var(--ng-green-50);
+    color: var(--ng-green-700);
+  }
+  .tech-card .ic svg { width: 17px; height: 17px; stroke-width: 1.85; }
+  .tech-card .name {
+    font-family: var(--font-display);
+    font-size: 11.5px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    letter-spacing: -0.005em;
+    line-height: 1.1;
+    margin: 0 0 3px;
+  }
+  .tech-card .desc {
+    font-size: 8.5px;
+    line-height: 1.4;
+    color: var(--ng-steel);
+    margin: 0 0 5px;
+  }
+  .tech-card .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+  .tech-card .chips span {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--ng-blue-700);
+    background: var(--ng-blue-50);
+    border: 1px solid var(--ng-blue-100);
+    border-radius: 999px;
+    padding: 1px 4.5px;
+    white-space: nowrap;
+  }
+  .tech-card.green .chips span {
+    color: var(--ng-green-700);
+    background: var(--ng-green-50);
+    border-color: #c9eccb;
+  }
+  .tech-eyebrow {
+    padding: 4px 24px 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .tech-eyebrow h2 {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0;
+  }
+  .tech-eyebrow .tag {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--ng-blue);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* ─── Section 5 — Value chips ───────────────────────────── */
+  .value {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 6px 24px 10px;
+  }
+  .chip {
+    background: #fff;
+    border: 1.5px solid var(--ng-green);
+    border-radius: 10px;
+    padding: 9px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .chip .check {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--ng-green);
+    color: #fff;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .chip .check svg { width: 13px; height: 13px; stroke-width: 3; }
+  .chip .text {
+    font-size: 9.5px;
+    line-height: 1.25;
+    color: var(--ng-ink);
+    font-weight: 600;
+  }
+  .chip .text strong {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    margin-bottom: 1px;
+  }
+  .chip .text span { color: var(--ng-steel); font-weight: 500; }
+
+  /* ─── FOOTER ───────────────────────────────────────────── */
+  .footer {
+    background: var(--ng-navy);
+    color: #fff;
+    padding: 10px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr 1.3fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .footer .f-logo img {
+    width: 124px;
+    height: auto;
+    display: block;
+  }
+  .footer .f-logo .tag {
+    font-size: 8.5px;
+    color: rgba(255,255,255,.55);
+    margin-top: 5px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .footer .contact {
+    font-size: 10px;
+    line-height: 1.5;
+    color: rgba(255,255,255,.92);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .footer .contact .row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer .contact .row svg {
+    width: 12px; height: 12px;
+    color: #9be39c;
+    flex-shrink: 0;
+  }
+  .footer .contact .row strong { font-weight: 700; color:#fff;}
+  .footer .cta {
+    background: #103559;
+    border: 1px solid #1f4d80;
+    border-radius: 10px;
+    padding: 9px 13px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 10px;
+  }
+  .footer .cta .label {
+    font-size: 11px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.005em;
+    line-height: 1.15;
+  }
+  .footer .cta .label small {
+    display: block;
+    font-size: 8.5px;
+    font-weight: 500;
+    color: rgba(255,255,255,.7);
+    margin-top: 2px;
+    letter-spacing: 0;
+  }
+  .footer .cta .btn {
+    background: var(--ng-green);
+    color: #fff;
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 4px;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .footer .cta .btn svg { width: 12px; height: 12px; }
+</style>
+</head>
+<body>
+
+<div class="sheet" data-screen-label="One Pager Hotelero">
+
+  <!-- ═══════════════ HEADER ═══════════════ -->
+  <header class="header">
+    <img class="logo" src="assets/neugreen-logo-extended-white.svg" alt="Neugreen">
+    <div class="copy">
+      <span class="eyebrow-light">Soluciones Hoteleras</span>
+      <h1>Operación impecable en cada área del hotel.<br><span class="accent">Un solo proveedor.</span></h1>
+      <p class="sub">Lavandería · Cocina · Habitaciones · Áreas comunes · Body care · Aromatización · Agua</p>
+    </div>
+  </header>
+
+  <div class="body">
+
+    <!-- ═══════════════ SECCIÓN 1 — PORTAFOLIO ═══════════════ -->
+    <div class="sec-head">
+      <h2>Cubrimos toda la operación del hotel</h2>
+      <span class="tag">01 · Portafolio</span>
+    </div>
+
+    <div class="portfolio">
+      <!-- Col 1 Lavandería -->
+      <div class="col">
+        <div class="col-head">
+          <div class="ic"><i data-lucide="washing-machine"></i></div>
+          <div class="label">Área 01<small>Lavandería</small></div>
+        </div>
+        <ul>
+          <li>Detergente institucional para lavandería</li>
+          <li>Suavizante y neutralizador</li>
+          <li>Blanqueador sin cloro para blancos</li>
+          <li>Quitamanchas de alta eficacia</li>
+          <li>Detergente enzimático para orgánicas</li>
+          <li class="hl"><span class="seko-mark">SEKO</span>WashBasic / WashDose Peri</li>
+        </ul>
+      </div>
+
+      <!-- Col 2 Cocina -->
+      <div class="col">
+        <div class="col-head">
+          <div class="ic"><i data-lucide="chef-hat"></i></div>
+          <div class="label">Área 02<small>Cocina y lavavajillas</small></div>
+        </div>
+        <ul>
+          <li>Detergente lavavajillas automático</li>
+          <li>Desengrasante de campanas y superficies</li>
+          <li>Desinfectante de contacto alimentario</li>
+          <li>Limpiador multiusos de cocina</li>
+          <li class="hl"><span class="seko-mark">SEKO</span>WareDose 10 + ProMax</li>
+        </ul>
+      </div>
+
+      <!-- Col 3 Habitaciones -->
+      <div class="col">
+        <div class="col-head">
+          <div class="ic"><i data-lucide="bed-double"></i></div>
+          <div class="label">Área 03<small>Habitaciones y áreas comunes</small></div>
+        </div>
+        <ul>
+          <li>Multiusos para habitaciones</li>
+          <li>Desinfectante de alto nivel para baños</li>
+          <li>Limpiador de pisos y pasillos</li>
+          <li>Jabón antibacterial institucional</li>
+          <li>Aromatizante de espacios</li>
+          <li class="hl"><span class="seko-mark">SEKO</span>ProMini (sanitarios y pasillos)</li>
+        </ul>
+      </div>
+
+      <!-- Col 4 Body Care -->
+      <div class="col">
+        <div class="col-head">
+          <div class="ic"><i data-lucide="sparkles"></i></div>
+          <div class="label">Área 04<small>Body care y amenidades</small></div>
+        </div>
+        <ul>
+          <li>Jabón corporal para habitación</li>
+          <li>Shampoo corporal premium</li>
+          <li>Acondicionador</li>
+          <li>Crema corporal</li>
+          <li class="hl"><span class="seko-mark">PLAN</span>Fragancia exclusiva del hotel</li>
+        </ul>
+        <p class="note">Manufactura con tu marca o con marca Neugreen, según tu estrategia comercial.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════ SECCIÓN 2 — SEKO LAVANDERÍA ═══════════════ -->
+    <section class="seko">
+      <div class="seko-head">
+        <div>
+          <h2>Dosificación automática <span class="brand">SEKO</span> para lavandería y cocina.</h2>
+          <p class="sub">Instalamos el equipo. Suministramos el químico. Monitoreamos el consumo.</p>
+        </div>
+        <span class="stamp">02 · Equipo</span>
+      </div>
+
+      <div class="seko-grid">
+        <div class="seko-card">
+          <div class="img"><img src="assets/washbasic-lll-cropped.png" alt="SEKO WashBasic LLL"></div>
+          <div>
+            <h3 class="name">SEKO WashBasic LLL</h3>
+            <p class="area">OPL — hasta 3 lavadoras</p>
+            <p class="desc">Dosificación peristáltica para lavandería propia. Hasta 3 químicos por ciclo (detergente, suavizante, blanqueador). Bajo mantenimiento.</p>
+            <div class="chips"><span>OPL</span><span>3 lavadoras</span><span>Peristáltica</span></div>
+          </div>
+        </div>
+
+        <div class="seko-card">
+          <div class="img"><img src="assets/washdose-peri.png" alt="SEKO WashDose Peri"></div>
+          <div>
+            <h3 class="name">SEKO WashDose Peri</h3>
+            <p class="area">Volumen medio-alto</p>
+            <p class="desc">2 a 4 productos por ciclo. Caudal 400–1,600 ml/min. Múltiples lavadoras en operación simultánea. Reportes de consumo y ajuste remoto.</p>
+            <div class="chips"><span>Multi-producto</span><span>400–1,600 ml/min</span><span>Reportes</span></div>
+          </div>
+        </div>
+
+        <div class="seko-card">
+          <div class="img"><img src="assets/opl-advantage-cropped.png" alt="SEKO OPL Advantage"></div>
+          <div>
+            <h3 class="name">SEKO OPL Advantage</h3>
+            <p class="area">Alta capacidad · IoT</p>
+            <p class="desc">Sistema modular escalable. Conectividad IoT opcional vía SekoWeb — control y monitoreo remoto desde app. Múltiples lavadoras-extractoras.</p>
+            <div class="chips"><span>IoT</span><span>SekoWeb</span><span>Escalable</span></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="seko-foot">
+        <i data-lucide="shield-check"></i>
+        Equipo instalado y calibrado por Neugreen. Soporte técnico en campo incluido. Garantía de desempeño.
+      </p>
+    </section>
+
+    <!-- ═══════════════ SECCIÓN 3 — AROMA ═══════════════ -->
+    <section class="aroma">
+      <div class="aroma-head">
+        <div>
+          <h2>Aroma Experience — <em>la primera impresión que el huésped no olvida.</em></h2>
+          <p class="sub">Nebulización en frío. Sin agua, sin calor, sin dilución. Aroma insignia exclusivo disponible.</p>
+        </div>
+        <span class="stamp">03 · Aroma</span>
+      </div>
+
+      <div class="aroma-grid">
+        <div class="aroma-card">
+          <div class="img"><img src="assets/difusor-pequeno.png" alt="Difusor Compacto NG-100"></div>
+          <div>
+            <h3 class="name">Difusor Compacto NG-100</h3>
+            <p class="use">Habitaciones, pasillos, sanitarios</p>
+            <p class="desc">Diseño minimalista de pared. Presencia constante en espacios pequeños.</p>
+            <div class="specs"><span>Hasta 50 m²</span><span>Esenciales</span><span>Plug &amp; Play</span></div>
+          </div>
+        </div>
+
+        <div class="aroma-card">
+          <div class="img"><img src="assets/difusor-mediano.png" alt="Difusor Profesional NG-300"></div>
+          <div>
+            <h3 class="name">Difusor Profesional NG-300</h3>
+            <p class="use">Lobby, restaurante, salón de negocios</p>
+            <p class="desc">Control LCD con WiFi + Bluetooth. Programación por horarios desde app.</p>
+            <div class="specs"><span>Hasta 300 m²</span><span>App control</span><span>WiFi + BT</span></div>
+          </div>
+        </div>
+
+        <div class="aroma-card">
+          <div class="img"><img src="assets/difusor-grande.png" alt="Difusor HVAC NG-1500"></div>
+          <div>
+            <h3 class="name">Difusor HVAC Comercial NG-1500</h3>
+            <p class="use">Salones de eventos · HVAC</p>
+            <p class="desc">Integración directa al sistema de clima. Cobertura uniforme. Silenciosa 24/7.</p>
+            <div class="specs"><span>Hasta 1,500 m²</span><span>HVAC</span><span>24/7</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SECCIÓN 4 — TÉCNICO ═══════════════ -->
+    <div class="tech-eyebrow">
+      <h2>Cumplimiento técnico en procesos críticos</h2>
+      <span class="tag">04 · Técnico</span>
+    </div>
+    <div class="tech">
+      <div class="tech-card green">
+        <div class="ic"><i data-lucide="droplets"></i></div>
+        <div>
+          <h3 class="name">Control de trampas de grasa</h3>
+          <p class="desc">Bioactivador enzimático que degrada grasas acumuladas en trampas y cárcamos de cocina. Reduce DBO/DQO, elimina olores y previene taponamientos.</p>
+          <div class="chips"><span>Enzimático</span><span>Sin taponamientos</span><span>NOM descarga</span></div>
+        </div>
+      </div>
+      <div class="tech-card">
+        <div class="ic"><i data-lucide="activity"></i></div>
+        <div>
+          <h3 class="name">Agua y PTAR</h3>
+          <p class="desc">Soporte técnico para tratamiento de agua hotelera: agua potable, agua de alberca y sistemas de enfriamiento o descarga. Diagnóstico, química y seguimiento.</p>
+          <div class="chips"><span>Diagnóstico</span><span>Potable</span><span>Torres</span><span>Descarga</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ SECCIÓN 5 — VALOR ═══════════════ -->
+    <div class="value">
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>1 proveedor</strong>
+          <span>Químicos, equipo, amenidades y jarciería</span>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>Reposición programada</strong>
+          <span>Mensual o entrega SPOT</span>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>Body care exclusivo</strong>
+          <span>Tu marca o marca Neugreen</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer">
+    <div class="f-logo">
+      <img src="assets/neugreen-logo-extended-white.svg" alt="Neugreen">
+      <div class="tag">Biotecnología en limpieza y desinfección.</div>
+    </div>
+    <div class="contact">
+      <div class="row"><i data-lucide="mail"></i><span><strong>ventas@neugreen.mx</strong></span></div>
+      <div class="row"><i data-lucide="phone"></i><span><strong>+52 444 256 5697</strong></span></div>
+      <div class="row"><i data-lucide="globe"></i><span>neugreen.mx</span></div>
+    </div>
+    <div class="cta">
+      <div class="label">
+        Solicita tu diagnóstico de operación
+        <small>Te decimos qué necesitas y cuánto cuesta.</small>
+      </div>
+      <a class="btn" href="https://neugreen.mx/whatsapp.html" target="_blank" rel="noopener">
+        Cotizar
+        <i data-lucide="arrow-right"></i>
+      </a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  if (window.lucide) lucide.createIcons({ attrs: { 'stroke-width': 2 } });
+</script>
+</body>
+</html>

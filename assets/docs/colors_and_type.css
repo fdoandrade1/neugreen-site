@@ -1,0 +1,327 @@
+/* ============================================================
+   NEUGREEN — COLORS & TYPE
+   Single source of truth for color + typography tokens.
+   Drop in via <link rel="stylesheet" href="colors_and_type.css">.
+   ============================================================ */
+
+/* ─── Brand fonts: Fixel Text (licensed, included in /fonts) ───
+   Note: Fixel Display variant was not provided. We use Fixel Text
+   for both display and body roles (ExtraBold 800 / Black 900 for
+   display). Manrope (Google) remains as fallback. */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap");
+
+@font-face {
+  font-family: "Fixel Text";
+  src: url("../../fonts/FixelText-Thin.otf") format("opentype");
+  font-weight: 100; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fixel Text";
+  src: url("../../fonts/FixelText-ExtraLight.otf") format("opentype");
+  font-weight: 200; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fixel Text";
+  src: url("../../fonts/FixelText-Light.otf") format("opentype");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fixel Text";
+  src: url("../../fonts/FixelText-Regular.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fixel Text";
+  src: url("../../fonts/FixelText-RegularItalic.otf") format("opentype");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Fixel Text";
+  src: url("../../fonts/FixelText-Medium.otf") format("opentype");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fixel Text";
+  src: url("../../fonts/FixelText-SemiBold.otf") format("opentype");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fixel Text";
+  src: url("../../fonts/FixelText-Bold.otf") format("opentype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fixel Text";
+  src: url("../../fonts/FixelText-BoldItalic.otf") format("opentype");
+  font-weight: 700; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Fixel Text";
+  src: url("../../fonts/FixelText-ExtraBold.otf") format("opentype");
+  font-weight: 800; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fixel Text";
+  src: url("../../fonts/FixelText-Black.otf") format("opentype");
+  font-weight: 900; font-style: normal; font-display: swap;
+}
+
+/* Alias: until Fixel Display is licensed, --font-display also maps
+   to Fixel Text (use weight 800/900 for display roles). */
+@font-face {
+  font-family: "Fixel Display";
+  src: url("../../fonts/FixelText-ExtraBold.otf") format("opentype");
+  font-weight: 800; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fixel Display";
+  src: url("../../fonts/FixelText-Black.otf") format("opentype");
+  font-weight: 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fixel Display";
+  src: url("../../fonts/FixelText-Bold.otf") format("opentype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+:root {
+  /* ─── Brand core ─────────────────────────────────────────── */
+  --ng-blue:        #0055b8;   /* primary corporate · buttons · links · headers */
+  --ng-blue-700:    #0033A0;   /* hover / pressed blue */
+  --ng-blue-100:    #DCE6FF;   /* badge / soft highlight */
+  --ng-blue-50:     #EEF3FF;   /* surface secondary */
+  --ng-green:       #41BE43;   /* action accent · CTAs · checkmarks */
+  --ng-green-700:   #2F9831;   /* hover green / text on green-50 */
+  --ng-green-50:    #ECFAEC;   /* surface success */
+
+  /* ─── Surface & ink (neutrals) ───────────────────────────── */
+  --ng-navy:        #0B1B2B;   /* premium dark · footer · technical sections */
+  --ng-ink:         #0E1726;   /* primary text · titles on light */
+  --ng-steel:       #5A6B82;   /* secondary text · captions */
+  --ng-line:        #E2E8F2;   /* borders · separators */
+  --ng-mist:        #F4F7FB;   /* surface 1 (cards, subtle bg) */
+  --ng-cloud:       #FAFBFD;   /* surface 0 (page base) */
+  --ng-white:       #FFFFFF;
+
+  /* ─── Semantic ───────────────────────────────────────────── */
+  --success:        #41BE43;
+  --warning:        #E8A800;
+  --danger:         #D93838;
+  --info:           #0055b8;
+
+  /* ─── Foreground role tokens (semantic) ──────────────────── */
+  --fg-1:           var(--ng-ink);     /* primary text */
+  --fg-2:           var(--ng-steel);   /* secondary text */
+  --fg-3:           #8896AC;           /* tertiary / placeholder */
+  --fg-on-blue:     var(--ng-white);
+  --fg-on-green:    var(--ng-white);
+  --fg-on-dark:     var(--ng-white);
+  --fg-link:        var(--ng-blue);
+  --fg-link-hover:  var(--ng-blue-700);
+
+  /* ─── Background role tokens ─────────────────────────────── */
+  --bg-page:        var(--ng-cloud);
+  --bg-surface:     var(--ng-white);
+  --bg-subtle:      var(--ng-mist);
+  --bg-blue-soft:   var(--ng-blue-50);
+  --bg-green-soft:  var(--ng-green-50);
+  --bg-dark:        var(--ng-navy);
+  --bg-tech-dark:   #102942;            /* card-dark variant */
+
+  /* ─── Radius ─────────────────────────────────────────────── */
+  --r-xs:           4px;
+  --r-sm:           6px;
+  --r:              10px;
+  --r-lg:           14px;
+  --r-xl:           20px;
+  --r-pill:         999px;
+
+  /* ─── Shadow (blue-tinted, never gray) ──────────────────── */
+  --shadow-sm: 0 1px 2px rgba(15,23,42,.04), 0 1px 1px rgba(15,23,42,.03);
+  --shadow:    0 8px 24px -8px rgba(0,63,197,.12), 0 2px 6px rgba(15,23,42,.04);
+  --shadow-lg: 0 20px 50px -20px rgba(0,63,197,.25);
+
+  /* ─── Spacing (base-4) ───────────────────────────────────── */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   24px;
+  --space-6:   32px;
+  --space-7:   48px;
+  --space-8:   64px;
+  --space-9:   96px;
+  --space-10:  128px;
+
+  /* ─── Layout ─────────────────────────────────────────────── */
+  --container-max: 1240px;
+  --section-pad-y: clamp(64px, 8vw, 112px);
+  --section-pad-x: clamp(20px, 5vw, 56px);
+
+  /* ─── Type families ──────────────────────────────────────── */
+  /* Note: Fixel is the licensed brand face. Manrope (Google Fonts)
+     is the approved fallback when Fixel is unavailable. */
+  --font-display: "Fixel Display","Manrope","Inter Tight",system-ui,sans-serif;
+  --font-text:    "Fixel Text","Manrope","Inter Tight",system-ui,sans-serif;
+  --font-mono:    "JetBrains Mono",ui-monospace,Menlo,monospace;
+
+  /* ─── Type weights ───────────────────────────────────────── */
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-black:    800;
+
+  /* ─── Type scale (px) ────────────────────────────────────── */
+  --fs-display-xl: 72px;
+  --fs-display-l:  52px;
+  --fs-h2:         40px;
+  --fs-h3:         28px;
+  --fs-h4:         20px;
+  --fs-body-l:     17px;
+  --fs-body-m:     15px;
+  --fs-body-s:     13px;
+  --fs-eyebrow:    11px;
+  --fs-mono:       12px;
+
+  /* ─── Line heights ───────────────────────────────────────── */
+  --lh-tight:   1.05;
+  --lh-snug:    1.2;
+  --lh-normal:  1.5;
+  --lh-relaxed: 1.6;
+
+  /* ─── Letter spacing ─────────────────────────────────────── */
+  --ls-tight:   -0.025em;
+  --ls-snug:    -0.02em;
+  --ls-normal:  0;
+  --ls-eyebrow: 0.22em;
+}
+
+/* ============================================================
+   BASE ELEMENT STYLES (semantic mapping for raw HTML)
+   ============================================================ */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-page);
+  color: var(--fg-1);
+  font-family: var(--font-text);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--fg-1);
+  margin: 0 0 var(--space-3);
+  letter-spacing: var(--ls-snug);
+}
+
+h1 {
+  font-size: var(--fs-display-l);
+  font-weight: var(--fw-black);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+h2 {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-black);
+  line-height: 1.1;
+}
+h3 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.015em;
+}
+h4 {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+p {
+  margin: 0 0 var(--space-4);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: var(--fg-2);
+}
+
+a {
+  color: var(--fg-link);
+  text-decoration: none;
+  transition: color .12s ease;
+}
+a:hover { color: var(--fg-link-hover); text-decoration: underline; }
+
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+code {
+  background: var(--bg-subtle);
+  padding: 2px 6px;
+  border-radius: var(--r-sm);
+  color: var(--ng-blue-700);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--ng-line);
+  margin: var(--space-7) 0;
+}
+
+::selection { background: var(--ng-blue-100); color: var(--ng-blue-700); }
+
+/* ============================================================
+   UTILITY CLASSES (named semantic styles)
+   ============================================================ */
+
+.display-xl {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-xl);
+  font-weight: var(--fw-black);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--fg-1);
+}
+.display-l {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-l);
+  font-weight: var(--fw-black);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-snug);
+  color: var(--fg-1);
+}
+
+.body-l { font-size: var(--fs-body-l); line-height: var(--lh-normal); color: var(--fg-2); }
+.body-m { font-size: var(--fs-body-m); line-height: var(--lh-relaxed); color: var(--fg-2); }
+.body-s { font-size: var(--fs-body-s); line-height: var(--lh-normal); color: var(--fg-2); }
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-text);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--ng-blue);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0;
+}
+
+/* Color helpers — use sparingly. Prefer semantic role tokens. */
+.fg-ink    { color: var(--fg-1); }
+.fg-steel  { color: var(--fg-2); }
+.fg-blue   { color: var(--ng-blue); }
+.fg-green  { color: var(--ng-green-700); }
+.fg-on-dark { color: var(--fg-on-dark); }
