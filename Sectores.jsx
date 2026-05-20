@@ -42,11 +42,12 @@ const SECTOR_DATA = {
     ],
   },
   Manufactura: {
-    drawerTitle: 'Manufactura y marca privada',
-    desc: 'Formulación, envasado y etiquetado para tu marca. Planta propia en San Luis Potosí. Desde lotes pequeños hasta producción industrial.',
+    drawerTitle: 'Manufactura y Marca Privada',
+    desc: 'Desarrollamos y fabricamos tu línea de productos. Formulación, producción, envasado y etiquetado en planta propia SLP. Tú pones la marca, nosotros ponemos todo lo demás.',
     acciones: [
-      { type: 'primary', label: 'Conocer el proceso',   href: 'manufactura.html' },
-      { type: 'link',    label: 'Solicitar información', href: 'contacto.html' },
+      { type: 'primary',  label: 'Ver One Pager',          onClick: () => window.open('assets/docs/onepager-manufactura.html', '_blank'), 'data-track': 'onepager-view',     'data-sector': 'manufactura' },
+      { type: 'download', label: 'Descargar PDF',           href: 'assets/docs/onepager-manufactura.pdf', hasPdf: false, 'data-track': 'onepager-download', 'data-sector': 'manufactura' },
+      { type: 'link',     label: 'Conocer el proceso →',   href: 'manufactura.html' },
     ],
   },
   Educativo: {
@@ -59,11 +60,12 @@ const SECTOR_DATA = {
     ],
   },
   Salud: {
-    drawerTitle: 'Sector Salud',
-    desc: 'Desinfectantes de alto nivel, protocolos de inocuidad y productos certificados para clínicas, hospitales y consultorios.',
+    drawerTitle: 'Salud',
+    desc: 'Desinfectantes BEIZUM® certificados, sanitizantes, lavandería clínica y dosificación automática SEKO para clínicas, consultorios y centros médicos. Fichas técnicas y HDS incluidas.',
     acciones: [
-      { type: 'primary', label: 'Ver portafolio',       href: 'productos.html' },
-      { type: 'link',    label: 'Solicitar cotización', href: 'contacto.html' },
+      { type: 'primary',  label: 'Ver One Pager',          onClick: () => window.open('assets/docs/onepager-salud.html', '_blank'), 'data-track': 'onepager-view',     'data-sector': 'salud' },
+      { type: 'download', label: 'Descargar PDF',           href: 'assets/docs/onepager-salud.pdf', hasPdf: false, 'data-track': 'onepager-download', 'data-sector': 'salud' },
+      { type: 'link',     label: 'Ver productos →',         href: 'productos.html' },
     ],
   },
   Comercial: {
