@@ -75,12 +75,13 @@ const SECTOR_DATA = {
       { type: 'link',     label: 'Ver todos los productos', href: 'productos.html' },
     ],
   },
-  Gobierno: {
-    drawerTitle: 'Gobierno',
-    desc: 'Suministro de insumos de limpieza, desinfección y jarciería para dependencias, instalaciones públicas y licitaciones.',
+  'Oficinas y Espacios de Trabajo': {
+    drawerTitle: 'Oficinas y Espacios de Trabajo',
+    desc: 'Limpieza, sanitarios, aromatización y jarciería para oficinas, coworkings, PyMES y centros de negocios. Pedido recurrente sin complicaciones.',
     acciones: [
-      { type: 'primary', label: 'Ver portafolio', href: 'productos.html' },
-      { type: 'link',    label: 'Contactar',      href: 'contacto.html' },
+      { type: 'primary',  label: 'Ver One Pager',          onClick: () => window.open('assets/docs/onepager-oficinas.html', '_blank'), 'data-track': 'onepager-view',     'data-sector': 'oficinas' },
+      { type: 'download', label: 'Descargar PDF',           href: 'assets/docs/onepager-oficinas.pdf', hasPdf: false, 'data-track': 'onepager-download', 'data-sector': 'oficinas' },
+      { type: 'link',     label: 'Ver todos los productos', href: 'productos.html' },
     ],
   },
   Distribuidores: {
@@ -195,7 +196,7 @@ function Sectores() {
     { name: 'Salud',          icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M8 6V4h8v2M12 11v6M9 14h6"/></svg> },
     { name: 'Comercial',      icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9 5 4h14l2 5"/><path d="M3 9v11h18V9"/><path d="M9 13h6"/></svg> },
     { name: 'Industrial',     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M2 21h20"/><path d="M3 21V11l5 3V11l5 3V11l8 3v7"/></svg> },
-    { name: 'Gobierno',       icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21h18M5 21V10h14v11M3 10l9-6 9 6M9 14v5M15 14v5"/></svg> },
+    { name: 'Oficinas y Espacios de Trabajo', icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2M12 12v4M10 14h4"/></svg> },
     { name: 'Distribuidores', icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M3 7h13v8H3z"/><path d="M16 10h3l2 3v2h-5"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg> },
   ];
 
