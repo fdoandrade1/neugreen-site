@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>Neugreen · One Pager Oficinas</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<style>
+  /* ─── Page setup ──────────────────────────────────────────── */
+  @page { size: letter; margin: 0; }
+  html, body {
+    background: #2a3340;
+    color: var(--fg-1);
+    font-family: var(--font-text);
+  }
+  body {
+    margin: 0;
+    display: grid;
+    place-items: start center;
+    min-height: 100vh;
+    padding: 24px 0;
+  }
+
+  /* ─── Sheet ───────────────────────────────────────────────── */
+  .sheet {
+    width: 816px;
+    height: 1056px;
+    background: #fff;
+    color: var(--ng-ink);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,.45);
+    display: grid;
+    grid-template-rows: 120px 1fr auto;
+  }
+  @media print {
+    body { background: #fff; padding: 0; display: block; }
+    .sheet { box-shadow: none; width: 8.5in; height: 11in; }
+  }
+
+  /* ─── HEADER ──────────────────────────────────────────────── */
+  .header {
+    background: var(--ng-blue);
+    color: #fff;
+    padding: 0 28px;
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: "";
+    position: absolute;
+    right: -40px; bottom: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.10), transparent 60%);
+    pointer-events: none;
+  }
+  .header img.logo { width: 168px; height: auto; display: block; }
+  .header .copy { color: #fff; line-height: 1.15; }
+  .header .eyebrow-light {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.78);
+    margin-bottom: 6px;
+    display: block;
+  }
+  .header h1 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin: 0 0 4px;
+  }
+  .header h1 .accent { color: #9be39c; }
+  .header .sub {
+    font-size: 11px;
+    color: rgba(255,255,255,.85);
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 0;
+  }
+
+  /* ─── BODY ────────────────────────────────────────────────── */
+  .body {
+    display: grid;
+    align-content: start;
+  }
+
+  /* Section title strip */
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 8px 24px 4px;
+  }
+  .sec-head h2 {
+    font-family: var(--font-display);
+    font-size: 15.5px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0;
+  }
+  .sec-head .tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--ng-blue);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* ─── Section 1 — Portfolio grid ─────────────────────────── */
+  .portfolio {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 0 24px 10px;
+  }
+  .col {
+    background: var(--ng-mist);
+    border-radius: 10px;
+    padding: 13px 11px;
+    border: 1px solid var(--ng-line);
+    display: flex; flex-direction: column;
+  }
+  .col-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--ng-line);
+  }
+  .col-head .ic {
+    width: 28px; height: 28px;
+    background: #fff;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    color: var(--ng-blue);
+    box-shadow: 0 1px 2px rgba(0,63,197,.10);
+    flex-shrink: 0;
+  }
+  .col-head .ic svg { width: 15px; height: 15px; stroke-width: 2; }
+  .col-head .label {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    line-height: 1.1;
+  }
+  .col-head .label small {
+    display: block;
+    font-size: 10.5px;
+    color: var(--ng-ink);
+    letter-spacing: -0.01em;
+    text-transform: none;
+    font-weight: 800;
+    margin-top: 2px;
+  }
+  .col ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 9.5px;
+    line-height: 1.35;
+    color: var(--ng-steel);
+  }
+  .col li {
+    position: relative;
+    padding-left: 9px;
+  }
+  .col li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 6px;
+    width: 3.5px; height: 3.5px;
+    background: var(--ng-blue);
+    border-radius: 50%;
+  }
+  .col li.hl {
+    margin-top: 4px;
+    padding: 5px 7px 5px 8px;
+    background: #fff;
+    border: 1px solid var(--ng-line);
+    border-left: 2px solid var(--ng-green);
+    border-radius: 6px;
+    color: var(--ng-ink);
+    font-weight: 600;
+    font-size: 9px;
+    line-height: 1.3;
+  }
+  .col li.hl::before { display: none; }
+  .col li.hl .seko-mark {
+    display: inline-block;
+    font-size: 7.5px;
+    color: var(--ng-green-700);
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    margin-right: 3px;
+    text-transform: uppercase;
+  }
+
+  /* ─── Section 2 — AROMA band (2 cards) ──────────────────── */
+  .aroma {
+    background: #EEF4FF;
+    padding: 9px 24px 9px;
+    border-top: 1px solid var(--ng-line);
+    border-bottom: 1px solid var(--ng-line);
+  }
+  .aroma-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 10px;
+  }
+  .aroma-head h2 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0 0 2px;
+  }
+  .aroma-head h2 em {
+    font-style: normal;
+    color: var(--ng-blue);
+  }
+  .aroma-head .sub {
+    font-size: 10.5px;
+    color: var(--ng-steel);
+    margin: 0;
+    font-weight: 500;
+    max-width: 500px;
+  }
+  .aroma-head .stamp {
+    flex-shrink: 0;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    background: #fff;
+    border: 1px solid var(--ng-blue-100);
+    border-radius: 999px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+  .aroma-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .aroma-card {
+    background: #fff;
+    border: 1px solid var(--ng-line);
+    border-left: 3px solid var(--ng-blue);
+    border-radius: 10px;
+    padding: 12px 14px 13px;
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+  .aroma-card .img {
+    width: 72px; height: 72px;
+    background: var(--ng-mist);
+    border-radius: 8px;
+    display: grid; place-items: center;
+    overflow: hidden;
+  }
+  .aroma-card .img img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    padding: 4px;
+    box-sizing: border-box;
+  }
+  .aroma-card .name {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    letter-spacing: -0.005em;
+    line-height: 1.1;
+    margin: 0 0 3px;
+  }
+  .aroma-card .use {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    margin: 0 0 5px;
+    line-height: 1.2;
+  }
+  .aroma-card .desc {
+    font-size: 10px;
+    line-height: 1.4;
+    color: var(--ng-steel);
+    margin: 0 0 6px;
+  }
+  .aroma-card .specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+  .aroma-card .specs span {
+    font-size: 7.5px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--ng-blue-700);
+    background: var(--ng-blue-50);
+    border: 1px solid var(--ng-blue-100);
+    border-radius: 999px;
+    padding: 1.5px 5px;
+    white-space: nowrap;
+  }
+  .aroma-foot {
+    margin-top: 10px;
+    font-size: 9px;
+    color: var(--ng-steel);
+    font-style: italic;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .aroma-foot svg { width: 11px; height: 11px; color: var(--ng-blue); flex-shrink: 0; }
+
+  /* ─── Section 3 — Process 3 steps ────────────────────────── */
+  .process {
+    padding: 6px 24px 6px;
+  }
+  .process-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .process-head h2 {
+    font-family: var(--font-display);
+    font-size: 15.5px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0;
+  }
+  .process-head .tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--ng-blue);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .timeline {
+    display: grid;
+    grid-template-columns: 1fr 20px 1fr 20px 1fr;
+    align-items: stretch;
+    gap: 0;
+  }
+  .step {
+    background: var(--ng-mist);
+    border: 1px solid var(--ng-line);
+    border-left: 3px solid var(--ng-blue);
+    border-radius: 10px;
+    padding: 12px 14px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .step .num {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .step .num .dot {
+    width: 24px; height: 24px;
+    background: var(--ng-blue);
+    color: #fff;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 800;
+  }
+  .step .num .ic {
+    width: 24px; height: 24px;
+    background: var(--ng-blue-50);
+    border-radius: 7px;
+    display: grid; place-items: center;
+    color: var(--ng-blue);
+    flex-shrink: 0;
+  }
+  .step .num .ic svg { width: 14px; height: 14px; stroke-width: 2; }
+  .step .name {
+    font-family: var(--font-display);
+    font-size: 12.5px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin: 2px 0 0;
+  }
+  .step .desc {
+    font-size: 10px;
+    line-height: 1.4;
+    color: var(--ng-steel);
+    margin: 0;
+    font-weight: 500;
+  }
+  .arrow {
+    display: grid; place-items: center;
+    color: var(--ng-blue);
+  }
+  .arrow svg { width: 16px; height: 16px; stroke-width: 2.2; }
+
+  /* ─── Section 4 — Value chips ───────────────────────────── */
+  .value {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 4px 24px 10px;
+  }
+  .chip {
+    background: #fff;
+    border: 1.5px solid var(--ng-green);
+    border-radius: 10px;
+    padding: 11px 13px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+  .chip .check {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--ng-green);
+    color: #fff;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .chip .check svg { width: 14px; height: 14px; stroke-width: 3; }
+  .chip .text {
+    font-size: 10px;
+    line-height: 1.25;
+    color: var(--ng-ink);
+    font-weight: 600;
+  }
+  .chip .text strong {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    margin-bottom: 1px;
+  }
+  .chip .text span { color: var(--ng-steel); font-weight: 500; }
+
+  /* ─── FOOTER ───────────────────────────────────────────── */
+  .footer {
+    background: var(--ng-navy);
+    color: #fff;
+    padding: 10px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr 1.3fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .footer .f-logo img {
+    width: 130px;
+    height: auto;
+    display: block;
+  }
+  .footer .f-logo .tag {
+    font-size: 9px;
+    color: rgba(255,255,255,.55);
+    margin-top: 6px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .footer .contact {
+    font-size: 10.5px;
+    line-height: 1.55;
+    color: rgba(255,255,255,.92);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .footer .contact .row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer .contact .row svg {
+    width: 12px; height: 12px;
+    color: #9be39c;
+    flex-shrink: 0;
+  }
+  .footer .contact .row strong { font-weight: 700; color:#fff;}
+  .footer .cta {
+    background: #103559;
+    border: 1px solid #1f4d80;
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 10px;
+  }
+  .footer .cta .label {
+    font-size: 11px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.005em;
+    line-height: 1.15;
+  }
+  .footer .cta .label small {
+    display: block;
+    font-size: 9px;
+    font-weight: 500;
+    color: rgba(255,255,255,.7);
+    margin-top: 2px;
+    letter-spacing: 0;
+  }
+  .footer .cta .btn {
+    background: var(--ng-green);
+    color: #fff;
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 4px;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .footer .cta .btn svg { width: 12px; height: 12px; }
+</style>
+</head>
+<body>
+
+<div class="sheet" data-screen-label="One Pager Oficinas">
+
+  <!-- ═══════════════ HEADER ═══════════════ -->
+  <header class="header">
+    <img class="logo" src="assets/neugreen-logo-extended-white.svg" alt="Neugreen">
+    <div class="copy">
+      <span class="eyebrow-light">Soluciones para Oficinas y Espacios de Trabajo</span>
+      <h1>El espacio donde trabajas también comunica.<br><span class="accent">Mantenlo impecable.</span></h1>
+      <p class="sub">Limpieza · Sanitarios · Aromatización · Jarciería · Entrega puntual</p>
+    </div>
+  </header>
+
+  <div class="body">
+
+    <!-- ═══════════════ SECCIÓN 1 — PORTAFOLIO ═══════════════ -->
+    <div class="sec-head">
+      <h2>Todo lo que necesita tu espacio de trabajo</h2>
+      <span class="tag">01 · Portafolio</span>
+    </div>
+
+    <div class="portfolio">
+      <!-- Col 1 -->
+      <div class="col">
+        <div class="col-head">
+          <div class="ic"><i data-lucide="spray-can"></i></div>
+          <div class="label">Área 01<small>Limpieza de oficinas</small></div>
+        </div>
+        <ul>
+          <li>Multiusos para escritorios y superficies</li>
+          <li>Limpiador de pisos y alfombras</li>
+          <li>Limpiador de vidrios y espejos</li>
+          <li>Desinfectante de superficies de alto contacto</li>
+          <li>Removedor de manchas especializado</li>
+        </ul>
+      </div>
+
+      <!-- Col 2 -->
+      <div class="col">
+        <div class="col-head">
+          <div class="ic"><i data-lucide="shield-check"></i></div>
+          <div class="label">Área 02<small>Sanitarios y higiene</small></div>
+        </div>
+        <ul>
+          <li>Desinfectante de alta eficacia para baños</li>
+          <li>Jabón antibacterial líquido para manos</li>
+          <li>Gel antibacterial para dispensador</li>
+          <li>Papel higiénico y toalla interdoblada</li>
+          <li>Bolsas de basura y consumibles</li>
+          <li class="hl"><span class="seko-mark">SEKO</span>ProMini · dispensador automático</li>
+        </ul>
+      </div>
+
+      <!-- Col 3 -->
+      <div class="col">
+        <div class="col-head">
+          <div class="ic"><i data-lucide="wind"></i></div>
+          <div class="label">Área 03<small>Aroma Experience</small></div>
+        </div>
+        <ul>
+          <li>Difusor NG-100 — recepciones y baños</li>
+          <li>Difusor NG-300 — sala de juntas y lobby</li>
+          <li>Aromatizante ambiental para pasillos</li>
+          <li>Fragancia insignia para tu marca o espacio</li>
+          <li class="hl"><span class="seko-mark">PLAN</span>Servicio mensual o venta de equipo</li>
+        </ul>
+      </div>
+
+      <!-- Col 4 -->
+      <div class="col">
+        <div class="col-head">
+          <div class="ic"><i data-lucide="package"></i></div>
+          <div class="label">Área 04<small>Jarciería y reposición</small></div>
+        </div>
+        <ul>
+          <li>Trapeadores, escobas y fibras</li>
+          <li>Guantes y bolsas de basura clasificadas</li>
+          <li>Señalética de limpieza y seguridad</li>
+          <li>Cestos y contenedores de reciclaje</li>
+          <li>Kit mensual por piso u oficina</li>
+          <li class="hl"><span class="seko-mark">PLAN</span>Pedido recurrente sin fricción</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══════════════ SECCIÓN 2 — AROMA ═══════════════ -->
+    <section class="aroma">
+      <div class="aroma-head">
+        <div>
+          <h2>El aroma de tu espacio <em>es parte de tu marca.</em></h2>
+          <p class="sub">Nebulización en frío. Sin agua, sin calor. Presencia constante en cada área.</p>
+        </div>
+        <span class="stamp">02 · Aroma</span>
+      </div>
+
+      <div class="aroma-grid">
+        <div class="aroma-card">
+          <div class="img"><img src="assets/difusor-pequeno.png" alt="Difusor Compacto NG-100"></div>
+          <div>
+            <h3 class="name">Difusor Compacto NG-100</h3>
+            <p class="use">Baños · recepción · sala de espera</p>
+            <p class="desc">Diseño minimalista de pared o escritorio. Fragancia constante en espacios pequeños, sin mantenimiento diario.</p>
+            <div class="specs"><span>Hasta 50 m²</span><span>Plug &amp; Play</span><span>Aceites esenciales</span></div>
+          </div>
+        </div>
+
+        <div class="aroma-card">
+          <div class="img"><img src="assets/difusor-mediano.png" alt="Difusor Profesional NG-300"></div>
+          <div>
+            <h3 class="name">Difusor Profesional NG-300</h3>
+            <p class="use">Lobby · sala de juntas · coworking</p>
+            <p class="desc">Control digital con WiFi + Bluetooth. Programa horarios desde tu teléfono. Ideal para espacios de representación y reuniones.</p>
+            <div class="specs"><span>Hasta 300 m²</span><span>App control</span><span>WiFi + BT</span></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="aroma-foot">
+        <i data-lucide="sparkles"></i>
+        Fragancia insignia exclusiva disponible para tu empresa o espacio. Instalación incluida. Modalidad de renta mensual o venta de equipo.
+      </p>
+    </section>
+
+    <!-- ═══════════════ SECCIÓN 3 — PROCESO ═══════════════ -->
+    <section class="process">
+      <div class="process-head">
+        <h2>Tan simple como debe ser</h2>
+        <span class="tag">03 · Proceso</span>
+      </div>
+
+      <div class="timeline">
+        <div class="step">
+          <span class="num"><span class="dot">01</span><span class="ic"><i data-lucide="message-circle"></i></span></span>
+          <p class="name">Cotiza en minutos</p>
+          <p class="desc">Dinos qué áreas tienes y cuántas personas. Te respondemos el mismo día con precio claro.</p>
+        </div>
+        <div class="arrow"><i data-lucide="chevron-right"></i></div>
+        <div class="step">
+          <span class="num"><span class="dot">02</span><span class="ic"><i data-lucide="truck"></i></span></span>
+          <p class="name">Recibe todo en una entrega</p>
+          <p class="desc">Productos, papel, jarciería y aromatización. Todo junto, sin pedidos parciales.</p>
+        </div>
+        <div class="arrow"><i data-lucide="chevron-right"></i></div>
+        <div class="step">
+          <span class="num"><span class="dot">03</span><span class="ic"><i data-lucide="refresh-cw"></i></span></span>
+          <p class="name">Configura tu reposición</p>
+          <p class="desc">Define tu ciclo mensual o quincenal y olvídate de quedarte sin insumos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SECCIÓN 4 — VALOR ═══════════════ -->
+    <div class="value">
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>1 proveedor</strong>
+          <span>Limpieza, aroma y consumibles completos</span>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>Entrega puntual</strong>
+          <span>SLP y región sin mínimos altos</span>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>Pedido recurrente</strong>
+          <span>Configuras una vez y listo</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer">
+    <div class="f-logo">
+      <img src="assets/neugreen-logo-extended-white.svg" alt="Neugreen">
+      <div class="tag">Biotecnología en limpieza y desinfección.</div>
+    </div>
+    <div class="contact">
+      <div class="row"><i data-lucide="mail"></i><span><strong>ventas@neugreen.mx</strong></span></div>
+      <div class="row"><i data-lucide="phone"></i><span><strong>+52 444 256 5697</strong></span></div>
+      <div class="row"><i data-lucide="globe"></i><span>neugreen.mx/productos</span></div>
+    </div>
+    <div class="cta">
+      <div class="label">
+        Solicita tu cotización
+        <small>Te respondemos el mismo día.</small>
+      </div>
+      <a class="btn" href="https://neugreen.mx/whatsapp.html" target="_blank" rel="noopener">
+        Cotizar
+        <i data-lucide="arrow-right"></i>
+      </a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  if (window.lucide) lucide.createIcons({ attrs: { 'stroke-width': 2 } });
+</script>
+</body>
+</html>
