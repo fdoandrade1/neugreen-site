@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>Neugreen · One Pager Salud</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<style>
+  /* ─── Page setup ──────────────────────────────────────────── */
+  @page { size: letter; margin: 0; }
+  html, body {
+    background: #2a3340;
+    color: var(--fg-1);
+    font-family: var(--font-text);
+  }
+  body {
+    margin: 0;
+    display: grid;
+    place-items: start center;
+    min-height: 100vh;
+    padding: 24px 0;
+  }
+
+  /* ─── Sheet ───────────────────────────────────────────────── */
+  .sheet {
+    width: 816px;
+    height: 1056px;
+    background: #fff;
+    color: var(--ng-ink);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,.45);
+    display: grid;
+    grid-template-rows: 120px 1fr auto;
+  }
+  @media print {
+    body { background: #fff; padding: 0; display: block; }
+    .sheet { box-shadow: none; width: 8.5in; height: 11in; }
+  }
+
+  /* ─── HEADER ──────────────────────────────────────────────── */
+  .header {
+    background: var(--ng-blue);
+    color: #fff;
+    padding: 0 28px;
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: "";
+    position: absolute;
+    right: -40px; bottom: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.10), transparent 60%);
+    pointer-events: none;
+  }
+  .header img.logo { width: 168px; height: auto; display: block; }
+  .header .copy { color: #fff; line-height: 1.15; }
+  .header .eyebrow-light {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.78);
+    margin-bottom: 6px;
+    display: block;
+  }
+  .header h1 {
+    font-family: var(--font-display);
+    font-size: 21px;
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin: 0 0 4px;
+  }
+  .header h1 .accent { color: #9be39c; }
+  .header .sub {
+    font-size: 11px;
+    color: rgba(255,255,255,.85);
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 0;
+  }
+
+  /* ─── BODY ────────────────────────────────────────────────── */
+  .body {
+    display: grid;
+    align-content: start;
+  }
+
+  /* Section title strip */
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 6px 24px 3px;
+  }
+  .sec-head h2 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0;
+  }
+  .sec-head .tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--ng-blue);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* ─── Section 1 — Portfolio grid ─────────────────────────── */
+  .portfolio {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 0 24px 10px;
+  }
+  .col {
+    background: var(--ng-mist);
+    border-radius: 10px;
+    padding: 13px 11px;
+    border: 1px solid var(--ng-line);
+    display: flex; flex-direction: column;
+  }
+  .col-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--ng-line);
+  }
+  .col-head .ic {
+    width: 28px; height: 28px;
+    background: #fff;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    color: var(--ng-blue);
+    box-shadow: 0 1px 2px rgba(0,63,197,.10);
+    flex-shrink: 0;
+  }
+  .col-head .ic svg { width: 15px; height: 15px; stroke-width: 2; }
+  .col-head .label {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    line-height: 1.1;
+  }
+  .col-head .label small {
+    display: block;
+    font-size: 10.5px;
+    color: var(--ng-ink);
+    letter-spacing: -0.01em;
+    text-transform: none;
+    font-weight: 800;
+    margin-top: 2px;
+  }
+  .col ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 9.5px;
+    line-height: 1.35;
+    color: var(--ng-steel);
+  }
+  .col li {
+    position: relative;
+    padding-left: 9px;
+  }
+  .col li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 6px;
+    width: 3.5px; height: 3.5px;
+    background: var(--ng-blue);
+    border-radius: 50%;
+  }
+  .col li.hl {
+    margin-top: 4px;
+    padding: 5px 7px 5px 8px;
+    background: #fff;
+    border: 1px solid var(--ng-line);
+    border-left: 2px solid var(--ng-green);
+    border-radius: 6px;
+    color: var(--ng-ink);
+    font-weight: 600;
+    font-size: 9px;
+    line-height: 1.3;
+  }
+  .col li.hl::before { display: none; }
+  .col li.hl .seko-mark {
+    display: inline-block;
+    font-size: 7.5px;
+    color: var(--ng-green-700);
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    margin-right: 3px;
+    text-transform: uppercase;
+  }
+  .col .note {
+    margin-top: auto;
+    padding-top: 5px;
+    font-size: 8px;
+    line-height: 1.3;
+    color: var(--ng-blue-700);
+    font-style: italic;
+  }
+
+  /* ─── Section 2 — SEKO band ─────────────────────────────── */
+  .seko {
+    background: #E8F0FB;
+    padding: 7px 24px 8px;
+    border-top: 1px solid var(--ng-line);
+    border-bottom: 1px solid var(--ng-line);
+  }
+  .seko-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 9px;
+    gap: 16px;
+  }
+  .seko-head h2 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0 0 2px;
+  }
+  .seko-head h2 em {
+    font-style: normal;
+    color: var(--ng-blue);
+  }
+  .seko-head .sub {
+    font-size: 10.5px;
+    color: var(--ng-steel);
+    margin: 0;
+    font-weight: 500;
+    max-width: 500px;
+  }
+  .seko-head .stamp {
+    flex-shrink: 0;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    background: #fff;
+    border: 1px solid var(--ng-blue-100);
+    border-radius: 999px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+  .seko-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+  }
+  .seko-card {
+    background: #fff;
+    border: 1px solid var(--ng-line);
+    border-left: 3px solid var(--ng-blue);
+    border-radius: 10px;
+    padding: 9px 11px 10px;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+  .seko-card .img {
+    width: 50px; height: 50px;
+    background: var(--ng-mist);
+    border-radius: 8px;
+    display: grid; place-items: center;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .seko-card .img img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    padding: 3px;
+    box-sizing: border-box;
+  }
+  .seko-card .name {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    letter-spacing: -0.005em;
+    line-height: 1.1;
+    margin: 0 0 2px;
+  }
+  .seko-card .area {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    margin: 0 0 4px;
+    line-height: 1.2;
+  }
+  .seko-card .desc {
+    font-size: 9px;
+    line-height: 1.4;
+    color: var(--ng-steel);
+    margin: 0 0 5px;
+  }
+  .seko-card .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+  .seko-card .chips span {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--ng-blue-700);
+    background: var(--ng-blue-50);
+    border: 1px solid var(--ng-blue-100);
+    border-radius: 999px;
+    padding: 1px 4.5px;
+    white-space: nowrap;
+  }
+  .seko-foot {
+    margin-top: 8px;
+    font-size: 8.5px;
+    color: var(--ng-steel);
+    font-style: italic;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .seko-foot svg { width: 11px; height: 11px; color: var(--ng-blue); flex-shrink: 0; }
+
+  /* ─── Section 3 — Documentation badges ──────────────────── */
+  .docs {
+    padding: 5px 24px 5px;
+  }
+  .docs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .doc {
+    background: #fff;
+    border: 1.5px solid var(--ng-blue-100);
+    border-radius: 10px;
+    padding: 9px 11px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .doc .ic {
+    width: 28px; height: 28px;
+    background: var(--ng-blue-50);
+    border-radius: 8px;
+    display: grid; place-items: center;
+    color: var(--ng-blue);
+    flex-shrink: 0;
+  }
+  .doc .ic svg { width: 15px; height: 15px; stroke-width: 1.85; }
+  .doc .text {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    letter-spacing: -0.005em;
+    line-height: 1.2;
+  }
+  .docs-note {
+    margin-top: 7px;
+    font-size: 8.5px;
+    color: var(--ng-steel);
+    font-style: italic;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  /* ─── Section 4 — Value chips ───────────────────────────── */
+  .value {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 2px 24px 10px;
+  }
+  .chip {
+    background: #fff;
+    border: 1.5px solid var(--ng-green);
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+  .chip .check {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--ng-green);
+    color: #fff;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .chip .check svg { width: 13px; height: 13px; stroke-width: 3; }
+  .chip .text {
+    font-size: 10px;
+    line-height: 1.25;
+    color: var(--ng-ink);
+    font-weight: 600;
+  }
+  .chip .text strong {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    margin-bottom: 1px;
+  }
+  .chip .text span { color: var(--ng-steel); font-weight: 500; }
+
+  /* ─── FOOTER ───────────────────────────────────────────── */
+  .footer {
+    background: var(--ng-navy);
+    color: #fff;
+    padding: 10px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr 1.3fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .footer .f-logo img {
+    width: 130px;
+    height: auto;
+    display: block;
+  }
+  .footer .f-logo .tag {
+    font-size: 9px;
+    color: rgba(255,255,255,.55);
+    margin-top: 6px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .footer .contact {
+    font-size: 10.5px;
+    line-height: 1.55;
+    color: rgba(255,255,255,.92);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .footer .contact .row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer .contact .row svg {
+    width: 12px; height: 12px;
+    color: #9be39c;
+    flex-shrink: 0;
+  }
+  .footer .contact .row strong { font-weight: 700; color:#fff;}
+  .footer .cta {
+    background: #103559;
+    border: 1px solid #1f4d80;
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 10px;
+  }
+  .footer .cta .label {
+    font-size: 11px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.005em;
+    line-height: 1.15;
+  }
+  .footer .cta .label small {
+    display: block;
+    font-size: 9px;
+    font-weight: 500;
+    color: rgba(255,255,255,.7);
+    margin-top: 2px;
+    letter-spacing: 0;
+  }
+  .footer .cta .btn {
+    background: var(--ng-green);
+    color: #fff;
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 4px;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .footer .cta .btn svg { width: 12px; height: 12px; }
+</style>
+</head>
+<body>
+
+<div class="sheet" data-screen-label="One Pager Salud">
+
+  <!-- ═══════════════ HEADER ═══════════════ -->
+  <header class="header">
+    <img class="logo" src="assets/neugreen-logo-extended-white.svg" alt="Neugreen">
+    <div class="copy">
+      <span class="eyebrow-light">Soluciones para Unidades Médicas</span>
+      <h1>Protocolos de limpieza y desinfección<br>para entornos donde <span class="accent">el control no es opcional.</span></h1>
+      <p class="sub">Desinfectantes certificados · Sanitizantes · Lavandería · Dosificación automática · Fichas técnicas</p>
+    </div>
+  </header>
+
+  <div class="body">
+
+    <!-- ═══════════════ SECCIÓN 1 — PORTAFOLIO ═══════════════ -->
+    <div class="sec-head">
+      <h2>Cobertura completa para cada área clínica</h2>
+      <span class="tag">01 · Portafolio</span>
+    </div>
+
+    <div class="portfolio">
+      <!-- Col 1 Desinfección -->
+      <div class="col">
+        <div class="col-head">
+          <div class="ic"><i data-lucide="shield-check"></i></div>
+          <div class="label">Área 01<small>Desinfección y sanitización</small></div>
+        </div>
+        <ul>
+          <li>BEIZUM® — desinfectante de alto nivel (cuaternario)</li>
+          <li>Antiseptik — desinfectante multiusos institucional</li>
+          <li>BEIZUM® Gel — antibacterial 70% etanol</li>
+          <li>BEIZUM® Plus 20% — alta concentración</li>
+          <li>Sanitizante de superficies de contacto</li>
+        </ul>
+        <p class="note">Aviso COFEPRIS y HDS disponibles.</p>
+      </div>
+
+      <!-- Col 2 Limpieza -->
+      <div class="col">
+        <div class="col-head">
+          <div class="ic"><i data-lucide="spray-can"></i></div>
+          <div class="label">Área 02<small>Limpieza general y pisos</small></div>
+        </div>
+        <ul>
+          <li>Multiusos para áreas clínicas</li>
+          <li>Limpiador de pisos institucional</li>
+          <li>Desengrasante para áreas de servicio</li>
+          <li>Limpiador de baños y sanitarios</li>
+          <li class="hl"><span class="seko-mark">SEKO</span>ProMax · dilución exacta en pared</li>
+        </ul>
+      </div>
+
+      <!-- Col 3 Lavandería -->
+      <div class="col">
+        <div class="col-head">
+          <div class="ic"><i data-lucide="shirt"></i></div>
+          <div class="label">Área 03<small>Lavandería institucional</small></div>
+        </div>
+        <ul>
+          <li>Detergente para lavandería hospitalaria</li>
+          <li>Blanqueador sin cloro para blancos clínicos</li>
+          <li>Suavizante y neutralizador de telas</li>
+          <li>Detergente enzimático — manchas orgánicas</li>
+          <li class="hl"><span class="seko-mark">SEKO</span>WashBasic / WashDose Peri</li>
+        </ul>
+      </div>
+
+      <!-- Col 4 Higiene de manos -->
+      <div class="col">
+        <div class="col-head">
+          <div class="ic"><i data-lucide="hand"></i></div>
+          <div class="label">Área 04<small>Higiene de manos y consumibles</small></div>
+        </div>
+        <ul>
+          <li>Jabón antibacterial para lavado clínico</li>
+          <li>Gel antibacterial — dispensador de entrada</li>
+          <li>Toalla interdoblada y papel higiénico</li>
+          <li>Bolsas diferenciadas (rojo / negro)</li>
+          <li>Guantes de látex y nitrilo</li>
+          <li class="hl"><span class="seko-mark">SEKO</span>ProMini · dispensador compacto</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══════════════ SECCIÓN 2 — SEKO ═══════════════ -->
+    <section class="seko">
+      <div class="seko-head">
+        <div>
+          <h2>Dosificación automática — <em>sin error, sin desperdicio.</em></h2>
+          <p class="sub">En entornos de salud, la concentración correcta no es negociable. Los sistemas SEKO la garantizan.</p>
+        </div>
+        <span class="stamp">02 · Equipo</span>
+      </div>
+
+      <div class="seko-grid">
+        <div class="seko-card">
+          <div class="img"><img src="assets/promax-group.png" alt="SEKO ProMax"></div>
+          <div>
+            <h3 class="name">SEKO ProMax</h3>
+            <p class="area">Pisos · sanitarios · superficies</p>
+            <p class="desc">Dispensador de pared para hasta 4 químicos a dilución exacta programada. Personal solo abre la llave — sin manipular concentrados.</p>
+            <div class="chips"><span>Dilución exacta</span><span>4 productos</span><span>Sin error</span></div>
+          </div>
+        </div>
+
+        <div class="seko-card">
+          <div class="img"><img src="assets/promini.png" alt="SEKO ProMini"></div>
+          <div>
+            <h3 class="name">SEKO ProMini</h3>
+            <p class="area">Lavabos · entradas · puntos de higiene</p>
+            <p class="desc">Dispensador compacto de pared para jabón antibacterial o gel. Ideal para baños, entradas y consultorios. Bajo mantenimiento.</p>
+            <div class="chips"><span>Higiene de manos</span><span>Compacto</span><span>Bajo costo/dosis</span></div>
+          </div>
+        </div>
+
+        <div class="seko-card">
+          <div class="img"><img src="assets/washdose-peri.png" alt="SEKO WashDose Peri"></div>
+          <div>
+            <h3 class="name">SEKO WashDose Peri</h3>
+            <p class="area">Lavandería institucional</p>
+            <p class="desc">Dosificación automática de detergente, blanqueador y suavizante por ciclo. Control preciso por carga, compatible con lavadoras extractoras.</p>
+            <div class="chips"><span>Lavandería</span><span>Por ciclo</span><span>Trazable</span></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="seko-foot">
+        <i data-lucide="shield-check"></i>
+        Equipo instalado y calibrado por Neugreen. Garantía de desempeño. Soporte técnico en campo.
+      </p>
+    </section>
+
+    <!-- ═══════════════ SECCIÓN 3 — DOCUMENTACIÓN ═══════════════ -->
+    <div class="sec-head">
+      <h2>Documentación disponible para cada producto</h2>
+      <span class="tag">03 · Cumplimiento</span>
+    </div>
+
+    <div class="docs">
+      <div class="docs-grid">
+        <div class="doc">
+          <div class="ic"><i data-lucide="file-text"></i></div>
+          <div class="text">Ficha técnica<br>por producto</div>
+        </div>
+        <div class="doc">
+          <div class="ic"><i data-lucide="file-warning"></i></div>
+          <div class="text">Hoja de datos<br>de seguridad (HDS)</div>
+        </div>
+        <div class="doc">
+          <div class="ic"><i data-lucide="badge-check"></i></div>
+          <div class="text">Aviso COFEPRIS<br>en productos aplicables</div>
+        </div>
+        <div class="doc">
+          <div class="ic"><i data-lucide="users"></i></div>
+          <div class="text">Soporte técnico<br>para protocolo de uso</div>
+        </div>
+      </div>
+      <p class="docs-note">Toda la documentación técnica se entrega junto con el pedido o por correo a solicitud. Sin trámites adicionales.</p>
+    </div>
+
+    <!-- ═══════════════ SECCIÓN 4 — VALOR ═══════════════ -->
+    <div class="value">
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>BEIZUM® certificado</strong>
+          <span>Desinfectantes con aviso COFEPRIS</span>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>Dosificación SEKO</strong>
+          <span>Concentración exacta, sin error</span>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>Documentación incluida</strong>
+          <span>Ficha técnica y HDS en cada entrega</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer">
+    <div class="f-logo">
+      <img src="assets/neugreen-logo-extended-white.svg" alt="Neugreen">
+      <div class="tag">Biotecnología en limpieza y desinfección.</div>
+    </div>
+    <div class="contact">
+      <div class="row"><i data-lucide="mail"></i><span><strong>ventas@neugreen.mx</strong></span></div>
+      <div class="row"><i data-lucide="phone"></i><span><strong>+52 444 256 5697</strong></span></div>
+      <div class="row"><i data-lucide="globe"></i><span>neugreen.mx/productos</span></div>
+    </div>
+    <div class="cta">
+      <div class="label">
+        Solicita tu protocolo de limpieza
+        <small>Evaluamos tus áreas sin costo.</small>
+      </div>
+      <a class="btn" href="https://neugreen.mx/whatsapp.html" target="_blank" rel="noopener">
+        Cotizar
+        <i data-lucide="arrow-right"></i>
+      </a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  if (window.lucide) lucide.createIcons({ attrs: { 'stroke-width': 2 } });
+</script>
+</body>
+</html>

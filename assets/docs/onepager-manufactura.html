@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>Neugreen · One Pager Manufactura y Marca Privada</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<style>
+  /* ─── Page setup ──────────────────────────────────────────── */
+  @page { size: letter; margin: 0; }
+  html, body {
+    background: #2a3340;
+    color: var(--fg-1);
+    font-family: var(--font-text);
+  }
+  body {
+    margin: 0;
+    display: grid;
+    place-items: start center;
+    min-height: 100vh;
+    padding: 24px 0;
+  }
+
+  /* ─── Sheet ───────────────────────────────────────────────── */
+  .sheet {
+    width: 816px;
+    height: 1056px;
+    background: #fff;
+    color: var(--ng-ink);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,.45);
+    display: grid;
+    grid-template-rows: 120px 1fr auto;
+  }
+  @media print {
+    body { background: #fff; padding: 0; display: block; }
+    .sheet { box-shadow: none; width: 8.5in; height: 11in; }
+  }
+
+  /* ─── HEADER ──────────────────────────────────────────────── */
+  .header {
+    background: var(--ng-blue);
+    color: #fff;
+    padding: 0 28px;
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: "";
+    position: absolute;
+    right: -40px; bottom: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.10), transparent 60%);
+    pointer-events: none;
+  }
+  .header img.logo { width: 168px; height: auto; display: block; }
+  .header .copy { color: #fff; line-height: 1.15; }
+  .header .eyebrow-light {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.78);
+    margin-bottom: 6px;
+    display: block;
+  }
+  .header h1 {
+    font-family: var(--font-display);
+    font-size: 23px;
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin: 0 0 4px;
+  }
+  .header h1 .accent { color: #9be39c; }
+  .header .sub {
+    font-size: 11px;
+    color: rgba(255,255,255,.85);
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 0;
+  }
+
+  /* ─── BODY ────────────────────────────────────────────────── */
+  .body {
+    display: grid;
+    align-content: start;
+  }
+
+  /* Section title strip */
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 5px 24px 2px;
+  }
+  .sec-head h2 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0;
+  }
+  .sec-head .tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--ng-blue);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* ─── Section 1 — Scope (3 cols) ─────────────────────────── */
+  .scope {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 0 24px 8px;
+  }
+  .scope-col {
+    background: var(--ng-mist);
+    border-radius: 10px;
+    padding: 13px 13px 12px;
+    border: 1px solid var(--ng-line);
+    display: flex; flex-direction: column;
+  }
+  .scope-col.green { border-left: 3px solid var(--ng-green); }
+  .scope-col.blue { border-left: 3px solid var(--ng-blue); }
+  .scope-col .head {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 9px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--ng-line);
+  }
+  .scope-col .head .ic {
+    width: 32px; height: 32px;
+    background: #fff;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    color: var(--ng-blue);
+    flex-shrink: 0;
+    box-shadow: 0 1px 2px rgba(0,63,197,.10);
+  }
+  .scope-col.green .head .ic { color: var(--ng-green-700); background: var(--ng-green-50); box-shadow: none; }
+  .scope-col .head .ic svg { width: 17px; height: 17px; stroke-width: 1.85; }
+  .scope-col .head .tit {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    letter-spacing: -0.005em;
+    line-height: 1.1;
+    margin: 0;
+  }
+  .scope-col .head .tit small {
+    display: block;
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    margin-bottom: 2px;
+  }
+  .scope-col.green .head .tit small { color: var(--ng-green-700); }
+  .scope-col ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 10px;
+    line-height: 1.35;
+    color: var(--ng-steel);
+  }
+  .scope-col li {
+    position: relative;
+    padding-left: 11px;
+  }
+  .scope-col li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 6px;
+    width: 4px; height: 4px;
+    background: var(--ng-blue);
+    border-radius: 50%;
+  }
+  .scope-col.green li::before { background: var(--ng-green); }
+  .scope-col .note {
+    margin-top: 9px;
+    font-size: 9px;
+    line-height: 1.35;
+    color: var(--ng-blue-700);
+    font-style: italic;
+  }
+
+  /* ─── Section 2 — 6-step process ────────────────────────── */
+  .process {
+    background: #E8F0FB;
+    padding: 6px 24px 7px;
+    border-top: 1px solid var(--ng-line);
+    border-bottom: 1px solid var(--ng-line);
+  }
+  .process-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .process-head h2 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0;
+  }
+  .process-head h2 em {
+    font-style: normal;
+    color: var(--ng-blue);
+  }
+  .process-head .stamp {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    background: #fff;
+    border: 1px solid var(--ng-blue-100);
+    border-radius: 999px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+  .timeline {
+    display: grid;
+    grid-template-columns: 1fr 12px 1fr 12px 1fr 12px 1fr 12px 1fr 12px 1fr;
+    align-items: stretch;
+    gap: 0;
+  }
+  .step {
+    background: #fff;
+    border: 1px solid var(--ng-line);
+    border-left: 3px solid var(--ng-blue);
+    border-radius: 8px;
+    padding: 8px 9px 9px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .step .num {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 1px;
+  }
+  .step .num .dot {
+    width: 19px; height: 19px;
+    background: var(--ng-blue);
+    color: #fff;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: var(--font-display);
+    font-size: 9.5px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .step .num .ic {
+    color: var(--ng-blue);
+    display: grid; place-items: center;
+  }
+  .step .num .ic svg { width: 13px; height: 13px; stroke-width: 2; }
+  .step .name {
+    font-family: var(--font-display);
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    letter-spacing: -0.005em;
+    line-height: 1.15;
+    margin: 0;
+  }
+  .step .desc {
+    font-size: 8.5px;
+    line-height: 1.35;
+    color: var(--ng-steel);
+    margin: 0;
+    font-weight: 500;
+  }
+  .arrow {
+    display: grid; place-items: center;
+    color: var(--ng-blue);
+  }
+  .arrow svg { width: 12px; height: 12px; stroke-width: 2.2; }
+
+  /* ─── Section 3 — For whom (2x2) ────────────────────────── */
+  .who {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 0 24px 4px;
+  }
+  .who-card {
+    background: #fff;
+    border: 1px solid var(--ng-line);
+    border-radius: 10px;
+    padding: 10px 13px 11px;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 11px;
+    align-items: start;
+  }
+  .who-card.blue { border-left: 3px solid var(--ng-blue); }
+  .who-card.green { border-left: 3px solid var(--ng-green); }
+  .who-card .ic {
+    width: 36px; height: 36px;
+    border-radius: 9px;
+    display: grid; place-items: center;
+  }
+  .who-card.blue .ic { background: var(--ng-blue-50); color: var(--ng-blue); }
+  .who-card.green .ic { background: var(--ng-green-50); color: var(--ng-green-700); }
+  .who-card .ic svg { width: 19px; height: 19px; stroke-width: 1.85; }
+  .who-card .name {
+    font-family: var(--font-display);
+    font-size: 11.5px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    letter-spacing: -0.005em;
+    line-height: 1.15;
+    margin: 0 0 3px;
+  }
+  .who-card .desc {
+    font-size: 9.5px;
+    line-height: 1.4;
+    color: var(--ng-steel);
+    margin: 0;
+  }
+
+  /* ─── Section 4 — Brands ────────────────────────────────── */
+  .brands {
+    background: var(--ng-mist);
+    padding: 7px 24px 8px;
+    border-top: 1px solid var(--ng-line);
+    border-bottom: 1px solid var(--ng-line);
+  }
+  .brands-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    gap: 16px;
+  }
+  .brands-head h2 {
+    font-family: var(--font-display);
+    font-size: 13.5px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ng-ink);
+    margin: 0;
+  }
+  .brands-head .sub {
+    font-size: 9.5px;
+    color: var(--ng-steel);
+    margin: 0;
+    font-weight: 500;
+  }
+  .brands-head .stamp {
+    flex-shrink: 0;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ng-blue);
+    background: #fff;
+    border: 1px solid var(--ng-blue-100);
+    border-radius: 999px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+  .brands-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    align-items: center;
+  }
+  .brand-chip {
+    background: #fff;
+    border: 1px solid var(--ng-blue-100);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    letter-spacing: -0.005em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .brand-chip .dot {
+    width: 5px; height: 5px;
+    background: var(--ng-green);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .brand-chip.more {
+    background: transparent;
+    border-style: dashed;
+    color: var(--ng-blue);
+    font-weight: 700;
+    font-size: 10px;
+  }
+  .brands-foot {
+    margin-top: 7px;
+    font-size: 8.5px;
+    color: var(--ng-steel);
+    font-style: italic;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .brands-foot svg { width: 11px; height: 11px; color: var(--ng-blue); flex-shrink: 0; }
+
+  /* ─── Section 5 — Value chips ───────────────────────────── */
+  .value {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 4px 24px 8px;
+  }
+  .chip {
+    background: #fff;
+    border: 1.5px solid var(--ng-green);
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+  .chip .check {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--ng-green);
+    color: #fff;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .chip .check svg { width: 13px; height: 13px; stroke-width: 3; }
+  .chip .text {
+    font-size: 9.5px;
+    line-height: 1.25;
+    color: var(--ng-ink);
+    font-weight: 600;
+  }
+  .chip .text strong {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--ng-ink);
+    margin-bottom: 1px;
+  }
+  .chip .text span { color: var(--ng-steel); font-weight: 500; }
+
+  /* ─── FOOTER ───────────────────────────────────────────── */
+  .footer {
+    background: var(--ng-navy);
+    color: #fff;
+    padding: 10px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr 1.3fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .footer .f-logo img { width: 130px; height: auto; display: block; }
+  .footer .f-logo .tag {
+    font-size: 9px;
+    color: rgba(255,255,255,.55);
+    margin-top: 6px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .footer .contact {
+    font-size: 10.5px;
+    line-height: 1.55;
+    color: rgba(255,255,255,.92);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .footer .contact .row { display: flex; align-items: center; gap: 8px; }
+  .footer .contact .row svg { width: 12px; height: 12px; color: #9be39c; flex-shrink: 0; }
+  .footer .contact .row strong { font-weight: 700; color:#fff; }
+  .footer .cta {
+    background: #103559;
+    border: 1px solid #1f4d80;
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 10px;
+  }
+  .footer .cta .label {
+    font-size: 11px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.005em;
+    line-height: 1.15;
+  }
+  .footer .cta .label small {
+    display: block;
+    font-size: 9px;
+    font-weight: 500;
+    color: rgba(255,255,255,.7);
+    margin-top: 2px;
+    letter-spacing: 0;
+  }
+  .footer .cta .btn {
+    background: var(--ng-green);
+    color: #fff;
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 4px;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .footer .cta .btn svg { width: 12px; height: 12px; }
+</style>
+</head>
+<body>
+
+<div class="sheet" data-screen-label="One Pager Manufactura">
+
+  <!-- ═══════════════ HEADER ═══════════════ -->
+  <header class="header">
+    <img class="logo" src="assets/neugreen-logo-extended-white.svg" alt="Neugreen">
+    <div class="copy">
+      <span class="eyebrow-light">Manufactura y Marca Privada</span>
+      <h1>Tu marca. Nuestra planta.<br><span class="accent">Producto terminado listo para vender.</span></h1>
+      <p class="sub">Formulación · Laboratorio · Producción · Envasado · Etiquetado · Entrega final</p>
+    </div>
+  </header>
+
+  <div class="body">
+
+    <!-- ═══════════════ SECCIÓN 1 — ALCANCE ═══════════════ -->
+    <div class="sec-head">
+      <h2>Del concepto al producto terminado con tu marca</h2>
+      <span class="tag">01 · Alcance</span>
+    </div>
+
+    <div class="scope">
+      <div class="scope-col blue">
+        <div class="head">
+          <div class="ic"><i data-lucide="flask-conical"></i></div>
+          <div class="tit"><small>Qué desarrollar</small>Líneas disponibles</div>
+        </div>
+        <ul>
+          <li>Limpieza y desinfección profesional</li>
+          <li>Enzimáticos y biotecnológicos</li>
+          <li>Cosméticos funcionales (body care)</li>
+          <li>Repelentes y cuidado personal</li>
+          <li>Líneas especializadas industriales</li>
+          <li>Aromatizantes y fragancias</li>
+        </ul>
+      </div>
+
+      <div class="scope-col green">
+        <div class="head">
+          <div class="ic"><i data-lucide="factory"></i></div>
+          <div class="tit"><small>Lado técnico</small>Neugreen pone</div>
+        </div>
+        <ul>
+          <li>Planta de manufactura propia en SLP</li>
+          <li>Laboratorio de I+D y control de calidad</li>
+          <li>Formulación técnica exclusiva</li>
+          <li>Validación COFEPRIS cuando aplica</li>
+          <li>Personal especializado en química</li>
+          <li>Logística y entrega del producto terminado</li>
+        </ul>
+      </div>
+
+      <div class="scope-col blue">
+        <div class="head">
+          <div class="ic"><i data-lucide="sparkles"></i></div>
+          <div class="tit"><small>Lado comercial</small>Tú pones</div>
+        </div>
+        <ul>
+          <li>Tu marca y concepto de producto</li>
+          <li>Presentación y diseño de etiqueta</li>
+          <li>Tu canal de distribución</li>
+          <li>Tu mercado objetivo</li>
+        </ul>
+        <p class="note">No necesitas experiencia química ni infraestructura de producción.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════ SECCIÓN 2 — PROCESO ═══════════════ -->
+    <section class="process">
+      <div class="process-head">
+        <h2>Del brief al embarque <em>en 6 pasos.</em></h2>
+        <span class="stamp">02 · Proceso</span>
+      </div>
+
+      <div class="timeline">
+        <div class="step">
+          <span class="num"><span class="dot">01</span><span class="ic"><i data-lucide="lightbulb"></i></span></span>
+          <p class="name">Idea o necesidad</p>
+          <p class="desc">Defines categoría, uso y mercado objetivo.</p>
+        </div>
+        <div class="arrow"><i data-lucide="chevron-right"></i></div>
+        <div class="step">
+          <span class="num"><span class="dot">02</span><span class="ic"><i data-lucide="flask-conical"></i></span></span>
+          <p class="name">Formulación</p>
+          <p class="desc">Laboratorio desarrolla la fórmula técnica.</p>
+        </div>
+        <div class="arrow"><i data-lucide="chevron-right"></i></div>
+        <div class="step">
+          <span class="num"><span class="dot">03</span><span class="ic"><i data-lucide="badge-check"></i></span></span>
+          <p class="name">Validación</p>
+          <p class="desc">Eficacia, estabilidad, COFEPRIS y muestra.</p>
+        </div>
+        <div class="arrow"><i data-lucide="chevron-right"></i></div>
+        <div class="step">
+          <span class="num"><span class="dot">04</span><span class="ic"><i data-lucide="factory"></i></span></span>
+          <p class="name">Producción</p>
+          <p class="desc">Fabricación con trazabilidad por lote.</p>
+        </div>
+        <div class="arrow"><i data-lucide="chevron-right"></i></div>
+        <div class="step">
+          <span class="num"><span class="dot">05</span><span class="ic"><i data-lucide="package"></i></span></span>
+          <p class="name">Envasado y etiquetado</p>
+          <p class="desc">Tu marca, colores y regulatorios.</p>
+        </div>
+        <div class="arrow"><i data-lucide="chevron-right"></i></div>
+        <div class="step">
+          <span class="num"><span class="dot">06</span><span class="ic"><i data-lucide="truck"></i></span></span>
+          <p class="name">Entrega final</p>
+          <p class="desc">Paletizado y listo para distribución.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SECCIÓN 3 — PARA QUIÉN ═══════════════ -->
+    <div class="sec-head">
+      <h2>Si encajas aquí, podemos trabajar juntos</h2>
+      <span class="tag">03 · Para quién</span>
+    </div>
+
+    <div class="who">
+      <div class="who-card blue">
+        <div class="ic"><i data-lucide="truck"></i></div>
+        <div>
+          <h3 class="name">Distribuidores</h3>
+          <p class="desc">Quieres tu propia marca para mejorar margen y diferenciarte de la competencia.</p>
+        </div>
+      </div>
+      <div class="who-card green">
+        <div class="ic"><i data-lucide="building-2"></i></div>
+        <div>
+          <h3 class="name">Cadenas y redes</h3>
+          <p class="desc">Estandarizas productos con tu marca en toda tu red de sucursales o clientes.</p>
+        </div>
+      </div>
+      <div class="who-card blue">
+        <div class="ic"><i data-lucide="rocket"></i></div>
+        <div>
+          <h3 class="name">Emprendedores</h3>
+          <p class="desc">Tienes marca y mercado identificado, pero no tienes planta ni fórmula propia.</p>
+        </div>
+      </div>
+      <div class="who-card green">
+        <div class="ic"><i data-lucide="leaf"></i></div>
+        <div>
+          <h3 class="name">Líneas verdes / especializadas</h3>
+          <p class="desc">Quieres lanzar productos enzimáticos, biodegradables o cosméticos funcionales.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ SECCIÓN 4 — MARCAS ═══════════════ -->
+    <section class="brands">
+      <div class="brands-head">
+        <div>
+          <h2>Marcas activas que hoy fabricamos</h2>
+          <p class="sub">Confidencialidad garantizada en todos los proyectos.</p>
+        </div>
+        <span class="stamp">04 · Prueba</span>
+      </div>
+      <div class="brands-row">
+        <span class="brand-chip"><span class="dot"></span>Verde Hogar</span>
+        <span class="brand-chip"><span class="dot"></span>BioNeutral</span>
+        <span class="brand-chip"><span class="dot"></span>Equilux</span>
+        <span class="brand-chip"><span class="dot"></span>ANEMVE</span>
+        <span class="brand-chip more">+ otras bajo NDA</span>
+      </div>
+      <p class="brands-foot">
+        <i data-lucide="lock"></i>
+        Los detalles del proyecto permanecen bajo NDA. Podemos compartir alcances generales en reunión.
+      </p>
+    </section>
+
+    <!-- ═══════════════ SECCIÓN 5 — VALOR ═══════════════ -->
+    <div class="value">
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>Planta propia en SLP</strong>
+          <span>Laboratorio y formulación incluidos</span>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>Muestra a industrial</strong>
+          <span>Desde piloto hasta producción</span>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="check"><i data-lucide="check"></i></div>
+        <div class="text">
+          <strong>Producto terminado</strong>
+          <span>Listo para vender con tu marca</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer">
+    <div class="f-logo">
+      <img src="assets/neugreen-logo-extended-white.svg" alt="Neugreen">
+      <div class="tag">Biotecnología en limpieza y desinfección.</div>
+    </div>
+    <div class="contact">
+      <div class="row"><i data-lucide="mail"></i><span><strong>ventas@neugreen.mx</strong></span></div>
+      <div class="row"><i data-lucide="phone"></i><span><strong>+52 444 256 5697</strong></span></div>
+      <div class="row"><i data-lucide="globe"></i><span>neugreen.mx/manufactura</span></div>
+    </div>
+    <div class="cta">
+      <div class="label">
+        Cuéntanos tu idea
+        <small>Te asesoramos desde el concepto.</small>
+      </div>
+      <a class="btn" href="https://neugreen.mx/whatsapp.html" target="_blank" rel="noopener">
+        Iniciar
+        <i data-lucide="arrow-right"></i>
+      </a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  if (window.lucide) lucide.createIcons({ attrs: { 'stroke-width': 2 } });
+</script>
+</body>
+</html>
