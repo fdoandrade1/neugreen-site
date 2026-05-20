@@ -51,10 +51,11 @@ const SECTOR_DATA = {
   },
   Educativo: {
     drawerTitle: 'Sector Educativo',
-    desc: 'Soluciones de limpieza y desinfección para escuelas, universidades y centros educativos. Productos seguros, certificados y de fácil aplicación.',
+    desc: 'Productos de limpieza, jarciería, papel y desechables para escuelas, colegios y universidades. Surtido completo, entrega puntual y pedido recurrente mensual sin complicaciones.',
     acciones: [
-      { type: 'primary', label: 'Ver portafolio',       href: 'productos.html' },
-      { type: 'link',    label: 'Solicitar cotización', href: 'contacto.html' },
+      { type: 'primary',  label: 'Ver One Pager',          onClick: () => window.open('assets/docs/onepager-educativo.html', '_blank'), 'data-track': 'onepager-view',     'data-sector': 'educativo' },
+      { type: 'download', label: 'Descargar PDF',           href: 'assets/docs/onepager-educativo.pdf', hasPdf: false, 'data-track': 'onepager-download', 'data-sector': 'educativo' },
+      { type: 'link',     label: 'Ver todos los productos', href: 'productos.html' },
     ],
   },
   Salud: {
@@ -67,10 +68,11 @@ const SECTOR_DATA = {
   },
   Comercial: {
     drawerTitle: 'Comercial',
-    desc: 'Limpieza y desinfección para oficinas, centros comerciales, plazas y espacios de alto tráfico. Reposición programada mensual disponible.',
+    desc: 'Limpieza, desinfección y aromatización profesional para plazas comerciales, edificios de oficinas y espacios de alto tráfico. Imagen impecable en cada área del espacio.',
     acciones: [
-      { type: 'primary', label: 'Ver portafolio',       href: 'productos.html' },
-      { type: 'link',    label: 'Solicitar cotización', href: 'contacto.html' },
+      { type: 'primary',  label: 'Ver One Pager',          onClick: () => window.open('assets/docs/onepager-comercial.html', '_blank'), 'data-track': 'onepager-view',     'data-sector': 'comercial' },
+      { type: 'download', label: 'Descargar PDF',           href: 'assets/docs/onepager-comercial.pdf', hasPdf: false, 'data-track': 'onepager-download', 'data-sector': 'comercial' },
+      { type: 'link',     label: 'Ver todos los productos', href: 'productos.html' },
     ],
   },
   Gobierno: {
