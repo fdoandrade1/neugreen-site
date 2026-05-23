@@ -64,58 +64,23 @@ function MaquilaBand() {
           </div>
         </div>
 
-        {/* Stylized "bottle row" placeholder */}
+        {/* Imagen real manufactura */}
         <div style={{
-          background: 'var(--ng-mist)',
-          border: '1px solid var(--ng-line)',
           borderRadius: 'var(--r-xl)',
-          padding: 40,
+          overflow: 'hidden',
           aspectRatio: '5/4',
-          display: 'flex',
-          alignItems: 'flex-end',
-          justifyContent: 'center',
-          gap: 18,
-          position: 'relative',
+          flexShrink: 0,
         }}>
-          {[
-            { h: 70, w: 56, c: 'var(--ng-blue)' },
-            { h: 85, w: 64, c: 'var(--ng-green)' },
-            { h: 60, w: 50, c: 'var(--ng-blue-700)' },
-            { h: 78, w: 60, c: 'var(--ng-ink)' },
-            { h: 65, w: 54, c: 'var(--ng-blue)' },
-          ].map((b, i) => (
-            <div key={i} style={{
-              width: `${b.w}%`,
-              maxWidth: b.w + 'px',
-              height: `${b.h}%`,
-              background: b.c,
-              borderRadius: '6px 6px 4px 4px',
-              position: 'relative',
-              boxShadow: '0 12px 24px -10px rgba(0,63,197,.35)',
-            }}>
-              <div style={{
-                position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)',
-                width: '40%', height: '14px', background: b.c, borderRadius: '3px 3px 0 0',
-              }}></div>
-              <div style={{
-                position: 'absolute', top: '30%', left: '10%', right: '10%',
-                height: '34%', background: '#fff', borderRadius: 3, opacity: .94,
-                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                fontFamily: 'var(--font-display)', fontSize: 8, fontWeight: 800, color: b.c,
-                letterSpacing: '0.05em',
-              }}>
-                <div>TU MARCA</div>
-                <div style={{ width: '60%', height: 1, background: b.c, margin: '2px 0', opacity: .4 }}></div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 6, fontWeight: 500 }}>20 L</div>
-              </div>
-            </div>
-          ))}
-          <div style={{
-            position: 'absolute', top: 16, right: 16,
-            fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--ng-steel)',
-            background: '#fff', padding: '4px 10px', borderRadius: 6,
-            border: '1px solid var(--ng-line)',
-          }}>Mockup · 5 SKUs marca privada</div>
+          <img
+            src="assets/images/Imagen_Manufactura_Neugreen.webp"
+            alt="Planta de manufactura Neugreen — San Luis Potosí"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block',
+            }}
+          />
         </div>
       </div>
       <style>{`
