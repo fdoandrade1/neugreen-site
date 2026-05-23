@@ -1,4 +1,4 @@
-// CapacidadesPlanta.jsx — wide block with photo background (placeholder) + stats card overlay
+// CapacidadesPlanta.jsx — wide block with photo background (bodega SLP) + stats card overlay
 function CapacidadesPlanta() {
   const stats = [
     { v: '+15', l: 'Años de experiencia técnica' },
@@ -19,8 +19,8 @@ function CapacidadesPlanta() {
           overflow: 'hidden',
           minHeight: 480,
           background: `
-            linear-gradient(120deg, rgba(0,85,184,.72) 0%, rgba(0,85,184,.55) 50%, rgba(11,27,43,.4) 100%),
-            repeating-linear-gradient(135deg, #5A6B82 0 14px, #475569 14px 28px, #334155 28px 42px)
+            linear-gradient(120deg, rgba(0,85,184,.68) 0%, rgba(0,85,184,.45) 50%, rgba(11,27,43,.35) 100%),
+            url('assets/images/BODEGA_NEUGREEN_COMPLETA_FINAL.webp') center/cover no-repeat
           `,
           position: 'relative',
           padding: '64px 56px',
@@ -29,27 +29,6 @@ function CapacidadesPlanta() {
           justifyContent: 'flex-end',
           color: '#fff',
         }}>
-          {/* drum/pallet texture suggestion */}
-          <div style={{
-            position: 'absolute', inset: 0,
-            background: `
-              radial-gradient(circle at 18% 35%, rgba(255,255,255,.06) 0 80px, transparent 110px),
-              radial-gradient(circle at 36% 30%, rgba(255,255,255,.04) 0 60px, transparent 90px),
-              radial-gradient(circle at 78% 50%, rgba(65,190,67,.10) 0 100px, transparent 140px)
-            `,
-            pointerEvents: 'none',
-          }}></div>
-
-          {/* placeholder tag */}
-          <div style={{
-            position: 'absolute', top: 24, left: 24,
-            background: 'rgba(11,27,43,.85)',
-            backdropFilter: 'blur(8px)',
-            color: 'rgba(255,255,255,.85)',
-            fontFamily: 'var(--font-mono)', fontSize: 10,
-            padding: '6px 10px', borderRadius: 6,
-            letterSpacing: '0.08em', textTransform: 'uppercase',
-          }}>Placeholder · pedir foto real planta SLP</div>
 
           <div style={{ position: 'relative', maxWidth: 640 }}>
             <div className="eyebrow" style={{ color: '#A6C8FF', marginBottom: 16 }}>Capacidades de planta · San Luis Potosí</div>
