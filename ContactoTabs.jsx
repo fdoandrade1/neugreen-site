@@ -152,7 +152,7 @@ function IndustrialFormCT() {
         <div>
           <label style={labelStyle}>Problema</label>
           <select style={inputStyle} value={f.problema} onChange={e => setF({ ...f, problema: e.target.value })} required>
-            <option value="">Seleccionar...</option><option>Tratamiento de agua</option><option>PTAR</option><option>Torres</option><option>Calderas</option><option>Olores</option><option>Dosificación</option><option>Ingeniería integral</option>
+            <option value="">Seleccionar...</option><option>Tratamiento de agua</option><option>PTAR</option><option>Torres</option><option>Calderas</option><option>Olores</option><option>Dosificación</option><option>Ingeniería integral</option><option>Otro</option>
           </select>
         </div>
       </div>

@@ -3,7 +3,7 @@ const { useState: useStateMaq } = React;
 
 function MaquilaForm() {
   const [form, setForm] = useStateMaq({
-    empresa: '', contacto: '', email: '', telefono: '',
+    nombre: '', empresa: '', contacto: '', email: '', telefono: '',
     tipoProducto: '', volumen: '',
     formula: 'no', plazo: '', mensaje: '',
   });
@@ -34,7 +34,7 @@ function MaquilaForm() {
           <p style={{ fontSize: 16, color: 'var(--ng-steel)', margin: '0 0 24px', lineHeight: 1.55 }}>
             Un ingeniero de planta te contacta en <strong style={{ color: 'var(--ng-ink)' }}>menos de 24 h hábiles</strong> con análisis de viabilidad y cotización preliminar.
           </p>
-          <button onClick={() => { setSent(false); setForm({ empresa: '', contacto: '', email: '', telefono: '', tipoProducto: '', volumen: '', formula: 'no', plazo: '', mensaje: '' }); }}
+          <button onClick={() => { setSent(false); setForm({ nombre: '', empresa: '', contacto: '', email: '', telefono: '', tipoProducto: '', volumen: '', formula: 'no', plazo: '', mensaje: '' }); }}
                   style={{ background: 'transparent', border: '1px solid var(--ng-line)', color: 'var(--ng-ink)', fontWeight: 700, fontSize: 14, padding: '12px 22px', borderRadius: 'var(--r)', cursor: 'pointer' }}>
             Enviar otro brief
           </button>
@@ -91,6 +91,11 @@ function MaquilaForm() {
                 background: '#fff', border: '1px solid var(--ng-line)',
                 borderRadius: 'var(--r-xl)', padding: 36, boxShadow: 'var(--shadow-sm)',
               }}>
+          <div style={{ marginBottom: 14 }}>
+            <label style={label}>Nombre</label>
+            <input style={input} value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} placeholder="Tu nombre" required />
+          </div>
+
           <div className="ng-maq-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
             <div>
               <label style={label}>Empresa</label>
