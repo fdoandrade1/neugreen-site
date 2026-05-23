@@ -37,19 +37,30 @@ function FormSuccess({ onReset, accent }) {
 }
 
 function ProductosFormCT() {
-  const [f, setF] = useStateCT({ empresa: '', email: '', sector: '', mensaje: '' });
+  const lineaMap = { convencional: 'Limpieza convencional', enzimatica: 'Limpieza enzimática', desinfeccion: 'Desinfección', bodycare: 'Body Care', mascotas: 'Mascotas', aroma: 'Aroma Experience', jarciera: 'Jarciería e institucional' };
+  const lineaParam = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('linea') : '';
+  const lineaLabel = lineaMap[lineaParam] || '';
+  const [f, setF] = useStateCT({ nombre: '', empresa: '', email: '', telefono: '', sector: '', mensaje: lineaLabel });
   const [s, setS] = useStateCT(false);
-  if (s) return <FormSuccess onReset={() => { setS(false); setF({ empresa: '', email: '', sector: '', mensaje: '' }); }} />;
+  if (s) return <FormSuccess onReset={() => { setS(false); setF({ nombre: '', empresa: '', email: '', telefono: '', sector: '', mensaje: '' }); }} />;
   return (
     <form onSubmit={(e) => { e.preventDefault(); setS(true); }} data-lead-source="contacto-productos">
       <div className="ng-ctabs-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
-        <div><label style={labelStyle}>Empresa</label><input style={inputStyle} value={f.empresa} onChange={e => setF({ ...f, empresa: e.target.value })} placeholder="Razón social" required /></div>
+        <div><label style={labelStyle}>Nombre</label><input style={inputStyle} value={f.nombre} onChange={e => setF({ ...f, nombre: e.target.value })} placeholder="Tu nombre" required /></div>
         <div><label style={labelStyle}>Correo</label><input type="email" style={inputStyle} value={f.email} onChange={e => setF({ ...f, email: e.target.value })} placeholder="compras@empresa.com" required /></div>
+      </div>
+      <div style={{ marginBottom: 14 }}>
+        <label style={labelStyle}>Teléfono <span style={{ fontWeight: 400, color: 'var(--ng-steel)' }}>(opcional)</span></label>
+        <input type="tel" style={inputStyle} value={f.telefono} onChange={e => setF({ ...f, telefono: e.target.value })} placeholder="+52 ..." />
+      </div>
+      <div style={{ marginBottom: 14 }}>
+        <label style={labelStyle}>Empresa</label>
+        <input style={inputStyle} value={f.empresa} onChange={e => setF({ ...f, empresa: e.target.value })} placeholder="Razón social" required />
       </div>
       <div style={{ marginBottom: 14 }}>
         <label style={labelStyle}>Sector</label>
         <select style={inputStyle} value={f.sector} onChange={e => setF({ ...f, sector: e.target.value })} required>
-          <option value="">Seleccionar...</option><option>Alimenticio</option><option>Manufactura</option><option>Hospitalidad</option><option>Salud</option><option>Educativo</option><option>Comercial</option><option>Industrial</option><option>Gobierno</option><option>Distribuidor</option>
+          <option value="">Seleccionar...</option><option>Hospitalidad (Hotel / Restaurant)</option><option>Salud (Clínica / Consultorio)</option><option>Alimentos y Bebidas</option><option>Industrial / Manufactura</option><option>Oficinas</option><option>Otro</option>
         </select>
       </div>
       <div style={{ marginBottom: 22 }}>
