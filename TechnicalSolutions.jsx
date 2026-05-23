@@ -1,7 +1,7 @@
 // TechnicalSolutions.jsx — dark premium section with 3 industrial cards
-function SolutionCard({ icon, title, body, stat, statLabel }) {
+function SolutionCard({ icon, title, body, stat, statLabel, areaId }) {
   return (
-    <div className="ng-card-dark" style={{
+    <div className="ng-card-dark" onClick={() => { window.location.href = `industrial.html?area=${areaId}`; }} style={{
       background: '#102942',
       border: '1px solid #1f3d5e',
       borderRadius: 'var(--r-lg)',
@@ -58,9 +58,9 @@ function TechnicalSolutions() {
   };
 
   const cards = [
-    { icon: icons.water, stat: '4', statLabel: 'PTARs operando', title: 'Tratamiento de agua (PTAR)', body: 'Diseño, operación y bioaumentación. Reducción DBO/DQO sin químicos agresivos. Cumplimiento NOM-001 garantizado.' },
-    { icon: icons.tower, stat: '24/7', statLabel: 'Soporte técnico', title: 'Torres y calderas', body: 'Control de incrustación, corrosión, biopelícula y consumo químico. Auditoría inicial sin costo.' },
-    { icon: icons.gauge, stat: '18%', statLabel: 'Ahorro promedio', title: 'Dosificación inteligente', body: 'Bombas, sensores y telemetría para procesos críticos. Ahorro químico medible en 90 días.' },
+    { icon: icons.water, stat: '4', statLabel: 'PTARs operando', title: 'Tratamiento de agua (PTAR)', body: 'Diseño, operación y bioaumentación. Reducción DBO/DQO sin químicos agresivos. Cumplimiento NOM-001 garantizado.', areaId: 'ptar' },
+    { icon: icons.tower, stat: '24/7', statLabel: 'Soporte técnico', title: 'Torres y calderas', body: 'Control de incrustación, corrosión, biopelícula y consumo químico. Auditoría inicial sin costo.', areaId: 'torres' },
+    { icon: icons.gauge, stat: '18%', statLabel: 'Ahorro promedio', title: 'Dosificación inteligente', body: 'Bombas, sensores y telemetría para procesos críticos. Ahorro químico medible en 90 días.', areaId: 'dosificacion' },
   ];
 
   return (
@@ -83,12 +83,12 @@ function TechnicalSolutions() {
               Para industria, agua y energía. Ingeniería de proyecto, suministro y soporte técnico en planta.
             </p>
           </div>
-          <button className="ng-tech-cta-btn" style={{
+          <button className="ng-tech-cta-btn" onClick={() => { window.location.href = 'industrial.html#diagnostico'; }} style={{
             background: 'transparent', color: '#fff',
             border: '1px solid rgba(255,255,255,.22)',
             fontWeight: 700, fontSize: 14, padding: '12px 22px',
             borderRadius: 'var(--r)', cursor: 'pointer',
-          }}>Hablar con un ingeniero</button>
+          }}>Hablar con un técnico</button>
         </div>
 
         <div style={{

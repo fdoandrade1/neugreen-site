@@ -1,5 +1,5 @@
 // IndustrialAreas.jsx — 10 áreas técnicas (orden: diagnóstico → validación → tratamiento → ingeniería → suministro)
-const { useState: useStateAreas } = React;
+const { useState: useStateAreas, useEffect: useEffectAreas } = React;
 
 // ────────────────────────────────────────────────────────────
 // Lucide-style line icons (1.75 stroke, 24×24)
@@ -483,7 +483,22 @@ function AreaCardOpen({ a, n, onClose }) {
 // Section
 // ────────────────────────────────────────────────────────────
 function IndustrialAreas() {
-  const [expanded, setExpanded] = useStateAreas(null);
+  const initialArea = (() => {
+    if (typeof window === 'undefined') return null;
+    const p = new URLSearchParams(window.location.search);
+    const area = p.get('area');
+    return AREAS.find(a => a.id === area) ? area : null;
+  })();
+  const [expanded, setExpanded] = useStateAreas(initialArea);
+
+  useEffectAreas(() => {
+    if (initialArea && expanded === initialArea) {
+      setTimeout(() => {
+        const section = document.querySelector('.ng-areas-grid');
+        if (section) window.scrollTo({ top: section.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+      }, 400);
+    }
+  }, []);
   const expandedIdx = expanded == null ? -1 : AREAS.findIndex(a => a.id === expanded);
 
   return (
