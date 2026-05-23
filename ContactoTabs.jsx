@@ -254,9 +254,9 @@ function ContactoTabs() {
 
             <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 18 }}>
               {[
-                { ico: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>, label: 'WhatsApp ventas', value: '+52 444 256 5697', sub: '< 24 h hábiles' },
-                { ico: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>, label: 'Ventas', value: 'ventas@neugreen.mx', sub: 'Cotizaciones y catálogo' },
-                { ico: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>, label: 'Contacto general', value: 'contacto@neugreen.mx', sub: 'Manufactura + industrial' },
+                { ico: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>, label: 'WhatsApp ventas', value: '+52 444 256 5697', sub: '< 24 h hábiles', href: 'https://www.neugreen.mx/whatsapp' },
+                { ico: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>, label: 'Ventas', value: 'ventas@neugreen.mx', sub: 'Cotizaciones y catálogo', href: 'mailto:ventas@neugreen.mx' },
+                { ico: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>, label: 'Contacto general', value: 'contacto@neugreen.mx', sub: 'Manufactura + industrial', href: 'mailto:contacto@neugreen.mx' },
                 { ico: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>, label: 'Planta SLP', value: 'San Luis Potosí', sub: 'Visita con cita previa' },
               ].map((c, i) => (
                 <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
@@ -268,7 +268,9 @@ function ContactoTabs() {
                   }}>{c.ico}</div>
                   <div>
                     <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,.55)', marginBottom: 4 }}>{c.label}</div>
-                    <div style={{ fontFamily: 'var(--font-display)', fontSize: 16, fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' }}>{c.value}</div>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: 16, fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' }}>
+                      {c.href ? <a href={c.href} target={c.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'none' }}>{c.value}</a> : c.value}
+                    </div>
                     <div style={{ fontSize: 12, color: 'rgba(255,255,255,.6)', marginTop: 2 }}>{c.sub}</div>
                   </div>
                 </li>
