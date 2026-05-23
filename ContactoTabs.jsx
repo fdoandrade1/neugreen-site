@@ -81,14 +81,18 @@ function ProductosFormCT() {
 }
 
 function MaquilaFormCT() {
-  const [f, setF] = useStateCT({ empresa: '', email: '', producto: '', volumen: '', formula: 'no', mensaje: '' });
+  const [f, setF] = useStateCT({ empresa: '', email: '', telefono: '', producto: '', volumen: '', formula: 'no', mensaje: '' });
   const [s, setS] = useStateCT(false);
-  if (s) return <FormSuccess onReset={() => { setS(false); setF({ empresa: '', email: '', producto: '', volumen: '', formula: 'no', mensaje: '' }); }} accent="green" />;
+  if (s) return <FormSuccess onReset={() => { setS(false); setF({ empresa: '', email: '', telefono: '', producto: '', volumen: '', formula: 'no', mensaje: '' }); }} accent="green" />;
   return (
     <form onSubmit={(e) => { e.preventDefault(); setS(true); }} data-lead-source="contacto-manufactura">
       <div className="ng-ctabs-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
         <div><label style={labelStyle}>Empresa</label><input style={inputStyle} value={f.empresa} onChange={e => setF({ ...f, empresa: e.target.value })} placeholder="Razón social" required /></div>
         <div><label style={labelStyle}>Correo</label><input type="email" style={inputStyle} value={f.email} onChange={e => setF({ ...f, email: e.target.value })} placeholder="contacto@empresa.com" required /></div>
+      </div>
+      <div style={{ marginBottom: 14 }}>
+        <label style={labelStyle}>Teléfono <span style={{ fontWeight: 400, color: 'var(--ng-steel)' }}>(opcional)</span></label>
+        <input type="tel" style={inputStyle} value={f.telefono} onChange={e => setF({ ...f, telefono: e.target.value })} placeholder="+52 ..." />
       </div>
       <div className="ng-ctabs-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
         <div>
@@ -133,14 +137,18 @@ function MaquilaFormCT() {
 }
 
 function IndustrialFormCT() {
-  const [f, setF] = useStateCT({ empresa: '', email: '', sector: '', problema: '', mensaje: '' });
+  const [f, setF] = useStateCT({ empresa: '', email: '', telefono: '', sector: '', problema: '', mensaje: '' });
   const [s, setS] = useStateCT(false);
-  if (s) return <FormSuccess onReset={() => { setS(false); setF({ empresa: '', email: '', sector: '', problema: '', mensaje: '' }); }} />;
+  if (s) return <FormSuccess onReset={() => { setS(false); setF({ empresa: '', email: '', telefono: '', sector: '', problema: '', mensaje: '' }); }} />;
   return (
     <form onSubmit={(e) => { e.preventDefault(); setS(true); }} data-lead-source="contacto-industrial">
       <div className="ng-ctabs-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
         <div><label style={labelStyle}>Empresa</label><input style={inputStyle} value={f.empresa} onChange={e => setF({ ...f, empresa: e.target.value })} placeholder="Razón social" required /></div>
         <div><label style={labelStyle}>Correo</label><input type="email" style={inputStyle} value={f.email} onChange={e => setF({ ...f, email: e.target.value })} placeholder="ingeniero@empresa.com" required /></div>
+      </div>
+      <div style={{ marginBottom: 14 }}>
+        <label style={labelStyle}>Teléfono <span style={{ fontWeight: 400, color: 'var(--ng-steel)' }}>(opcional)</span></label>
+        <input type="tel" style={inputStyle} value={f.telefono} onChange={e => setF({ ...f, telefono: e.target.value })} placeholder="+52 ..." />
       </div>
       <div className="ng-ctabs-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
         <div>

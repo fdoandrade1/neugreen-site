@@ -2,7 +2,7 @@
 const { useState: useStateForm } = React;
 
 function ContactForm() {
-  const [form, setForm] = useStateForm({ name: '', email: '', company: '', line: 'productos', message: '' });
+  const [form, setForm] = useStateForm({ name: '', email: '', telefono: '', company: '', line: 'productos', message: '' });
   const [submitted, setSubmitted] = useStateForm(false);
 
   if (submitted) {
@@ -16,7 +16,7 @@ function ContactForm() {
           <p style={{ fontSize: 16, color: 'var(--ng-steel)', margin: '0 0 24px', lineHeight: 1.55 }}>
             Te respondemos en menos de <strong style={{ color: 'var(--ng-ink)' }}>24 h hábiles</strong> con cotización + ficha técnica.
           </p>
-          <button onClick={() => { setSubmitted(false); setForm({ name: '', email: '', company: '', line: 'productos', message: '' }); }}
+          <button onClick={() => { setSubmitted(false); setForm({ name: '', email: '', telefono: '', company: '', line: 'productos', message: '' }); }}
                   style={{ background: 'transparent', border: '1px solid var(--ng-line)', color: 'var(--ng-ink)', fontWeight: 700, fontSize: 14, padding: '12px 22px', borderRadius: 'var(--r)', cursor: 'pointer' }}>
             Enviar otra solicitud
           </button>
@@ -99,6 +99,11 @@ function ContactForm() {
               <label style={labelStyle}>Correo corporativo</label>
               <input type="email" style={inputStyle} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="compras@empresa.com" />
             </div>
+          </div>
+
+          <div style={{ marginTop: 14 }}>
+            <label style={labelStyle}>Teléfono <span style={{ fontWeight: 400, color: 'var(--ng-steel)' }}>(opcional)</span></label>
+            <input type="tel" style={inputStyle} value={form.telefono} onChange={(e) => setForm({ ...form, telefono: e.target.value })} placeholder="+52 ..." />
           </div>
 
           <div style={{ marginTop: 14 }}>
