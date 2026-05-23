@@ -381,7 +381,17 @@ function FilterBar({ active, onChange, counts }) {
 
 // ────────────────────────────────────────────────────────────
 function ProyectosGaleria() {
-  const [filter, setFilter] = useStateP('TODOS');
+  const [filter, setFilter] = useStateP(() => {
+    if (typeof window === 'undefined') return 'TODOS';
+    const p = new URLSearchParams(window.location.search);
+    const f = p.get('filtro');
+    if (!f) return 'TODOS';
+    const upper = f.charAt(0).toUpperCase() + f.slice(1).toLowerCase();
+    if (upper === 'Manufactura') return 'Manufactura';
+    if (upper === 'Industrial') return 'Industrial';
+    const map = { 'linea': 'Productos de Línea', 'productos': 'Productos de Línea' };
+    return map[f.toLowerCase()] || 'TODOS';
+  });
 
   const counts = {
     TODOS: ALL_CASES.length,

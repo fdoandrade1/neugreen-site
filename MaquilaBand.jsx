@@ -47,14 +47,14 @@ function MaquilaBand() {
 
           <div className="ng-maquila-band-btns" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <button
-              onClick={() => { window.location.href = 'contacto.html'; }}
+              onClick={() => { window.location.href = 'contacto.html?tab=manufactura'; }}
               style={{
               background: 'var(--ng-blue)', color: '#fff',
               fontWeight: 700, fontSize: 14, padding: '14px 24px',
               borderRadius: 'var(--r)', border: 'none', cursor: 'pointer',
             }}>Solicitar propuesta de manufactura</button>
             <button
-              onClick={() => { window.location.href = 'proyectos.html'; }}
+              onClick={() => { window.location.href = 'proyectos.html?filtro=manufactura'; }}
               style={{
               background: 'transparent', color: 'var(--ng-ink)',
               border: '1px solid var(--ng-line)',
