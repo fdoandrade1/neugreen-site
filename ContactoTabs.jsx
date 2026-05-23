@@ -175,7 +175,16 @@ function IndustrialFormCT() {
 }
 
 function ContactoTabs() {
-  const [active, setActive] = useStateCT('productos');
+  const [active, setActive] = useStateCT(() => {
+    if (typeof window === 'undefined') return 'productos';
+    const p = new URLSearchParams(window.location.search);
+    const tab = p.get('tab');
+    if (tab === 'manufactura' || tab === 'industrial') return tab;
+    const hash = window.location.hash.replace('#', '');
+    if (hash === 'formulario-manufactura') return 'manufactura';
+    if (hash === 'formulario-industrial') return 'industrial';
+    return 'productos';
+  });
 
   const tabs = [
     { id: 'productos',  label: 'Productos',  accent: 'blue',  sub: 'Cotización de catálogo' },
