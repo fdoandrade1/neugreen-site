@@ -2,8 +2,14 @@
 const { useState: useStateAsesor } = React;
 
 function AsesorBlock() {
-  const [form, setForm] = useStateAsesor({ name: '', empresa: '', email: '', mensaje: '' });
-  const [sent, setSent] = useStateAsesor(false);
+  const [form, setForm] = useStateAsesor({
+    nombre: '',
+    empresa: '',
+    telefono: '',
+    email: '',
+    linea_interes: '',
+    mensaje: '',
+  });
 
   const inputStyle = {
     width: '100%', padding: '12px 14px',
@@ -58,59 +64,69 @@ function AsesorBlock() {
           </ul>
         </div>
 
-        {sent ? (
-          <div style={{
-            background: '#fff', border: '1px solid var(--ng-line)',
-            borderRadius: 'var(--r-xl)', padding: 40, textAlign: 'center',
-          }}>
-            <div style={{ width: 64, height: 64, background: 'var(--ng-green-50)', borderRadius: '50%', display: 'grid', placeItems: 'center', margin: '0 auto 18px' }}>
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--ng-green-700)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <form action="/api/leads/productos"
+              method="POST"
+              data-form="productos"
+              data-lead-source="productos-asesor-general"
+              style={{
+                background: '#fff', border: '1px solid var(--ng-line)',
+                borderRadius: 'var(--r-xl)', padding: 36, boxShadow: 'var(--shadow-sm)',
+              }}>
+          <input type="hidden" name="fuente" value="sitio_web" />
+          <input type="hidden" name="pagina_origen" value="productos" />
+
+          <div className="ng-asesor-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+            <div>
+              <label style={labelStyle}>Nombre</label>
+              <input name="nombre" type="text" style={inputStyle} value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} placeholder="Tu nombre" required />
             </div>
-            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 800, margin: '0 0 10px', color: 'var(--ng-ink)' }}>Solicitud recibida.</h3>
-            <p style={{ fontSize: 15, color: 'var(--ng-steel)', margin: 0, lineHeight: 1.55 }}>
-              Un asesor técnico te contacta en <strong style={{ color: 'var(--ng-ink)' }}>menos de 24 h hábiles</strong>.
-            </p>
-          </div>
-        ) : (
-          <form onSubmit={(e) => { e.preventDefault(); setSent(true); }}
-                data-lead-source="productos-asesor-general"
-                style={{
-                  background: '#fff', border: '1px solid var(--ng-line)',
-                  borderRadius: 'var(--r-xl)', padding: 36, boxShadow: 'var(--shadow-sm)',
-                }}>
-            <div className="ng-asesor-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
-              <div>
-                <label style={labelStyle}>Nombre</label>
-                <input style={inputStyle} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Tu nombre" />
-              </div>
-              <div>
-                <label style={labelStyle}>Empresa</label>
-                <input style={inputStyle} value={form.empresa} onChange={(e) => setForm({ ...form, empresa: e.target.value })} placeholder="Razón social" />
-              </div>
+            <div>
+              <label style={labelStyle}>Empresa</label>
+              <input name="empresa" type="text" style={inputStyle} value={form.empresa} onChange={(e) => setForm({ ...form, empresa: e.target.value })} placeholder="Razón social" required />
             </div>
-            <div style={{ marginBottom: 14 }}>
+            <div>
+              <label style={labelStyle}>Teléfono / WhatsApp</label>
+              <input name="telefono" type="tel" style={inputStyle} value={form.telefono} onChange={(e) => setForm({ ...form, telefono: e.target.value })} placeholder="444 000 0000" required />
+            </div>
+            <div>
               <label style={labelStyle}>Correo corporativo</label>
-              <input type="email" style={inputStyle} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="compras@empresa.com" />
+              <input name="email" type="email" style={inputStyle} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="compras@empresa.com" required />
             </div>
-            <div style={{ marginBottom: 22 }}>
-              <label style={labelStyle}>Cuéntanos qué necesitas</label>
-              <textarea style={{ ...inputStyle, minHeight: 96, resize: 'vertical', fontFamily: 'inherit' }}
-                        value={form.mensaje} onChange={(e) => setForm({ ...form, mensaje: e.target.value })}
-                        placeholder="Tipo de operación, problema actual, sector..."></textarea>
-            </div>
-            <button type="submit" style={{
-              width: '100%',
-              background: 'var(--ng-blue)', color: '#fff',
-              fontWeight: 700, fontSize: 15,
-              padding: '14px 22px', borderRadius: 'var(--r)',
-              border: 'none', cursor: 'pointer',
-              display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-            }}>
-              Hablar con un asesor
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </button>
-          </form>
-        )}
+          </div>
+
+          <div style={{ marginBottom: 14 }}>
+            <label style={labelStyle}>Línea de interés</label>
+            <select name="linea_interes" style={inputStyle} value={form.linea_interes} onChange={(e) => setForm({ ...form, linea_interes: e.target.value })} required>
+              <option value="">Selecciona una línea</option>
+              <option value="Limpieza convencional">Limpieza convencional</option>
+              <option value="Limpieza enzimática">Limpieza enzimática</option>
+              <option value="Desinfección">Desinfección</option>
+              <option value="Body Care">Body Care</option>
+              <option value="Mascotas">Mascotas</option>
+              <option value="Aroma Experience">Aroma Experience</option>
+              <option value="Jarciería e Institucional">Jarciería e Institucional</option>
+            </select>
+          </div>
+
+          <div style={{ marginBottom: 22 }}>
+            <label style={labelStyle}>Cuéntanos qué necesitas</label>
+            <textarea name="mensaje" style={{ ...inputStyle, minHeight: 96, resize: 'vertical', fontFamily: 'inherit' }}
+                      value={form.mensaje} onChange={(e) => setForm({ ...form, mensaje: e.target.value })}
+                      placeholder="Tipo de operación, problema actual, sector..." required></textarea>
+          </div>
+
+          <button type="submit" style={{
+            width: '100%',
+            background: 'var(--ng-blue)', color: '#fff',
+            fontWeight: 700, fontSize: 15,
+            padding: '14px 22px', borderRadius: 'var(--r)',
+            border: 'none', cursor: 'pointer',
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+          }}>
+            Hablar con un asesor
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </form>
       </div>
     <style>{`
       @media (max-width: 768px) {
