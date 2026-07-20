@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /assets/docs/
+Disallow: /index-print.html
+
+Sitemap: https://www.neugreen.mx/sitemap.xml
