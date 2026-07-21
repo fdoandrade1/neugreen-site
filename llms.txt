@@ -1,0 +1,20 @@
+# Neugreen México
+
+> Empresa B2B de formulación química, biotecnología aplicada a la desinfección y soluciones de tratamiento de agua industrial, con sede en San Luis Potosí, México.
+
+Neugreen atiende tres líneas de negocio: productos de limpieza y desinfección (120+ SKUs), manufactura y marca privada para terceros, y soluciones industriales de tratamiento de agua. Trabajamos bajo estándares de cumplimiento normativo y control de calidad para clientes industriales, manufactureros y de servicios.
+
+## Páginas principales
+
+- [Inicio](https://www.neugreen.mx/): Presentación general de Neugreen
+- [Productos](https://www.neugreen.mx/productos): Línea de productos de limpieza y desinfección
+- [Manufactura](https://www.neugreen.mx/manufactura): Manufactura y marca privada para terceros
+- [Industrial](https://www.neugreen.mx/industrial): Tratamiento de agua y soluciones industriales
+- [Proyectos](https://www.neugreen.mx/proyectos): Casos y proyectos ejecutados
+- [Nosotros](https://www.neugreen.mx/nosotros): Sobre la empresa
+- [Contacto](https://www.neugreen.mx/contacto): Información de contacto
+
+## Contacto
+
+- Sitio: https://www.neugreen.mx
+- Correo: contacto@neugreen.mx

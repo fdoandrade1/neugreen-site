@@ -36,7 +36,7 @@ const STATIC_FILES = [
   'index.html', 'productos.html', 'manufactura.html', 'industrial.html',
   'proyectos.html', 'nosotros.html', 'contacto.html',
   'whatsapp.html', 'index-print.html',
-  'colors_and_type.css', 'robots.txt', 'sitemap.xml',
+  'colors_and_type.css', 'robots.txt', 'sitemap.xml', 'llms.txt',
 ];
 const STATIC_DIRS = ['assets', 'fonts', 'gracias-productos'];
 
