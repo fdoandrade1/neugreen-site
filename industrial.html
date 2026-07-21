@@ -50,49 +50,10 @@
 
 <div id="root"></div>
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 
-<script type="text/babel" src="Header.jsx"></script>
-<script type="text/babel" src="IndustrialHero.jsx"></script>
-<script type="text/babel" src="IndustrialAreas.jsx"></script>
-<script type="text/babel" src="IndustrialRecursos.jsx"></script>
-<script type="text/babel" src="Colaboradores.jsx"></script>
-<script type="text/babel" src="IndustrialForm.jsx"></script>
-<script type="text/babel" src="WhatsAppFloat.jsx"></script>
-<script type="text/babel" src="Footer.jsx"></script>
-
-<script type="text/babel">
-const { useState } = React;
-function App() {
-  const [active, setActive] = useState('industrial');
-  const handleNav = (id) => {
-    setActive(id);
-    if (id === 'home') { window.location.href = 'index.html'; return; }
-    if (id === 'productos') { window.location.href = 'productos.html'; return; }
-    if (id === 'manufactura')   { window.location.href = 'manufactura.html';   return; }
-    if (id === 'proyectos') { window.location.href = 'proyectos.html'; return; }
-    if (id === 'nosotros')  { window.location.href = 'nosotros.html';  return; }
-    if (id === 'contacto' || id === 'asesor' || id === 'cotizar') {
-      const target = document.getElementById('diagnostico');
-      if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-    }
-  };
-  return (
-    <div data-screen-label="Marketing site · industrial">
-      <Header onNavClick={handleNav} activeRoute={active} />
-      <IndustrialHero />
-      <IndustrialAreas />
-      <IndustrialRecursos />
-      <Colaboradores />
-      <IndustrialForm />
-      <WhatsAppFloat />
-      <Footer />
-    </div>
-  );
-}
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-</script>
+<script src="/assets/js/app.min.js"></script>
+<script src="/assets/js/mount-industrial.js"></script>
 </body>
 </html>
