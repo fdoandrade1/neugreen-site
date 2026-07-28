@@ -6,7 +6,7 @@ function App() {
   const handleNav = (id) => {
     setActiveRoute(id);
     // External pages
-    const externalRoutes = { productos: 'productos.html', manufactura: 'manufactura.html', industrial: 'industrial.html', contacto: 'contacto.html', proyectos: 'proyectos.html', nosotros: 'nosotros.html' };
+    const externalRoutes = { productos: 'productos.html', manufactura: 'manufactura.html', industrial: 'industrial.html', contacto: 'contacto.html', proyectos: 'proyectos.html', nosotros: 'nosotros.html', blog: 'blog.html' };
     if (externalRoutes[id]) {
       window.location.href = externalRoutes[id];
       return;

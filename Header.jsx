@@ -11,13 +11,15 @@ function Header({ onNavClick, activeRoute }) {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
+  // Rutas absolutas: el Header también se monta en /blog/<slug>, un nivel abajo.
   const navItems = [
-    { id: 'productos',   label: 'Productos',   href: 'productos.html' },
-    { id: 'manufactura', label: 'Manufactura', href: 'manufactura.html' },
-    { id: 'industrial',  label: 'Industrial',  href: 'industrial.html' },
-    { id: 'proyectos',   label: 'Proyectos',   href: 'proyectos.html' },
-    { id: 'nosotros',    label: 'Nosotros',    href: 'nosotros.html' },
-    { id: 'contacto',    label: 'Contacto',    href: 'contacto.html' },
+    { id: 'productos',   label: 'Productos',   href: '/productos.html' },
+    { id: 'manufactura', label: 'Manufactura', href: '/manufactura.html' },
+    { id: 'industrial',  label: 'Industrial',  href: '/industrial.html' },
+    { id: 'proyectos',   label: 'Proyectos',   href: '/proyectos.html' },
+    { id: 'nosotros',    label: 'Nosotros',    href: '/nosotros.html' },
+    { id: 'blog',        label: 'Blog',        href: '/blog.html' },
+    { id: 'contacto',    label: 'Contacto',    href: '/contacto.html' },
   ];
 
   const handleNavClick = (id) => {
@@ -41,9 +43,9 @@ function Header({ onNavClick, activeRoute }) {
         }}>
 
           {/* Logo */}
-          <a href="index.html" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
+          <a href="/index.html" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
              style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-            <img src="assets/logos/neugreen-logo-extended.svg" alt="Neugreen" style={{ height: 32 }} />
+            <img src="/assets/logos/neugreen-logo-extended.svg" alt="Neugreen" style={{ height: 32 }} />
           </a>
 
           {/* Desktop nav */}
@@ -72,7 +74,7 @@ function Header({ onNavClick, activeRoute }) {
               +52 444 256 5697
             </a>
             <a className="btn btn-primary"
-               href="contacto.html"
+               href="/contacto.html"
                onClick={(e) => { e.preventDefault(); handleNavClick('asesor'); }}
                style={{
                  background: 'var(--ng-blue)', color: '#fff',
@@ -136,7 +138,7 @@ function Header({ onNavClick, activeRoute }) {
                  }}>
                 +52 444 256 5697
               </a>
-              <a href="contacto.html"
+              <a href="/contacto.html"
                  onClick={(e) => { e.preventDefault(); handleNavClick('asesor'); }}
                  style={{
                    textAlign: 'center', padding: '14px 16px',
@@ -152,6 +154,10 @@ function Header({ onNavClick, activeRoute }) {
       </header>
 
       <style>{`
+        @media (max-width: 1100px) {
+          .ng-nav-desktop { gap: 20px !important; }
+          .ng-nav-actions a[href^="tel"] { display: none !important; }
+        }
         @media (max-width: 768px) {
           .ng-nav-desktop { display: none !important; }
           .ng-nav-actions  { display: none !important; }

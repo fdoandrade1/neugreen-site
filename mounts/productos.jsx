@@ -8,6 +8,7 @@ function App() {
     if (id === 'industrial') { window.location.href = 'industrial.html'; return; }
     if (id === 'proyectos') { window.location.href = 'proyectos.html'; return; }
     if (id === 'nosotros')  { window.location.href = 'nosotros.html';  return; }
+    if (id === 'blog') { window.location.href = 'blog.html'; return; }
     if (id === 'contacto' || id === 'asesor' || id === 'cotizar') { window.location.href = 'contacto.html'; return; }
   };
   return (

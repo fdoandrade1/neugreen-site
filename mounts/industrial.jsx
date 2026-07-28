@@ -8,6 +8,7 @@ function App() {
     if (id === 'manufactura')   { window.location.href = 'manufactura.html';   return; }
     if (id === 'proyectos') { window.location.href = 'proyectos.html'; return; }
     if (id === 'nosotros')  { window.location.href = 'nosotros.html';  return; }
+    if (id === 'blog') { window.location.href = 'blog.html'; return; }
     if (id === 'contacto' || id === 'asesor' || id === 'cotizar') {
       const target = document.getElementById('diagnostico');
       if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });

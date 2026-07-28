@@ -30,7 +30,7 @@ function Footer() {
         { label: 'Planta SLP',       href: 'https://neugreen.mx/nosotros.html' },
         { label: 'Casos de cliente', href: 'https://neugreen.mx/proyectos.html' },
         { label: 'Cumplimiento',     href: '#' },
-        { label: 'Blog técnico',     href: '#' },
+        { label: 'Blog técnico',     href: '/blog.html' },
         { label: 'Contacto',         href: 'https://neugreen.mx/contacto.html' },
       ],
     },
@@ -51,7 +51,7 @@ function Footer() {
           borderBottom: '1px solid rgba(255,255,255,.10)',
         }}>
           <div>
-            <img src="assets/logos/neugreen-logo-extended-white.svg" alt="Neugreen" style={{ height: 36, marginBottom: 20 }} />
+            <img src="/assets/logos/neugreen-logo-extended-white.svg" alt="Neugreen" style={{ height: 36, marginBottom: 20 }} />
             <p style={{ fontSize: 14, lineHeight: 1.55, color: 'rgba(255,255,255,.7)', margin: '0 0 20px', maxWidth: 340 }}>
               Biotecnología en limpieza y desinfección. Planta propia en San Luis Potosí. Soporte técnico-comercial B2B.
             </p>
