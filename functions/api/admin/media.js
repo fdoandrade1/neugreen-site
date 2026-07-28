@@ -7,12 +7,17 @@ import { json, error, conErrores } from './_lib/http.js';
 const MAX_BYTES = 5 * 1024 * 1024; // 5 MB
 
 // extensión -> content-type que se guardará en R2
+//
+// SVG queda FUERA a propósito: es un documento activo (puede llevar <script>
+// o manejadores de evento) y, servido desde el mismo origen que el sitio,
+// los ejecutaría — XSS almacenado con las cookies de Access a la mano.
+// Si algún día hace falta readmitirlo: servir R2 desde un origen aparte
+// (media.neugreen.mx) y sanear el SVG, no solo confiar en la extensión.
 const TIPOS = {
   jpg: 'image/jpeg',
   jpeg: 'image/jpeg',
   png: 'image/png',
   webp: 'image/webp',
-  svg: 'image/svg+xml',
 };
 
 // Firma binaria esperada. Evita que un archivo renombrado (un .html llamado
@@ -25,23 +30,9 @@ function firmaValida(ext, bytes) {
     const txt = String.fromCharCode(...b.slice(0, 12));
     return txt.startsWith('RIFF') && txt.slice(8, 12) === 'WEBP';
   }
-  return true; // svg se valida como texto más abajo
-}
-
-// Un SVG es un documento activo: puede traer <script> o manejadores de
-// evento y, servido desde el mismo origen, ejecutarlos. Se rechaza cualquiera
-// que los contenga. (Ver nota de seguridad en el reporte de Fase 2.)
-function svgPeligroso(texto) {
-  const t = texto.toLowerCase();
-  return (
-    t.includes('<script') ||
-    t.includes('javascript:') ||
-    /\son\w+\s*=/.test(t) ||
-    t.includes('<foreignobject') ||
-    t.includes('<use') ||
-    t.includes('<!entity') ||
-    t.includes('<!doctype')
-  );
+  // Falla cerrado: si mañana se agrega un tipo a TIPOS sin su firma aquí,
+  // se rechaza en vez de aceptarlo a ciegas.
+  return false;
 }
 
 function extensionDe(nombre) {
@@ -92,13 +83,6 @@ export const onRequestPost = conErrores(async ({ request, env }) => {
 
   if (!firmaValida(ext, datos)) {
     return error(400, `El contenido no corresponde a un .${ext} válido`);
-  }
-
-  if (ext === 'svg') {
-    const texto = new TextDecoder().decode(datos);
-    if (svgPeligroso(texto)) {
-      return error(400, 'El SVG contiene script, manejadores de evento o entidades externas');
-    }
   }
 
   const nombre = `${slugSeguro(form.get('slug'))}-${Date.now()}.${ext}`;
