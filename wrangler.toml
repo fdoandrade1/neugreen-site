@@ -1,2 +1,26 @@
 name = "neugreen-site"
 pages_build_output_dir = "dist"
+
+# Bindings para las Pages Functions del panel editorial del blog.
+
+[[d1_databases]]
+binding = "DB"
+database_name = "neugreen-blog"
+database_id = "c3f3cfd2-678e-422f-8b2f-7ebefc16cdc0"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "neugreen-blog-media"
+
+# Preview apunta a la misma base y al mismo bucket que producción durante
+# la fase de construcción: una sola fuente de contenido. Evaluar separar
+# cuando el panel esté publicando en serio.
+
+[[env.preview.d1_databases]]
+binding = "DB"
+database_name = "neugreen-blog"
+database_id = "c3f3cfd2-678e-422f-8b2f-7ebefc16cdc0"
+
+[[env.preview.r2_buckets]]
+binding = "MEDIA"
+bucket_name = "neugreen-blog-media"
