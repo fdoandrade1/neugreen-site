@@ -26,14 +26,26 @@ const DIST = path.join(ROOT, 'dist');
 const JS_OUT = path.join(DIST, 'assets', 'js');
 const SITE = 'https://www.neugreen.mx';
 
-// Componentes: todos los .jsx de la raíz (los montajes viven en mounts/).
-const COMPONENT_FILES = fs
-  .readdirSync(ROOT)
-  .filter((f) => f.endsWith('.jsx'))
-  .sort();
+const TODOS_JSX = fs.readdirSync(ROOT).filter((f) => f.endsWith('.jsx')).sort();
+
+// Componentes del sitio público: todos menos los del panel. El panel no se
+// mezcla en app.min.js — es código que solo usan dos páginas tras Access, y
+// cargarlo en cada visita pública sería peso muerto.
+const COMPONENT_FILES = TODOS_JSX.filter((f) => !f.startsWith('Admin'));
+
+// Bundle del panel: sus componentes + los del artículo, que se comparten
+// porque la previsualización usa ArticuloLayout, el mismo del sitio público.
+const ADMIN_FILES = [
+  ...TODOS_JSX.filter((f) => f.startsWith('Admin')),
+  'ArticuloCard.jsx',
+  'ArticuloLayout.jsx',
+];
 
 // Páginas con montaje React (cada una tiene mounts/<pagina>.jsx).
 const PAGES = ['index', 'productos', 'manufactura', 'industrial', 'proyectos', 'nosotros', 'contacto', 'blog'];
+
+// Páginas del panel: mounts/admin-<x>.jsx -> mount-admin-<x>.js
+const PAGES_ADMIN = ['index', 'editar'];
 
 // Estáticos a copiar tal cual. functions/ ausente a propósito.
 // sitemap.xml no se copia: se genera más abajo desde los datos.
@@ -43,7 +55,7 @@ const STATIC_FILES = [
   'whatsapp.html', 'index-print.html',
   'colors_and_type.css', 'robots.txt', 'llms.txt',
 ];
-const STATIC_DIRS = ['assets', 'fonts', 'gracias-productos'];
+const STATIC_DIRS = ['assets', 'fonts', 'gracias-productos', 'admin'];
 
 // Páginas estáticas del sitemap: [ruta limpia, prioridad].
 const SITEMAP_PAGES = [
@@ -94,17 +106,21 @@ function copyStatic() {
   console.log('✓ estáticos copiados (functions/ intacto en la raíz, no copiado)');
 }
 
-function buildComponents() {
-  const chunks = [];
-  for (const file of COMPONENT_FILES) {
+// Transpila cada componente por separado y lo envuelve en un IIFE, para que
+// sus declaraciones de nivel superior no choquen al concatenarse.
+function bundle(archivos, salida) {
+  const chunks = archivos.map((file) => {
     const src = fs.readFileSync(path.join(ROOT, file), 'utf8');
-    const js = transformJsx(src, file);
-    chunks.push(`;(function(){\n${js}\n})();\n`);
-  }
-  const bundled = minify(chunks.join('\n'), 'app.min.js');
+    return `;(function(){\n${transformJsx(src, file)}\n})();\n`;
+  });
   fs.mkdirSync(JS_OUT, { recursive: true });
-  fs.writeFileSync(path.join(JS_OUT, 'app.min.js'), bundled);
-  console.log(`✓ app.min.js — ${COMPONENT_FILES.length} componentes (IIFE + minify)`);
+  fs.writeFileSync(path.join(JS_OUT, salida), minify(chunks.join('\n'), salida));
+  console.log(`✓ ${salida} — ${archivos.length} componentes (IIFE + minify)`);
+}
+
+function buildComponents() {
+  bundle(COMPONENT_FILES, 'app.min.js');
+  bundle(ADMIN_FILES, 'admin.min.js');
 }
 
 function buildMounts() {
@@ -113,7 +129,12 @@ function buildMounts() {
     const js = minify(transformJsx(src, `mounts/${page}.jsx`), `mount-${page}.js`);
     fs.writeFileSync(path.join(JS_OUT, `mount-${page}.js`), js);
   }
-  console.log(`✓ ${PAGES.length} mount-*.js`);
+  for (const page of PAGES_ADMIN) {
+    const src = fs.readFileSync(path.join(ROOT, 'mounts', `admin-${page}.jsx`), 'utf8');
+    const js = minify(transformJsx(src, `mounts/admin-${page}.jsx`), `mount-admin-${page}.js`);
+    fs.writeFileSync(path.join(JS_OUT, `mount-admin-${page}.js`), js);
+  }
+  console.log(`✓ ${PAGES.length} mount-*.js + ${PAGES_ADMIN.length} mount-admin-*.js`);
 }
 
 // HTML de una página de artículo, con su propio <head> de SEO.

@@ -3,5 +3,6 @@ Allow: /
 
 Disallow: /assets/docs/
 Disallow: /index-print.html
+Disallow: /admin/
 
 Sitemap: https://www.neugreen.mx/sitemap.xml

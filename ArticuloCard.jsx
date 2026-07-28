@@ -32,6 +32,13 @@ const ICONOS = {
   gota: <path d="M12 2.7l5.7 5.7a8 8 0 1 1-11.4 0z"/>,
 };
 
+// Las portadas pueden venir del repo ('assets/images/x.webp') o de R2, que
+// da una URL absoluta. Prefijar con '/' a ciegas rompería la segunda.
+function urlPortada(p) {
+  if (!p) return null;
+  return /^https?:\/\//i.test(p) ? p : `/${String(p).replace(/^\/+/, '')}`;
+}
+
 // Color del eyebrow y fondo de portada según la línea de negocio.
 function tonoLinea(linea, dark) {
   if (dark) return { eyebrow: 'var(--ng-green)', portada: 'rgba(255,255,255,.04)', icono: '#fff' };
@@ -78,7 +85,7 @@ function ArticuloCard({ articulo, dark = false }) {
           aspectRatio: '16 / 9', position: 'relative',
           borderBottom: `1px solid ${bordeColor}`, background: 'var(--ng-navy)',
         }}>
-          <img src={`/${articulo.portada}`} alt={articulo.portadaAlt || articulo.titulo}
+          <img src={urlPortada(articulo.portada)} alt={articulo.portadaAlt || articulo.titulo}
                loading="lazy"
                style={{
                  position: 'absolute', inset: 0, width: '100%', height: '100%',
@@ -151,3 +158,4 @@ function ArticuloCard({ articulo, dark = false }) {
 
 window.ArticuloCard = ArticuloCard;
 window.NG_ICONOS_ARTICULO = ICONOS;
+window.NG_URL_PORTADA = urlPortada;

@@ -84,7 +84,7 @@ function ArticuloLayout({ slug }) {
             position: 'relative', aspectRatio: '16 / 9',
             borderRadius: 'var(--r-lg)', overflow: 'hidden', background: 'var(--ng-navy)',
           }}>
-            <img src={`/${a.portada}`} alt={a.portadaAlt || a.titulo}
+            <img src={(window.NG_URL_PORTADA || ((p) => p))(a.portada)} alt={a.portadaAlt || a.titulo}
                  style={{
                    position: 'absolute', inset: 0, width: '100%', height: '100%',
                    objectFit: 'cover', filter: 'saturate(.85) contrast(1.05)',
