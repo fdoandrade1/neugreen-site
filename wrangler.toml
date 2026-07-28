@@ -1,6 +1,28 @@
 name = "neugreen-site"
 pages_build_output_dir = "dist"
 
+# ---------------------------------------------------------------------------
+# Variables de entorno
+#
+# Van aquí y NO en el dashboard: con un wrangler.toml presente, Cloudflare
+# Pages toma este archivo como única fuente de verdad e ignora la
+# configuración equivalente del dashboard, sin avisar.
+# https://developers.cloudflare.com/pages/functions/wrangler-configuration/
+#
+# `vars` es una clave NO heredable: [env.preview.vars] no hereda de [vars],
+# por eso los tres valores se repiten abajo para preview.
+#
+# Ninguna de estas tres es una credencial: el AUD es un identificador de
+# audiencia — conocerlo no da acceso, sigue haciendo falta un JWT firmado
+# por Cloudflare. DEPLOY_HOOK_URL sí es sensible y por eso NO está aquí:
+# vive como secreto encriptado (`wrangler pages secret put DEPLOY_HOOK_URL`).
+# ---------------------------------------------------------------------------
+
+[vars]
+CF_ACCESS_TEAM_DOMAIN = "lingering-feather-4a7b.cloudflareaccess.com"
+CF_ACCESS_AUD = "31164b7b5fa0aa3d246909d8a3ed6cd1aa6c383d933c69c3870625e19d03717d"
+R2_PUBLIC_URL = "https://pub-05621e7f27e04e5eb75012174c7d0a4c.r2.dev"
+
 # Bindings para las Pages Functions del panel editorial del blog.
 
 [[d1_databases]]
@@ -12,9 +34,18 @@ database_id = "c3f3cfd2-678e-422f-8b2f-7ebefc16cdc0"
 binding = "MEDIA"
 bucket_name = "neugreen-blog-media"
 
-# Preview apunta a la misma base y al mismo bucket que producción durante
-# la fase de construcción: una sola fuente de contenido. Evaluar separar
-# cuando el panel esté publicando en serio.
+# ---------------------------------------------------------------------------
+# Preview
+#
+# Apunta a la misma base y al mismo bucket que producción durante la fase de
+# construcción: una sola fuente de contenido. Evaluar separar cuando el panel
+# esté publicando en serio.
+# ---------------------------------------------------------------------------
+
+[env.preview.vars]
+CF_ACCESS_TEAM_DOMAIN = "lingering-feather-4a7b.cloudflareaccess.com"
+CF_ACCESS_AUD = "31164b7b5fa0aa3d246909d8a3ed6cd1aa6c383d933c69c3870625e19d03717d"
+R2_PUBLIC_URL = "https://pub-05621e7f27e04e5eb75012174c7d0a4c.r2.dev"
 
 [[env.preview.d1_databases]]
 binding = "DB"
