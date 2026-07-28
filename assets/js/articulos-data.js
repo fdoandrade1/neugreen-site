@@ -1,0 +1,246 @@
+/* articulos-data.js — fuente única de verdad del blog Neugreen.
+ *
+ * De aquí se alimentan: el índice (/blog), cada artículo (/blog/<slug>),
+ * los bloques de artículos relacionados y las entradas del sitemap.
+ * build.js lee este mismo archivo en Node para generar los HTML y los mounts.
+ *
+ * ── CONTENIDO PROVISIONAL ──────────────────────────────────────────────
+ * Los campos `cuerpo`, `respuestaRapida` y `extracto` traen texto de
+ * andamiaje para poder ver la plantilla completa. NO son contenido
+ * editorial: no publicar sin reemplazar. Los temas y metadatos sí
+ * corresponden a líneas reales de Neugreen.
+ *
+ * Para agregar un artículo: añade una entrada aquí y corre `npm run build`.
+ * El HTML, el mount y el sitemap se generan solos.
+ *
+ * Campos:
+ *   slug            string  · URL: /blog/<slug>
+ *   linea           string  · 'Productos de Línea' | 'Manufactura' | 'Industrial'
+ *   categoria       string  · sub-eyebrow, ej. 'Tratamiento de agua'
+ *   portada         string|null · ruta a imagen; si es null se usa portadaIcono
+ *   portadaIcono    string  · clave de ICONOS en ArticuloCard.jsx
+ *   cuerpo          string  · HTML del artículo (h2/h3/p/ul/table/blockquote)
+ *   articulosRelacionados string[] · slugs
+ *   destacado       boolean · solo uno debe ser true (va al hero del índice)
+ */
+
+var CUERPO_PLACEHOLDER = [
+  '<h2>Contexto</h2>',
+  '<p>Texto de andamiaje. Este bloque se reemplaza con el contenido editorial real. Sirve para verificar la jerarquía tipográfica, el ancho de lectura de 720 px y el espaciado entre elementos.</p>',
+  '<p>Un segundo párrafo permite comprobar el interlineado y el ritmo vertical del cuerpo, además del tratamiento de <strong>texto en negritas</strong> dentro de la línea.</p>',
+  '<h3>Subsección</h3>',
+  '<p>Los encabezados de tercer nivel marcan pasos o criterios dentro de una sección mayor.</p>',
+  '<ul>',
+  '<li>Primer punto de una lista con viñeta azul.</li>',
+  '<li>Segundo punto, para ver el espaciado entre elementos.</li>',
+  '<li>Tercer punto, con texto suficientemente largo como para pasar a una segunda línea y confirmar la sangría.</li>',
+  '</ul>',
+  '<h2>Parámetros</h2>',
+  '<p>Las tablas se usan para comparativos y valores de referencia:</p>',
+  '<table>',
+  '<thead><tr><th>Parámetro</th><th>Referencia</th><th>Unidad</th></tr></thead>',
+  '<tbody>',
+  '<tr><td>Valor de ejemplo A</td><td>—</td><td>—</td></tr>',
+  '<tr><td>Valor de ejemplo B</td><td>—</td><td>—</td></tr>',
+  '<tr><td>Valor de ejemplo C</td><td>—</td><td>—</td></tr>',
+  '</tbody>',
+  '</table>',
+  '<p class="ng-tabla-nota">Pie de tabla: origen del dato, método y norma de referencia.</p>',
+  '<blockquote><p>Cita destacada para una idea central del artículo.</p><footer>Atribución · área técnica</footer></blockquote>',
+  '<h2>Cierre</h2>',
+  '<p>Párrafo de cierre con la conclusión práctica y el siguiente paso para el lector.</p>',
+].join('\n');
+
+var RESPUESTA_PLACEHOLDER = {
+  parrafo: 'Resumen ejecutivo en dos o tres frases: qué resuelve el artículo, cuándo aplica y cuándo no. Se reemplaza con el contenido real.',
+  puntos: [
+    '<strong>Cuándo aplica:</strong> condición principal de uso.',
+    '<strong>Qué medir:</strong> parámetro de control y su frecuencia.',
+    '<strong>No aplica si:</strong> excepción o contraindicación.',
+  ],
+};
+
+window.ARTICULOS = [
+  {
+    slug: 'bioaumentacion-ptar-cuando-aplica',
+    titulo: 'Bioaumentación en PTAR: cuándo aplica y cómo se mide el resultado',
+    seoTitle: 'Bioaumentación en PTAR: cuándo aplica | Neugreen México',
+    metaDescription: 'Criterios para decidir si la bioaumentación resuelve tu planta de tratamiento, qué medir antes de dosificar y cómo documentar el resultado.',
+    linea: 'Industrial',
+    categoria: 'Tratamiento de agua',
+    fecha: '2026-07-12',
+    fechaTexto: '12 jul 2026',
+    lectura: '9 min de lectura',
+    autor: 'Equipo Técnico Neugreen',
+    portada: 'assets/images/BODEGA_NEUGREEN_COMPLETA_FINAL.webp',
+    portadaAlt: 'Planta y bodega Neugreen en San Luis Potosí',
+    portadaPie: 'Planta Neugreen · San Luis Potosí.',
+    portadaIcono: 'agua',
+    portadaTag: 'Tratamiento de agua',
+    extracto: 'Cuándo el problema de una PTAR es biológico y cuándo no. Criterios de diagnóstico, parámetros de control y forma de documentar el resultado.',
+    respuestaRapida: RESPUESTA_PLACEHOLDER,
+    cuerpo: CUERPO_PLACEHOLDER,
+    productosRelacionados: [
+      { nombre: 'Bacterias para trampas de grasa', desc: 'Bioaumentación dirigida para PTAR, trampas y cárcamos.', href: '/industrial.html?area=ptar', icono: 'gota' },
+      { nombre: 'Desinfectantes industriales', desc: 'Alta concentración para dosificación automatizada en proceso.', href: '/productos.html?tab=desinfeccion', icono: 'escudo' },
+      { nombre: 'Eliminadores de olores', desc: 'Neutralización enzimática en cárcamos y líneas de drenaje.', href: '/productos.html?tab=enzimatica', icono: 'agua' },
+    ],
+    articulosRelacionados: ['trampa-grasa-protocolo-recuperacion', 'legionella-torres-normativa-muestreo', 'dosificacion-manual-vs-automatica'],
+    destacado: true,
+  },
+  {
+    slug: 'legionella-torres-normativa-muestreo',
+    titulo: 'Control de Legionella en torres: normativa aplicable y protocolo de muestreo',
+    seoTitle: 'Control de Legionella en torres de enfriamiento | Neugreen México',
+    metaDescription: 'Qué normativa aplica al control de Legionella en torres de enfriamiento, con qué frecuencia muestrear y qué registro se solicita en auditoría.',
+    linea: 'Industrial',
+    categoria: 'Torres de enfriamiento',
+    fecha: '2026-07-04',
+    fechaTexto: '04 jul 2026',
+    lectura: '7 min de lectura',
+    autor: 'Equipo Técnico Neugreen',
+    portada: null,
+    portadaAlt: '',
+    portadaPie: '',
+    portadaIcono: 'agua',
+    portadaTag: 'Torres de enfriamiento',
+    extracto: 'Frecuencia de muestreo, límites de referencia y el registro que se solicita en auditoría. Con el protocolo de choque y sostenimiento.',
+    respuestaRapida: RESPUESTA_PLACEHOLDER,
+    cuerpo: CUERPO_PLACEHOLDER,
+    productosRelacionados: [
+      { nombre: 'Tratamiento de torres', desc: 'Biocidas e inhibidores para circuitos de enfriamiento.', href: '/industrial.html?area=torres', icono: 'escudo' },
+      { nombre: 'Dosificación automática', desc: 'Equipo de dosificación para control continuo.', href: '/industrial.html?area=dosificacion', icono: 'medidor' },
+    ],
+    articulosRelacionados: ['bioaumentacion-ptar-cuando-aplica', 'trampa-grasa-protocolo-recuperacion', 'dosificacion-manual-vs-automatica'],
+    destacado: false,
+  },
+  {
+    slug: 'enzimatico-o-cloro-cocina-industrial',
+    titulo: 'Enzimático o cloro en cocina industrial: criterio de selección por biocarga',
+    seoTitle: 'Enzimático o cloro en cocina industrial | Neugreen México',
+    metaDescription: 'Tabla de decisión por tipo de suelo, temperatura y material de superficie para elegir entre limpieza enzimática y desinfección clorada.',
+    linea: 'Productos de Línea',
+    categoria: 'Limpieza enzimática',
+    fecha: '2026-06-27',
+    fechaTexto: '27 jun 2026',
+    lectura: '6 min de lectura',
+    autor: 'Equipo Técnico Neugreen',
+    portada: null,
+    portadaAlt: '',
+    portadaPie: '',
+    portadaIcono: 'matraz',
+    portadaTag: 'Limpieza enzimática',
+    extracto: 'Criterio de decisión por tipo de suelo, temperatura y material de superficie, y por qué el cloro sale más caro en acero inoxidable.',
+    respuestaRapida: RESPUESTA_PLACEHOLDER,
+    cuerpo: CUERPO_PLACEHOLDER,
+    productosRelacionados: [
+      { nombre: 'Línea enzimática', desc: 'Degradación de materia orgánica en cocina y drenaje.', href: '/productos.html?tab=enzimatica', icono: 'matraz' },
+      { nombre: 'Desinfección', desc: 'Sanitizantes de superficie para contacto con alimentos.', href: '/productos.html?tab=desinfeccion', icono: 'escudo' },
+    ],
+    articulosRelacionados: ['dosificacion-manual-vs-automatica', 'bioaumentacion-ptar-cuando-aplica', 'moq-lead-time-escalamiento-maquila'],
+    destacado: false,
+  },
+  {
+    slug: 'moq-lead-time-escalamiento-maquila',
+    titulo: 'MOQ, lead time y escalamiento: qué definir antes de tu primera maquila',
+    seoTitle: 'MOQ, lead time y escalamiento en maquila | Neugreen México',
+    metaDescription: 'Las variables que mueven el costo unitario de una marca privada: mínimo de orden, tiempos de entrega, envase, etiqueta y tamaño de corrida.',
+    linea: 'Manufactura',
+    categoria: 'Marca privada',
+    fecha: '2026-06-21',
+    fechaTexto: '21 jun 2026',
+    lectura: '8 min de lectura',
+    autor: 'Equipo Técnico Neugreen',
+    portada: 'assets/images/Imagen_Manufactura_Neugreen.webp',
+    portadaAlt: 'Línea de envasado Neugreen en planta San Luis Potosí',
+    portadaPie: 'Línea de envasado · planta Neugreen SLP.',
+    portadaIcono: 'planta',
+    portadaTag: 'Planta SLP',
+    extracto: 'Las variables que mueven el costo unitario de una marca privada, desde el mínimo de orden hasta el tamaño de corrida.',
+    respuestaRapida: RESPUESTA_PLACEHOLDER,
+    cuerpo: CUERPO_PLACEHOLDER,
+    productosRelacionados: [
+      { nombre: 'Manufactura y marca privada', desc: 'Formulación, envasado y etiquetado en planta propia.', href: '/manufactura.html', icono: 'planta' },
+      { nombre: 'Solicitar propuesta', desc: 'Cotización de maquila con tu volumen y presentación.', href: '/contacto.html?tab=manufactura', icono: 'etiqueta' },
+    ],
+    articulosRelacionados: ['etiquetado-nom-189-checklist', 'enzimatico-o-cloro-cocina-industrial', 'bioaumentacion-ptar-cuando-aplica'],
+    destacado: false,
+  },
+  {
+    slug: 'trampa-grasa-protocolo-recuperacion',
+    titulo: 'Trampa de grasa saturada: protocolo de recuperación en tres fases',
+    seoTitle: 'Trampa de grasa saturada: protocolo de recuperación | Neugreen México',
+    metaDescription: 'Choque, adaptación y sostenimiento con bacterias dirigidas para recuperar una trampa de grasa saturada. Qué medir cada semana y cuándo ajustar la dosis.',
+    linea: 'Industrial',
+    categoria: 'Trampa de grasa',
+    fecha: '2026-06-13',
+    fechaTexto: '13 jun 2026',
+    lectura: '5 min de lectura',
+    autor: 'Equipo Técnico Neugreen',
+    portada: null,
+    portadaAlt: '',
+    portadaPie: '',
+    portadaIcono: 'trampa',
+    portadaTag: 'Trampa de grasa',
+    extracto: 'Choque, adaptación y sostenimiento con bacterias dirigidas. Qué medir cada semana y cuándo ajustar la dosis.',
+    respuestaRapida: RESPUESTA_PLACEHOLDER,
+    cuerpo: CUERPO_PLACEHOLDER,
+    productosRelacionados: [
+      { nombre: 'Bacterias para trampas de grasa', desc: 'Bioaumentación dirigida para trampas, cárcamos y PTAR.', href: '/industrial.html?area=ptar', icono: 'gota' },
+      { nombre: 'Eliminadores de olores', desc: 'Neutralización enzimática en líneas de drenaje.', href: '/productos.html?tab=enzimatica', icono: 'agua' },
+    ],
+    articulosRelacionados: ['bioaumentacion-ptar-cuando-aplica', 'legionella-torres-normativa-muestreo', 'enzimatico-o-cloro-cocina-industrial'],
+    destacado: false,
+  },
+  {
+    slug: 'etiquetado-nom-189-checklist',
+    titulo: 'Etiquetado NOM-189: puntos a verificar antes de mandar a imprimir',
+    seoTitle: 'Etiquetado NOM-189: checklist previo a imprenta | Neugreen México',
+    metaDescription: 'Leyendas obligatorias, pictogramas y datos del responsable que debe llevar la etiqueta de un producto de limpieza antes de mandarla a imprimir.',
+    linea: 'Manufactura',
+    categoria: 'Etiquetado',
+    fecha: '2026-06-06',
+    fechaTexto: '06 jun 2026',
+    lectura: '6 min de lectura',
+    autor: 'Equipo Técnico Neugreen',
+    portada: null,
+    portadaAlt: '',
+    portadaPie: '',
+    portadaIcono: 'etiqueta',
+    portadaTag: 'Etiquetado',
+    extracto: 'Leyendas obligatorias, pictogramas y datos del responsable. El error de forma que obliga a reimprimir un tiraje completo.',
+    respuestaRapida: RESPUESTA_PLACEHOLDER,
+    cuerpo: CUERPO_PLACEHOLDER,
+    productosRelacionados: [
+      { nombre: 'Manufactura y marca privada', desc: 'Diseño de etiqueta y cumplimiento normativo incluidos.', href: '/manufactura.html', icono: 'etiqueta' },
+    ],
+    articulosRelacionados: ['moq-lead-time-escalamiento-maquila', 'enzimatico-o-cloro-cocina-industrial', 'dosificacion-manual-vs-automatica'],
+    destacado: false,
+  },
+  {
+    slug: 'dosificacion-manual-vs-automatica',
+    titulo: 'Dosificación manual vs. automática: dónde se pierde producto por turno',
+    seoTitle: 'Dosificación manual vs. automática | Neugreen México',
+    metaDescription: 'Dónde se pierde químico en una operación de limpieza por turno y qué se necesita para justificar la inversión en equipo de dosificación.',
+    linea: 'Productos de Línea',
+    categoria: 'Dosificación',
+    fecha: '2026-05-30',
+    fechaTexto: '30 may 2026',
+    lectura: '7 min de lectura',
+    autor: 'Equipo Técnico Neugreen',
+    portada: null,
+    portadaAlt: '',
+    portadaPie: '',
+    portadaIcono: 'medidor',
+    portadaTag: 'Dosificación',
+    extracto: 'Dónde se va el producto en una operación de housekeeping y qué hace falta para justificar la inversión en equipo de dosificación.',
+    respuestaRapida: RESPUESTA_PLACEHOLDER,
+    cuerpo: CUERPO_PLACEHOLDER,
+    productosRelacionados: [
+      { nombre: 'Equipo de dosificación', desc: 'Dosificadores para lavandería, cocina y limpieza general.', href: '/industrial.html?area=dosificacion', icono: 'medidor' },
+      { nombre: 'Productos concentrados', desc: 'Formulaciones de alta dilución para dosificación.', href: '/productos.html?tab=convencional', icono: 'matraz' },
+    ],
+    articulosRelacionados: ['enzimatico-o-cloro-cocina-industrial', 'legionella-torres-normativa-muestreo', 'bioaumentacion-ptar-cuando-aplica'],
+    destacado: false,
+  },
+];
