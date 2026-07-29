@@ -1,6 +1,16 @@
 name = "neugreen-site"
 pages_build_output_dir = "dist"
 
+# Sin esta fecha, Pages cae a un default antiguo del runtime en el que
+# request.formData() devuelve los archivos como TEXTO en vez de como File, y
+# /api/admin/media rechazaba toda subida con "Falta el campo archivo".
+# El flag que lo corrige (formdata_parser_supports_files) está activo por
+# defecto desde 2021-11-03.
+#
+# Estaba configurada en el dashboard, pero este archivo lo anula: mismo caso
+# que las variables de entorno. Todo lo que el runtime necesite va aquí.
+compatibility_date = "2026-05-20"
+
 # ---------------------------------------------------------------------------
 # Variables de entorno
 #
