@@ -62,7 +62,14 @@ export const onRequestPost = conErrores(async ({ request, env }) => {
   const form = await request.formData();
   const archivo = form.get('archivo');
   if (!archivo || typeof archivo.arrayBuffer !== 'function') {
-    return error(400, 'Falta el campo "archivo"');
+    // Decir QUÉ llegó, no solo que falta: distingue "el cliente no mandó el
+    // campo" de "llegó pero no es un archivo", que se arreglan distinto.
+    return error(400, 'Falta el campo "archivo"', {
+      campos_recibidos: [...form.keys()],
+      tipo: archivo === null || archivo === undefined ? 'ausente' : typeof archivo,
+      constructor: archivo && archivo.constructor ? archivo.constructor.name : null,
+      tiene_arrayBuffer: !!(archivo && typeof archivo.arrayBuffer === 'function'),
+    });
   }
 
   const ext = extensionDe(archivo.name);
