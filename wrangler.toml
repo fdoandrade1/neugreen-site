@@ -10,17 +10,25 @@ pages_build_output_dir = "dist"
 # https://developers.cloudflare.com/pages/functions/wrangler-configuration/
 #
 # `vars` es una clave NO heredable: [env.preview.vars] no hereda de [vars],
-# por eso los tres valores se repiten abajo para preview.
+# por eso los valores se repiten abajo para preview.
 #
-# Ninguna de estas tres es una credencial: el AUD es un identificador de
-# audiencia — conocerlo no da acceso, sigue haciendo falta un JWT firmado
-# por Cloudflare. DEPLOY_HOOK_URL sí es sensible y por eso NO está aquí:
-# vive como secreto encriptado (`wrangler pages secret put DEPLOY_HOOK_URL`).
+# CF_ACCESS_AUD lleva TRES audiencias separadas por coma, porque el AUD es por
+# aplicación de Access y hay tres emitiendo tokens sobre estas rutas:
+#   1. Neugreen Admin              -> /admin
+#   2. Neugreen Admin API          -> /api/admin
+#   3. neugreen-site Cloudflare Pages -> la que Pages crea sola al restringir
+#      los despliegues de preview
+# El middleware acepta el token si su aud coincide con CUALQUIERA de ellas.
+#
+# Ninguna de estas variables es una credencial: el AUD es un identificador de
+# audiencia — conocerlo no da acceso, sigue haciendo falta un JWT firmado por
+# Cloudflare. DEPLOY_HOOK_URL sí es sensible y por eso NO está aquí: vive como
+# secreto encriptado (`wrangler pages secret put DEPLOY_HOOK_URL`).
 # ---------------------------------------------------------------------------
 
 [vars]
 CF_ACCESS_TEAM_DOMAIN = "lingering-feather-4a7b.cloudflareaccess.com"
-CF_ACCESS_AUD = "31164b7b5fa0aa3d246909d8a3ed6cd1aa6c383d933c69c3870625e19d03717d"
+CF_ACCESS_AUD = "d4d6cf9df1ffa2ada3e13c319ba0991ab3266b599db38519519313827700c12b,31164b7b5fa0aa3d246909d8a3ed6cd1aa6c383d933c69c3870625e19d03717d,ebb50ae39e5aeb3fa3b50a505ab9e0353c970fb911c225eb0e6effee4686e705"
 R2_PUBLIC_URL = "https://pub-05621e7f27e04e5eb75012174c7d0a4c.r2.dev"
 
 # Bindings para las Pages Functions del panel editorial del blog.
@@ -37,14 +45,16 @@ bucket_name = "neugreen-blog-media"
 # ---------------------------------------------------------------------------
 # Preview
 #
-# Apunta a la misma base y al mismo bucket que producción durante la fase de
-# construcción: una sola fuente de contenido. Evaluar separar cuando el panel
-# esté publicando en serio.
+# PENDIENTE: preview apunta HOY a la misma D1 y al mismo bucket que
+# producción. Se decidió mantenerlo así mientras todo esté en borrador, donde
+# el riesgo es bajo. Separar la base de preview ANTES de publicar el primer
+# artículo real: a partir de ahí, editar en preview tocaría contenido vivo.
+# Para separarlas basta cambiar el database_id de abajo por el de una D1 nueva.
 # ---------------------------------------------------------------------------
 
 [env.preview.vars]
 CF_ACCESS_TEAM_DOMAIN = "lingering-feather-4a7b.cloudflareaccess.com"
-CF_ACCESS_AUD = "31164b7b5fa0aa3d246909d8a3ed6cd1aa6c383d933c69c3870625e19d03717d"
+CF_ACCESS_AUD = "d4d6cf9df1ffa2ada3e13c319ba0991ab3266b599db38519519313827700c12b,31164b7b5fa0aa3d246909d8a3ed6cd1aa6c383d933c69c3870625e19d03717d,ebb50ae39e5aeb3fa3b50a505ab9e0353c970fb911c225eb0e6effee4686e705"
 R2_PUBLIC_URL = "https://pub-05621e7f27e04e5eb75012174c7d0a4c.r2.dev"
 
 [[env.preview.d1_databases]]
