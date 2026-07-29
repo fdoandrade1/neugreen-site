@@ -9,6 +9,23 @@
 const cacheJwks = new Map(); // dominio -> { llaves, expira }
 const TTL_JWKS_MS = 60 * 60 * 1000; // 1 h
 
+/**
+ * Normaliza la configuración de audiencias a una lista.
+ *
+ * El AUD es POR APLICACIÓN de Access, y hay más de una en juego: la app que
+ * protege el dominio de producción y la que Pages crea sola al restringir los
+ * despliegues de preview ("neugreen-site - Cloudflare Pages"). Cada una firma
+ * tokens con su propio aud, así que la configuración admite varios separados
+ * por coma. Un solo valor sin comas sigue funcionando igual.
+ *
+ * @param {string|string[]} valor
+ * @returns {string[]}
+ */
+export function normalizarAudiencias(valor) {
+  const lista = Array.isArray(valor) ? valor : String(valor || '').split(',');
+  return lista.map((a) => String(a).trim()).filter(Boolean);
+}
+
 function base64UrlADatos(s) {
   const b64 = s.replace(/-/g, '+').replace(/_/g, '/');
   const pad = b64.length % 4 ? '='.repeat(4 - (b64.length % 4)) : '';
@@ -45,7 +62,8 @@ async function obtenerLlaves(teamDomain) {
  *
  * @param {string} token  valor del header Cf-Access-Jwt-Assertion
  * @param {string} teamDomain  ej. "neugreen.cloudflareaccess.com"
- * @param {string} aud  Application Audience Tag de la app de Access
+ * @param {string|string[]} aud  uno o varios Application Audience Tag
+ *        (cadena separada por comas o arreglo)
  */
 export async function verificarJwtAccess(token, teamDomain, aud) {
   const partes = String(token).split('.');
@@ -95,8 +113,21 @@ export async function verificarJwtAccess(token, teamDomain, aud) {
   if (typeof carga.iat === 'number' && carga.iat - margen > ahora) throw new Error('El token viene del futuro');
 
   // --- audiencia ---
-  const audiencias = Array.isArray(carga.aud) ? carga.aud : [carga.aud];
-  if (!audiencias.includes(aud)) throw new Error('La audiencia del token no coincide');
+  // Basta con que UNA de las audiencias del token esté entre las permitidas:
+  // preview y producción son aplicaciones de Access distintas y cada una
+  // firma con su propio aud. El estándar permite que aud venga como arreglo.
+  const permitidas = normalizarAudiencias(aud);
+  if (!permitidas.length) throw new Error('No hay audiencias configuradas');
+
+  const delToken = (Array.isArray(carga.aud) ? carga.aud : [carga.aud])
+    .map((a) => String(a).trim())
+    .filter(Boolean);
+
+  if (!delToken.some((a) => permitidas.includes(a))) {
+    throw new Error(
+      `La audiencia del token no coincide con ninguna de las ${permitidas.length} configuradas`,
+    );
+  }
 
   // --- emisor ---
   const emisorEsperado = `https://${teamDomain}`;

@@ -9,7 +9,7 @@
 // El email SIEMPRE sale del token verificado, nunca del body: es lo que se
 // escribe en actualizado_por y editado_por.
 
-import { verificarJwtAccess } from './_lib/jwt.js';
+import { verificarJwtAccess, normalizarAudiencias } from './_lib/jwt.js';
 import { error } from './_lib/http.js';
 
 function normalizarDominioEquipo(valor) {
@@ -32,13 +32,15 @@ export async function onRequest(context) {
 
   // --- configuración ---
   const dominioEquipo = normalizarDominioEquipo(env.CF_ACCESS_TEAM_DOMAIN);
-  const aud = String(env.CF_ACCESS_AUD || '').trim();
+  // Admite varias audiencias separadas por coma: preview y producción son
+  // aplicaciones de Access distintas y cada una emite su propio aud.
+  const audiencias = normalizarAudiencias(env.CF_ACCESS_AUD);
 
-  if (!dominioEquipo || !aud) {
+  if (!dominioEquipo || !audiencias.length) {
     // Config incompleta: fallar cerrado y decir exactamente qué falta.
     const faltan = [
       !dominioEquipo && 'CF_ACCESS_TEAM_DOMAIN',
-      !aud && 'CF_ACCESS_AUD',
+      !audiencias.length && 'CF_ACCESS_AUD',
     ].filter(Boolean);
     return error(500, 'La API editorial no está configurada', { variables_faltantes: faltan });
   }
@@ -55,7 +57,7 @@ export async function onRequest(context) {
 
   let claims;
   try {
-    claims = await verificarJwtAccess(token, dominioEquipo, aud);
+    claims = await verificarJwtAccess(token, dominioEquipo, audiencias);
   } catch (e) {
     // El motivo se registra pero no se devuelve: no ayudamos a afinar un ataque.
     console.warn('Access JWT rechazado:', e && e.message ? e.message : String(e));
