@@ -157,6 +157,36 @@ function haySobrante(g) {
   return g.ventana.w > g.rw + 0.5 || g.ventana.h > g.rh + 0.5;
 }
 
+/**
+ * Fondo difuminado: la misma imagen ampliada hasta cubrir todo el marco 16:9
+ * y con desenfoque fuerte, como hacen las apps de fotos.
+ *
+ * Va centrada y NO sigue al pan: si se moviera con la imagen, el efecto se
+ * notaría como dos capas deslizándose y perdería el aspecto de fondo.
+ *
+ * El desenfoque se escala con el destino para que la previsualización a
+ * 720 px y el archivo a 1600 px se vean igual de borrosos; si fuera un valor
+ * fijo, el archivo exportado saldría mucho más nítido que lo previsualizado.
+ */
+function dibujarFondoDifuminado(ctx, img, g, estado, dw, dh) {
+  const desenfoque = Math.max(10, Math.round(dw / 20));
+  const ajustes = filtroCss(estado);
+  // El 1.25 evita que el desenfoque contra el vacío deje bordes translúcidos.
+  const cubrir = Math.max(dw / g.rw, dh / g.rh) * 1.25;
+
+  ctx.save();
+  try {
+    ctx.filter = `blur(${desenfoque}px)${ajustes === 'none' ? '' : ` ${ajustes}`}`;
+  } catch { /* sin filtro se verá solo ampliada, no en blanco */ }
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+  ctx.translate(dw / 2, dh / 2);
+  ctx.scale(cubrir, cubrir);
+  ctx.rotate((g.rot * Math.PI) / 180);
+  ctx.drawImage(img, -g.w / 2, -g.h / 2);
+  ctx.restore();
+}
+
 function dibujarEncuadre(ctx, img, estado, dw, dh) {
   const e = { ...ESTADO_INICIAL, ...(estado || {}) };
   const g = geometriaEncuadre(img, estado);
@@ -171,8 +201,11 @@ function dibujarEncuadre(ctx, img, estado, dw, dh) {
   try { ctx.filter = 'none'; } catch { /* da igual, aquí no se filtra */ }
   ctx.clearRect(0, 0, dw, dh);
   if (haySobrante(g)) {
+    // El color va siempre de base: si el desenfoque no llegara a cubrir un
+    // borde, se ve color y no transparencia.
     ctx.fillStyle = e.rellenoColor || '#FFFFFF';
     ctx.fillRect(0, 0, dw, dh);
+    if (e.relleno === 'difuminado') dibujarFondoDifuminado(ctx, img, g, estado, dw, dh);
   }
   ctx.restore();
 
