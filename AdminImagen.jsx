@@ -14,16 +14,24 @@ const ALTO_MAX = 900;
 const CALIDAD = 0.9;
 const TOLERANCIA = 0.01;
 
+// zoom < 1 agranda la ventana MÁS ALLÁ de la imagen: eso deja aire alrededor,
+// que se rellena según `relleno`. zoom >= 1 no genera sobrante y sigue el
+// mismo camino de siempre.
+const ZOOM_MIN = 0.5;
+const ZOOM_MAX = 4;
+
 // Estado neutro. Con esto, dibujarEncuadre produce el mismo resultado que el
 // recorte automático anterior: encuadre 16:9 máximo, centrado, sin filtros.
 const ESTADO_INICIAL = {
   rotacion: 0,      // 0 | 90 | 180 | 270
-  zoom: 1,          // 1 = encuadre máximo posible
+  zoom: 1,          // 1 = encuadre máximo posible; < 1 deja aire
   panX: 0,          // -1 .. 1 (normalizado; 0 = centrado)
   panY: 0,
   brillo: 100,      // porcentajes, 100 = sin cambio
   contraste: 100,
   saturacion: 100,
+  relleno: 'color', // 'color' | 'difuminado' — solo aplica con zoom < 1
+  rellenoColor: '#FFFFFF',
 };
 
 function cargarImagen(file) {
@@ -109,13 +117,16 @@ function geometriaEncuadre(img, estado) {
   if (rw / rh > RELACION) { bh = rh; bw = rh * RELACION; }
   else { bw = rw; bh = rw / RELACION; }
 
-  const zoom = Math.max(1, e.zoom || 1);
+  const zoom = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, e.zoom || 1));
   const vw = bw / zoom;
   const vh = bh / zoom;
 
-  // Con panX/panY en [-1,1] el recorte nunca puede salirse de la imagen.
-  const maxX = (rw - vw) / 2;
-  const maxY = (rh - vh) / 2;
+  // Valor absoluto porque con zoom < 1 la ventana es MAYOR que la imagen y la
+  // diferencia se vuelve negativa. En ambos sentidos, panX/panY en [-1,1]
+  // recorre exactamente de un extremo al otro: con zoom > 1 mueve el recorte
+  // dentro de la imagen, con zoom < 1 mueve la imagen dentro del marco.
+  const maxX = Math.abs(rw - vw) / 2;
+  const maxY = Math.abs(rh - vh) / 2;
   const panX = Math.max(-1, Math.min(1, e.panX || 0));
   const panY = Math.max(-1, Math.min(1, e.panY || 0));
   const cx = rw / 2 + panX * maxX;
@@ -141,13 +152,32 @@ function dimensionesSalida(img, estado) {
  * LA función de dibujo. La usan tanto la previsualización como la
  * exportación, solo que con distinto tamaño de destino.
  */
+/** ¿La ventana excede la imagen? Solo entonces sobra marco que rellenar. */
+function haySobrante(g) {
+  return g.ventana.w > g.rw + 0.5 || g.ventana.h > g.rh + 0.5;
+}
+
 function dibujarEncuadre(ctx, img, estado, dw, dh) {
+  const e = { ...ESTADO_INICIAL, ...(estado || {}) };
   const g = geometriaEncuadre(img, estado);
   const v = g.ventana;
   const escala = dw / v.w;
 
+  // --- fondo ---
+  // Solo se pinta cuando hay sobrante, es decir con zoom < 1. Con zoom >= 1
+  // la imagen cubre todo el marco y este bloque se reduce al clearRect de
+  // siempre: el camino existente no cambia.
   ctx.save();
+  try { ctx.filter = 'none'; } catch { /* da igual, aquí no se filtra */ }
   ctx.clearRect(0, 0, dw, dh);
+  if (haySobrante(g)) {
+    ctx.fillStyle = e.rellenoColor || '#FFFFFF';
+    ctx.fillRect(0, 0, dw, dh);
+  }
+  ctx.restore();
+
+  // --- imagen ---
+  ctx.save();
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
   try { ctx.filter = filtroCss(estado); } catch { /* sin filtros, se dibuja igual */ }
@@ -212,9 +242,9 @@ async function recortar16x9(file) {
 }
 
 window.NG_IMG = {
-  RELACION, ANCHO_MAX, ALTO_MAX, CALIDAD, ESTADO_INICIAL,
+  RELACION, ANCHO_MAX, ALTO_MAX, CALIDAD, ESTADO_INICIAL, ZOOM_MIN, ZOOM_MAX,
   cargarImagen, formatoSalida, conExtension, soportaFiltro, filtroCss,
-  normalizarRotacion, geometriaEncuadre, dimensionesSalida,
+  normalizarRotacion, geometriaEncuadre, dimensionesSalida, haySobrante,
   dibujarEncuadre, exportarEncuadre,
 };
 window.recortar16x9 = recortar16x9;

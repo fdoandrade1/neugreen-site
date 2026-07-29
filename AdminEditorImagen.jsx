@@ -9,8 +9,8 @@ const { useState: useStateImg, useEffect: useEffectImg, useRef: useRefImg, useCa
 
 const ANCHO_VISTA = 720;
 const ALTO_VISTA = 405;
-const ZOOM_MIN = 1;
-const ZOOM_MAX = 4;
+// Los límites de zoom viven en AdminImagen.jsx y se leen desde ahí en tiempo
+// de render: duplicarlos aquí acabaría con los dos valores desincronizados.
 
 function Deslizador({ etiqueta, valor, min, max, paso, onChange, sufijo, deshabilitado }) {
   return (
@@ -110,7 +110,7 @@ function AdminEditorImagen({ archivo, onAplicar, onCancelar }) {
     if (!img) return;
     e.preventDefault();
     const paso = e.deltaY < 0 ? 1.12 : 1 / 1.12;
-    set({ zoom: Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, estado.zoom * paso)) });
+    set({ zoom: Math.max(IMG.ZOOM_MIN, Math.min(IMG.ZOOM_MAX, estado.zoom * paso)) });
   };
 
   const rotar = () => set({ rotacion: IMG.normalizarRotacion(estado.rotacion + 90), panX: 0, panY: 0 });
@@ -136,6 +136,8 @@ function AdminEditorImagen({ archivo, onAplicar, onCancelar }) {
   const salida = img ? IMG.dimensionesSalida(img, estado) : null;
   const neutro = estado.brillo === 100 && estado.contraste === 100 && estado.saturacion === 100;
   const sinTocar = neutro && estado.zoom === 1 && estado.panX === 0 && estado.panY === 0 && estado.rotacion === 0;
+  // Con zoom < 1 la imagen deja de cubrir el marco y aparece el sobrante.
+  const sobra = !!img && IMG.haySobrante(IMG.geometriaEncuadre(img, estado));
 
   const boton = (extra) => ({
     fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em',
@@ -229,12 +231,44 @@ function AdminEditorImagen({ archivo, onAplicar, onCancelar }) {
 
           {/* controles */}
           <div>
-            <Deslizador etiqueta="Zoom" valor={Number(estado.zoom.toFixed(2))} min={ZOOM_MIN} max={ZOOM_MAX}
+            <Deslizador etiqueta="Zoom" valor={Number(estado.zoom.toFixed(2))} min={IMG.ZOOM_MIN} max={IMG.ZOOM_MAX}
               paso={0.01} sufijo="×" onChange={(v) => set({ zoom: v })} />
 
             <button onClick={rotar} style={{ ...boton({ width: '100%', marginBottom: 18 }) }}>
               ⟳ Rotar 90°{estado.rotacion ? ` (${estado.rotacion}°)` : ''}
             </button>
+
+            {/* Relleno del sobrante: solo tiene sentido con zoom < 1, que es
+                cuando la imagen deja de cubrir el marco 16:9. */}
+            {sobra && (
+              <div style={{ paddingTop: 6, borderTop: '1px solid var(--ng-line)', marginBottom: 18 }}>
+                <div style={{
+                  fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.16em',
+                  textTransform: 'uppercase', color: 'var(--ng-steel)', margin: '10px 0 10px',
+                }}>Relleno del sobrante</div>
+                <div style={{ display: 'flex', gap: 6, marginBottom: 10 }}>
+                  {[['color', 'Color sólido'], ['difuminado', 'Difuminado']].map(([id, txt]) => (
+                    <button key={id} onClick={() => set({ relleno: id })}
+                      style={boton({
+                        flex: 1, padding: '8px 6px',
+                        background: estado.relleno === id ? 'var(--ng-blue)' : '#fff',
+                        color: estado.relleno === id ? '#fff' : 'var(--ng-steel)',
+                        borderColor: estado.relleno === id ? 'var(--ng-blue)' : 'var(--ng-line)',
+                      })}>{txt}</button>
+                  ))}
+                </div>
+                {estado.relleno === 'color' && (
+                  <label style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <input type="color" value={estado.rellenoColor}
+                      onChange={(e) => set({ rellenoColor: e.target.value })}
+                      style={{ width: 44, height: 32, padding: 0, border: '1px solid var(--ng-line)', borderRadius: 6, background: '#fff', cursor: 'pointer' }} />
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--ng-steel)' }}>
+                      {estado.rellenoColor.toUpperCase()}
+                    </span>
+                  </label>
+                )}
+              </div>
+            )}
 
             <div style={{
               fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.16em',
