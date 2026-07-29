@@ -42,7 +42,6 @@ function AdminEditorImagen({ archivo, onAplicar, onCancelar }) {
 
   const lienzoRef = useRefImg(null);
   const arrastreRef = useRefImg(null);
-  const cuadroRef = useRefImg(0);
   const hayFiltro = useRefImg(IMG.soportaFiltro());
 
   const set = (parcial) => setEstado((e) => ({ ...e, ...parcial }));
@@ -56,20 +55,24 @@ function AdminEditorImagen({ archivo, onAplicar, onCancelar }) {
     return () => { vivo = false; };
   }, [archivo]);
 
-  // --- dibujo, agrupado con requestAnimationFrame ---
+  // --- dibujo ---
+  // Síncrono a propósito, NO dentro de requestAnimationFrame: rAF no se
+  // ejecuta en pestañas ocultas, así que abrir el editor y cambiar de pestaña
+  // dejaba la previsualización en blanco hasta volver. Comprobado en el
+  // preview con document.visibilityState = "hidden".
+  //
+  // No hace falta limitar la frecuencia: cada pointermove produce como mucho
+  // un render de React, y el navegador ya agrupa esos eventos al ritmo de
+  // pantalla. Un drawImage de 720x405 cuesta microsegundos.
   useEffectImg(() => {
-    if (!img || !lienzoRef.current) return undefined;
-    cancelAnimationFrame(cuadroRef.current);
-    cuadroRef.current = requestAnimationFrame(() => {
-      try {
-        const ctx = lienzoRef.current.getContext('2d');
-        if (!ctx) throw new Error('El navegador no expone contexto 2D de canvas');
-        IMG.dibujarEncuadre(ctx, img, estado, ANCHO_VISTA, ALTO_VISTA);
-      } catch (e) {
-        setError(e.message || 'Fallo al dibujar la previsualización');
-      }
-    });
-    return () => cancelAnimationFrame(cuadroRef.current);
+    if (!img || !lienzoRef.current) return;
+    try {
+      const ctx = lienzoRef.current.getContext('2d');
+      if (!ctx) throw new Error('El navegador no expone contexto 2D de canvas');
+      IMG.dibujarEncuadre(ctx, img, estado, ANCHO_VISTA, ALTO_VISTA);
+    } catch (e) {
+      setError(e.message || 'Fallo al dibujar la previsualización');
+    }
   }, [img, estado]);
 
   // --- arrastre para reposicionar ---
