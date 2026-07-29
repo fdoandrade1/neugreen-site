@@ -11,6 +11,12 @@ pages_build_output_dir = "dist"
 # que las variables de entorno. Todo lo que el runtime necesite va aquí.
 compatibility_date = "2026-05-20"
 
+# El flag se declara EXPLÍCITAMENTE en vez de confiar en que la fecha lo
+# active: con solo compatibility_date el runtime seguía entregando los
+# archivos como texto, comprobado contra el preview. Nombrarlo no tiene
+# efecto secundario si ya viniera activo por la fecha.
+compatibility_flags = ["formdata_parser_supports_files"]
+
 # ---------------------------------------------------------------------------
 # Variables de entorno
 #
