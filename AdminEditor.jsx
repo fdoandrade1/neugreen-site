@@ -65,8 +65,9 @@ function AdminEditor() {
   const [otros, setOtros] = useStateE([]);
   const [vista, setVista] = useStateE('escritorio');
   const [historial, setHistorial] = useStateE(null);
-  // null | 'procesando' (recorte en el navegador) | 'subiendo' (a R2)
-  const [faseImagen, setFaseImagen] = useStateE(null);
+  const [faseImagen, setFaseImagen] = useStateE(null); // null | 'subiendo'
+  // Archivo recién elegido, a la espera de que el usuario ajuste el encuadre.
+  const [archivoPendiente, setArchivoPendiente] = useStateE(null);
   const [, forzar] = useStateE(0);
 
   const sucioRef = useRefE(false);
@@ -210,24 +211,24 @@ function AdminEditor() {
     }
   };
 
-  const subirPortada = async (archivo) => {
+  // El tope de 5 MB se mide sobre el ORIGINAL: es lo que el usuario eligió y
+  // lo que su conexión tendría que mover si el editor no pudiera procesarlo.
+  const elegirPortada = (archivo) => {
     if (!archivo) return;
-
-    // El tope de 5 MB se mide sobre el ORIGINAL: es lo que el usuario eligió
-    // y lo que su conexión tendría que mover si el recorte fallara.
     if (archivo.size > MAX_PORTADA_BYTES) {
       alert(`La imagen pesa ${(archivo.size / 1024 / 1024).toFixed(1)} MB y el máximo son 5 MB.\n\nElige una más ligera.`);
       return;
     }
+    setArchivoPendiente(archivo); // abre el editor de encuadre
+  };
 
+  // Recibe el archivo YA editado desde AdminEditorImagen.
+  const subirPortada = async (archivoFinal) => {
+    setArchivoPendiente(null);
+    if (!archivoFinal) return;
+    setFaseImagen('subiendo');
     try {
-      // Recorte automático 16:9 centrado. Si algo falla devuelve el original,
-      // así que esto nunca impide subir.
-      setFaseImagen('procesando');
-      const listo = await window.recortar16x9(archivo);
-
-      setFaseImagen('subiendo');
-      const r = await window.AdminAPI.subirMedia(listo, art.slug || window.slugDesdeTitulo(art.titulo));
+      const r = await window.AdminAPI.subirMedia(archivoFinal, art.slug || window.slugDesdeTitulo(art.titulo));
       set('portada', r.url);
     } catch (e) {
       alert(`No se pudo subir la imagen: ${e.message}`);
@@ -412,19 +413,19 @@ function AdminEditor() {
               </Campo>
             )}
 
-            <Campo etiqueta="Subir imagen" ayuda="jpg, png o webp · máximo 5 MB · se recorta solo a 16:9">
+            <Campo etiqueta="Subir imagen" ayuda="jpg, png o webp · máximo 5 MB · se abre el editor de encuadre">
               <input type="file" accept=".jpg,.jpeg,.png,.webp" disabled={!!faseImagen}
                 onChange={(e) => {
                   const f = e.target.files && e.target.files[0];
                   // Se limpia el input para que volver a elegir el MISMO
                   // archivo dispare onChange otra vez.
                   e.target.value = '';
-                  subirPortada(f);
+                  elegirPortada(f);
                 }}
                 style={{ fontSize: 13, color: 'var(--ng-steel)' }} />
               {faseImagen && (
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--ng-blue)', marginTop: 6 }}>
-                  {faseImagen === 'procesando' ? 'Procesando imagen…' : 'Subiendo…'}
+                  Subiendo…
                 </div>
               )}
             </Campo>
@@ -520,6 +521,15 @@ function AdminEditor() {
           </div>
         </div>
       </div>
+
+      {/* --- editor de encuadre de portada --- */}
+      {archivoPendiente && (
+        <AdminEditorImagen
+          archivo={archivoPendiente}
+          onAplicar={subirPortada}
+          onCancelar={() => setArchivoPendiente(null)}
+        />
+      )}
 
       {/* --- historial --- */}
       {historial && (
