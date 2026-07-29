@@ -4,18 +4,18 @@ pages_build_output_dir = "dist"
 # Sin esta fecha, Pages cae a un default antiguo del runtime en el que
 # request.formData() devuelve los archivos como TEXTO en vez de como File, y
 # /api/admin/media rechazaba toda subida con "Falta el campo archivo".
-# El flag que lo corrige (formdata_parser_supports_files) está activo por
-# defecto desde 2021-11-03.
+# El flag que lo corrige (formdata_parser_supports_files) es el default desde
+# 2021-11-03, así que esta fecha ya lo cubre: ESTA LÍNEA BASTA.
 #
-# Estaba configurada en el dashboard, pero este archivo lo anula: mismo caso
-# que las variables de entorno. Todo lo que el runtime necesite va aquí.
+# NO añadir compatibility_flags = ["formdata_parser_supports_files"]. Con una
+# compatibility_date posterior a 2021-11-03, Cloudflare RECHAZA el despliegue
+# con "became the default ... so does not need to be specified anymore" y la
+# Function no se publica. Ya pasó una vez.
+#
+# La fecha estaba configurada en el dashboard, pero este archivo lo anula:
+# mismo caso que las variables de entorno. Todo lo que el runtime necesite
+# tiene que estar aquí.
 compatibility_date = "2026-05-20"
-
-# El flag se declara EXPLÍCITAMENTE en vez de confiar en que la fecha lo
-# active: con solo compatibility_date el runtime seguía entregando los
-# archivos como texto, comprobado contra el preview. Nombrarlo no tiene
-# efecto secundario si ya viniera activo por la fecha.
-compatibility_flags = ["formdata_parser_supports_files"]
 
 # ---------------------------------------------------------------------------
 # Variables de entorno
