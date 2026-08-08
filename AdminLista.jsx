@@ -21,6 +21,9 @@ function AdminLista() {
   const [fEstado, setFEstado] = useStateL('');
   const [fLinea, setFLinea] = useStateL('');
   const [ocupado, setOcupado] = useStateL(null);
+  // Artículo pendiente de confirmar borrado, y el error del intento anterior.
+  const [aBorrar, setABorrar] = useStateL(null);
+  const [errorBorrado, setErrorBorrado] = useStateL(null);
 
   const cargar = async () => {
     setCargando(true);
@@ -60,6 +63,27 @@ function AdminLista() {
       alert(`Publicado.\nDeploy: ${r.deploy}`);
     } catch (e) {
       alert(`No se pudo publicar: ${e.message}${e.detalle && e.detalle.faltan ? `\n\nFalta: ${e.detalle.faltan.join(', ')}` : ''}`);
+    } finally {
+      setOcupado(null);
+    }
+  };
+
+  const confirmarBorrado = async () => {
+    const a = aBorrar;
+    if (!a) return;
+    setOcupado(a.slug);
+    setErrorBorrado(null);
+    try {
+      await window.AdminAPI.borrar(a.slug);
+      // Se quita de la lista en memoria en vez de volver a pedirla: el
+      // servidor ya confirmó el borrado y un refetch solo añadiría espera.
+      setArticulos((prev) => prev.filter((x) => x.slug !== a.slug));
+      setABorrar(null);
+    } catch (e) {
+      // El modal SIGUE abierto con el error a la vista. Cerrarlo aquí haría
+      // creer que se borró: la fila seguiría en pantalla sin explicación.
+      const extra = e.detalle && e.detalle.estado_actual ? ` (estado actual: ${e.detalle.estado_actual})` : '';
+      setErrorBorrado(`${e.message}${extra}`);
     } finally {
       setOcupado(null);
     }
@@ -200,6 +224,15 @@ function AdminLista() {
                           {ocupado === a.slug ? '…' : 'Publicar'}
                         </button>
                       )}
+                      {/* Solo en borrador: la API responde 409 en cualquier
+                          otro estado, así que ofrecer el botón sería ofrecer
+                          una acción que se sabe que va a fallar. */}
+                      {a.estado === 'borrador' && (
+                        <button onClick={() => { setErrorBorrado(null); setABorrar(a); }} disabled={ocupado === a.slug}
+                          style={{ ...accion, borderColor: 'var(--danger)', color: 'var(--danger)', opacity: ocupado === a.slug ? .5 : 1 }}>
+                          Eliminar
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>
@@ -214,6 +247,58 @@ function AdminLista() {
           </div>
         )}
       </div>
+
+      {/* --- confirmación de borrado --- */}
+      {aBorrar && (
+        <div
+          onClick={() => { if (ocupado !== aBorrar.slug) { setABorrar(null); setErrorBorrado(null); } }}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 120, background: 'rgba(11,27,43,.55)',
+            display: 'grid', placeItems: 'center', padding: 20,
+          }}>
+          <div onClick={(e) => e.stopPropagation()} style={{
+            background: '#fff', borderRadius: 'var(--r-lg)', padding: 26,
+            width: 'min(480px, 100%)', border: '1px solid var(--ng-line)',
+          }}>
+            <h2 style={{
+              fontFamily: 'var(--font-display)', fontSize: 19, fontWeight: 800,
+              margin: '0 0 10px', color: 'var(--ng-ink)', lineHeight: 1.3,
+            }}>
+              ¿Eliminar “{aBorrar.titulo}”?
+            </h2>
+            <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--ng-steel)', margin: '0 0 18px' }}>
+              Esta acción no se puede deshacer. Se borrarán también sus revisiones.
+            </p>
+
+            {errorBorrado && (
+              <div style={{
+                background: '#FDECEC', border: '1px solid #F5C2C2',
+                borderLeft: '3px solid var(--danger)', borderRadius: 'var(--r)',
+                padding: '12px 14px', marginBottom: 18,
+              }}>
+                <div style={{ fontWeight: 700, fontSize: 13, color: 'var(--ng-ink)', marginBottom: 4 }}>
+                  No se eliminó
+                </div>
+                <div style={{ fontSize: 13, color: 'var(--ng-steel)', lineHeight: 1.5 }}>{errorBorrado}</div>
+              </div>
+            )}
+
+            <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
+              <button onClick={() => { setABorrar(null); setErrorBorrado(null); }}
+                disabled={ocupado === aBorrar.slug} style={accion}>Cancelar</button>
+              <button onClick={confirmarBorrado} disabled={ocupado === aBorrar.slug}
+                style={{
+                  ...accion,
+                  background: 'var(--danger)', borderColor: 'var(--danger)',
+                  color: '#fff', fontWeight: 700,
+                  opacity: ocupado === aBorrar.slug ? .6 : 1,
+                }}>
+                {ocupado === aBorrar.slug ? 'Eliminando…' : 'Eliminar'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
