@@ -1,4 +1,5 @@
-// ProductLines.jsx — 8 tarjetas de productos de línea para el home (grid 4×2)
+// ProductLines.jsx — 10 tarjetas de línea para el home, en correspondencia
+// 1:1 con las pestañas de ProductosTabs.jsx (mismo orden, mismo label).
 const PL_I = {
   // Lucide line icons (1.75 stroke)
   sprayCan: (
@@ -51,71 +52,103 @@ const PL_I = {
       <path d="M12.6 19.4A2 2 0 1 0 14 16H2"/>
     </svg>
   ),
-  moreH: (
+  car: (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="5" cy="12" r="1.4"/>
-      <circle cx="12" cy="12" r="1.4"/>
-      <circle cx="19" cy="12" r="1.4"/>
+      <path d="M5 17H3v-5l2-5h14l2 5v5h-2"/>
+      <path d="M9 17h6"/>
+      <circle cx="7.5" cy="17" r="1.6"/>
+      <circle cx="16.5" cy="17" r="1.6"/>
+    </svg>
+  ),
+  bottle: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M10 2h4v3l2 3v11a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V8l2-3z"/>
+      <path d="M8 13h8"/>
+    </svg>
+  ),
+  paw: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="8" cy="7.5" r="1.8"/>
+      <circle cx="16" cy="7.5" r="1.8"/>
+      <circle cx="5" cy="12.5" r="1.6"/>
+      <circle cx="19" cy="12.5" r="1.6"/>
+      <path d="M12 13c2.8 0 5 2 5 4.2 0 1.7-1.3 2.8-3 2.8h-4c-1.7 0-3-1.1-3-2.8C7 15 9.2 13 12 13z"/>
     </svg>
   ),
 };
 
+// Una tarjeta por pestaña de ProductosTabs.jsx: mismo orden, mismo label y
+// mismo accent, para que el home y /productos se lean como la misma cosa.
 const PL_CARDS = [
   {
     icon: PL_I.sprayCan, accent: 'blue',
-    n: '01', title: 'Limpieza General',
-    sub: ['Jabones multiusos', 'Limpiadores multiusos', 'Desengrasantes', 'Abrillantadores'],
-    desc: 'Limpieza profesional para superficies, espacios y uso diario.',
-    tab: 'convencional',
-  },
-  {
-    icon: PL_I.shirt, accent: 'blue',
-    n: '02', title: 'Lavandería',
-    sub: ['Detergentes', 'Suavizantes', 'Blanqueadores', 'Quita manchas'],
-    desc: 'Soluciones para lavado institucional y residencial de alto volumen.',
-    tab: 'convencional',
-  },
-  {
-    icon: PL_I.chefHat, accent: 'blue',
-    n: '03', title: 'Cocina',
-    sub: ['Detergentes', 'Limpiadores hornos & estufas', 'Desengrasantes', 'Desinfectantes'],
-    desc: 'Productos para cocinas industriales, restaurantes y food service.',
+    n: '01', title: 'Limpieza convencional',
+    sub: ['Multiusos concentrados', 'Desengrasantes industriales', 'Blanqueadores y cloros', 'Cuidado de superficies'],
+    desc: 'Línea base para la limpieza cotidiana de superficies y espacios.',
     tab: 'convencional',
   },
   {
     icon: PL_I.microscope, accent: 'green',
-    n: '04', title: 'Enzimáticos',
-    sub: ['Desengrasantes', 'Eliminadores de olor', 'Limpiadores multiusos', 'Bioactivador trampas de grasa', 'Detergentes'],
-    desc: 'Tecnología biológica que limpia en profundidad, no enmascara.',
+    n: '02', title: 'Limpieza enzimática',
+    sub: ['Desengrasantes enzimáticos', 'Biodigestores', 'Detergentes para ropa', 'Control de olores'],
+    desc: 'Enzimas y microorganismos que actúan sobre la materia orgánica.',
     tab: 'enzimatica',
   },
   {
     icon: PL_I.shieldCheck, accent: 'blue',
-    n: '05', title: 'Desinfectantes',
-    sub: ['Industriales', 'Cuaternarios', 'Listos para usar', 'Sanitizantes'],
-    desc: 'Desde uso convencional hasta desinfección de alto nivel industrial.',
+    n: '03', title: 'Desinfección',
+    sub: ['Cuaternarios de amonio', 'Glutaraldehído', 'Antisépticos de alcohol', 'Jabones antibacteriales'],
+    desc: 'Desde uso convencional hasta desinfección de alto nivel.',
     tab: 'desinfeccion',
   },
   {
-    icon: PL_I.package2, accent: 'blue',
-    n: '06', title: 'Jarciería & Institucional',
-    sub: ['Papel', 'Plásticos y accesorios', 'Limpieza de pisos', 'Cestos y contenedores'],
-    desc: 'Insumos y herramientas para operación de limpieza profesional.',
-    tab: 'jarciera',
+    icon: PL_I.chefHat, accent: 'green',
+    n: '04', title: 'Baños y cocina',
+    sub: ['Removedores de sarro', 'Limpiadores de hornos', 'Lavatrastes', 'Acero inoxidable'],
+    desc: 'Producto específico para las áreas de mayor exigencia sanitaria.',
+    tab: 'banos-cocina',
+  },
+  {
+    icon: PL_I.shirt, accent: 'blue',
+    n: '05', title: 'Lavandería',
+    sub: ['Detergentes líquidos y en polvo', 'Suavizantes', 'Quitamanchas', 'Aromatizantes para ropa'],
+    desc: 'Ciclo completo de lavado para textil de alto volumen.',
+    tab: 'lavanderia',
+  },
+  {
+    icon: PL_I.car, accent: 'green',
+    n: '06', title: 'Automotriz',
+    sub: ['Detergentes para lavado', 'Protectores de llantas', 'Protectores de vinil'],
+    desc: 'Lavado de carrocería, tratamiento de llanta y protección de interiores.',
+    tab: 'automotriz',
   },
   {
     icon: PL_I.wind, accent: 'blue',
     n: '07', title: 'Aroma Experience',
-    sub: ['Fragancias', 'Difusores de aroma', 'Servicio de aromatización'],
+    sub: ['Aromatizantes concentrados', 'Equipos de difusión', 'Aerosol y repuestos'],
     desc: 'Aromatización profesional de espacios: venta de equipo o servicio mensual.',
     tab: 'aroma',
   },
   {
-    icon: PL_I.moreH, accent: 'green',
-    n: '08', title: 'Otras Líneas',
-    sub: ['Automotriz', 'Body Care', 'Mascotas'],
-    desc: 'Líneas especializadas para cuidado personal, vehículos y mascotas.',
+    icon: PL_I.bottle, accent: 'green',
+    n: '08', title: 'Body Care',
+    sub: ['Shampoo capilar', 'Acondicionadores', 'Jabón corporal'],
+    desc: 'Cuidado personal para amenidad hotelera y marca privada.',
     tab: 'bodycare',
+  },
+  {
+    icon: PL_I.paw, accent: 'blue',
+    n: '09', title: 'Mascotas',
+    sub: ['Shampoo para baño', 'Control de olores', 'Alfombras y tapicería'],
+    desc: 'Formulaciones para piel animal y control de olor en su entorno.',
+    tab: 'mascotas',
+  },
+  {
+    icon: PL_I.package2, accent: 'green',
+    n: '10', title: 'Jarciería e institucional',
+    sub: ['Papel y desechables', 'Plásticos y accesorios', 'Limpieza de pisos', 'Dispensadores y dosificadores'],
+    desc: 'Insumos y herramientas para operación de limpieza profesional.',
+    tab: 'jarcieria',
   },
 ];
 

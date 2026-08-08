@@ -37,8 +37,27 @@ function FormSuccess({ onReset, accent }) {
 }
 
 function ProductosFormCT() {
-  const lineaMap = { convencional: 'Limpieza convencional', enzimatica: 'Limpieza enzimática', desinfeccion: 'Desinfección', bodycare: 'Body Care', mascotas: 'Mascotas', aroma: 'Aroma Experience', jarciera: 'Jarciería e institucional' };
+  // Las claves y etiquetas replican TAB_DATA de ProductosTabs.jsx, que es de
+  // donde llega el parámetro: el CTA de cada pestaña enlaza a
+  // contacto.html?linea=<id>. Si allá se agrega una línea, hay que agregarla
+  // aquí también; no hay forma de derivarlo porque TAB_DATA no es global.
+  const lineaMap = {
+    convencional: 'Limpieza convencional',
+    enzimatica: 'Limpieza enzimática',
+    desinfeccion: 'Desinfección',
+    'banos-cocina': 'Baños y cocina',
+    lavanderia: 'Lavandería',
+    automotriz: 'Automotriz',
+    aroma: 'Aroma Experience',
+    bodycare: 'Body Care',
+    mascotas: 'Mascotas',
+    jarcieria: 'Jarciería e institucional',
+    // Alias del id anterior, que sigue vivo en enlaces publicados.
+    jarciera: 'Jarciería e institucional',
+  };
   const lineaParam = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('linea') : '';
+  // Un id desconocido deja el mensaje vacío a propósito: es preferible que el
+  // usuario escriba su solicitud a rellenarla con una etiqueta inventada.
   const lineaLabel = lineaMap[lineaParam] || '';
   const [f, setF] = useStateCT({ nombre: '', empresa: '', email: '', telefono: '', sector: '', mensaje: lineaLabel });
   const [s, setS] = useStateCT(false);
