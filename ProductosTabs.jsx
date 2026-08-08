@@ -383,20 +383,23 @@ function ProductosTabs() {
     }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
 
-        {/* Tab strip — wraps to multiple rows when narrow (never scroll) */}
+        {/* Tab strip — píldoras que se ajustan al contenido y fluyen a varias
+            filas. Con 10 pestañas el subrayado de pestaña clásico deja de
+            funcionar: al partirse en dos filas, el indicador de la primera
+            queda flotando a media barra, desconectado del borde inferior.
+            La píldora es autocontenida y no depende de esa línea común. */}
         <div role="tablist" className="ng-tablist" style={{
           display: 'flex',
           flexWrap: 'wrap',
-          gap: 12,
-          rowGap: 0,
-          borderBottom: '1px solid var(--ng-line)',
-          marginBottom: 56,
-          padding: '0 0 0 0',
+          gap: 8,
+          rowGap: 8,
+          marginBottom: 48,
           justifyContent: 'flex-start',
         }}>
           {TAB_DATA.map(t => {
             const isActive = t.id === active;
             const isGreen = t.accent === 'green';
+            const acento = isGreen ? 'var(--ng-green)' : 'var(--ng-blue)';
             return (
               <button
                 key={t.id}
@@ -404,27 +407,25 @@ function ProductosTabs() {
                 aria-selected={isActive}
                 onClick={() => setActive(t.id)}
                 style={{
-                  padding: '12px 20px',
-                  background: 'transparent',
-                  border: 'none',
-                  borderBottom: `2px solid ${isActive ? (isGreen ? 'var(--ng-green)' : 'var(--ng-blue)') : 'transparent'}`,
-                  marginBottom: -1,
+                  padding: '11px 18px',
+                  background: isActive ? acento : 'var(--ng-white)',
+                  border: `1px solid ${isActive ? acento : 'var(--ng-line)'}`,
+                  borderRadius: 'var(--r-pill)',
                   fontFamily: 'var(--font-display)',
                   fontSize: 14,
                   fontWeight: 700,
-                  color: isActive ? 'var(--ng-ink)' : 'var(--ng-steel)',
+                  color: isActive ? '#fff' : 'var(--ng-ink)',
                   letterSpacing: '-0.01em',
                   cursor: 'pointer',
-                  transition: 'color .12s ease, border-color .12s ease',
-                  display: 'flex', alignItems: 'center', gap: 10,
-                  flexShrink: 0,
+                  transition: 'background .12s ease, border-color .12s ease, color .12s ease',
+                  display: 'flex', alignItems: 'center', gap: 8,
                   whiteSpace: 'nowrap',
                   minHeight: 44,
                 }}>
                 <span style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: 11, fontWeight: 500,
-                  color: isActive ? (isGreen ? 'var(--ng-green-700)' : 'var(--ng-blue)') : 'var(--ng-steel)',
+                  color: isActive ? 'rgba(255,255,255,.75)' : 'var(--ng-steel)',
                   letterSpacing: '0.06em',
                 }}>{t.short}</span>
                 {t.label}
@@ -444,11 +445,20 @@ if (typeof document !== 'undefined' && !document.getElementById('ng-tabs-respons
   const s = document.createElement('style');
   s.id = 'ng-tabs-responsive';
   s.textContent = `
+    /* productos.html trae sus propias reglas para .ng-tablist con flex-grow
+       (33% en <=1024 y 50% en <=768). Con 7 pestañas cortas pasaba
+       desapercibido; con 10 estiraba cada píldora hasta ocupar la fila entera
+       —"Mascotas" llegaba a 676 px— y la barra crecía a 475 px de alto en
+       móvil. Aquí se anula: las píldoras se miden por su contenido.
+       Esta hoja se inyecta después que la de la página, así que entre dos
+       !important de la misma especificidad gana esta por orden. */
+    .ng-tablist > button { flex: 0 0 auto !important; }
+
     @media (max-width: 768px) {
       .ng-tab-heading { grid-template-columns: 1fr !important; gap: 16px !important; }
       .ng-tab-heading > div:last-child { text-align: left !important; }
       .ng-subfam-grid { grid-template-columns: 1fr !important; }
-      .ng-tablist button { padding: 12px 14px !important; font-size: 14px !important; min-height: 44px !important; }
+      .ng-tablist > button { padding: 10px 14px !important; font-size: 13px !important; min-height: 40px !important; }
       .ng-tab-cta-row { flex-direction: column !important; padding: 20px 16px !important; }
       .ng-tab-cta-btn { width: 100% !important; padding-left: 16px !important; padding-right: 16px !important; box-sizing: border-box !important; }
     }

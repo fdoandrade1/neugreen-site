@@ -269,7 +269,7 @@ function ProductLines() {
 
         <div className="ng-pl-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: 'repeat(5, 1fr)',
           gap: 16,
         }}>
           {PL_CARDS.map((c, i) => <ProductLineCard key={i} card={c} />)}
