@@ -1,5 +1,12 @@
-// ProductosTabs.jsx — 7 tabs × 19 sub-familias (estructura real Neugreen)
+// ProductosTabs.jsx — 10 líneas de producto agrupadas por función (no por SKU)
 const { useState: useStateTabs } = React;
+
+// Ids obsoletos que siguen circulando en enlaces publicados. Se traducen al
+// id vigente ANTES de validar, para no romper URLs que ya están en el Footer
+// de todas las páginas y en material enviado a cliente.
+const ALIAS_TABS = {
+  jarciera: 'jarcieria',
+};
 
 const TAB_DATA = [
   {
@@ -11,10 +18,11 @@ const TAB_DATA = [
     title: 'Soluciones profesionales para espacios y operaciones.',
     body: 'Línea base de químicos para limpieza cotidiana. Cumplimiento COFEPRIS, NOM-016 y FDA/EPA cuando aplica. Disponible de 1L a 200L y a granel.',
     sub: [
-      { name: 'Limpieza general', desc: 'Multiusos, desengrasantes y limpiadores para superficies, pisos, vidrios y baños.', sector: 'Oficinas, comercios y operación cotidiana.' },
-      { name: 'Lavandería',       desc: 'Detergentes, blanqueadores y suavizantes para textil de alto volumen.', sector: 'Hotelería, hospitales y lavanderías industriales.' },
-      { name: 'Cocina',           desc: 'Desengrasantes, desincrustantes y limpiadores compatibles con grado alimenticio.', sector: 'Cocinas industriales y procesos alimenticios.' },
-      { name: 'Autos',            desc: 'Shampoo, ceras y limpiadores para detallado vehicular y flota.', sector: 'Autolavados, agencias y flotas.' },
+      { name: 'Limpiadores multiusos concentrados', desc: 'Fórmulas diluibles para limpieza general de superficies lavables.', sector: 'Oficinas, comercios y operación cotidiana.' },
+      { name: 'Desengrasantes industriales', desc: 'Remoción de grasa y residuo aceitoso en piso, maquinaria y área de proceso.', sector: 'Talleres, plantas y áreas de producción.' },
+      { name: 'Blanqueadores y cloros', desc: 'Soluciones cloradas para blanqueo y limpieza de superficies resistentes.', sector: 'Sanitarios, pisos y áreas de alta rotación.' },
+      { name: 'Cuidado de superficies (pisos, vidrios y madera)', desc: 'Limpiadores y abrillantadores formulados según el tipo de acabado.', sector: 'Recepciones, oficinas y áreas de exhibición.' },
+      { name: 'Control de plagas', desc: 'Insecticidas y repelentes de uso profesional para mantenimiento preventivo.', sector: 'Almacenes, exteriores y áreas de servicio.' },
     ],
   },
   {
@@ -24,12 +32,13 @@ const TAB_DATA = [
     accent: 'green',
     eyebrow: '02 · Limpieza enzimática especializada',
     title: 'Tecnología que limpia en profundidad, no enmascara.',
-    body: 'Formulaciones a base de enzimas y microorganismos seleccionados. Reduce DBO/DQO documentada en cliente, sin químicos agresivos ni residuos en agua residual.',
+    body: 'Formulaciones a base de enzimas y microorganismos seleccionados. Actúan sobre la materia orgánica sin químicos agresivos ni residuos en agua residual.',
     sub: [
-      { name: 'Limpieza general enzimática',                     desc: 'Limpiadores con enzimas que degradan materia orgánica residual.', sector: 'Superficies con biocarga alta y proceso alimenticio.' },
-      { name: 'Detergentes enzimáticos para lavandería',         desc: 'Quita manchas proteicas, grasas y sangre en una sola dosis.', sector: 'Hospitales, restaurantes y procesos industriales.' },
-      { name: 'Eliminadores de olores',                          desc: 'Neutralización enzimática de moléculas orgánicas (H₂S, mercaptanos, amoníaco).', sector: 'Baños públicos, drenajes y áreas de proceso.' },
-      { name: 'Bacterias para trampas de grasa',                 desc: 'Bioaumentación dirigida. Mantiene PTARs y trampas operando sin químico agresivo.', sector: 'PTARs municipales, industriales y cocinas con trampa.' },
+      { name: 'Desengrasantes enzimáticos', desc: 'Enzimas que degradan grasa y materia orgánica sin químico agresivo.', sector: 'Cocinas industriales y líneas de proceso alimenticio.' },
+      { name: 'Biodigestores para trampas de grasa y fosas sépticas', desc: 'Consorcios bacterianos para mantenimiento de trampas, fosas y cárcamos.', sector: 'PTAR, trampas de grasa y drenaje institucional.' },
+      { name: 'Limpiadores multiusos enzimáticos', desc: 'Limpieza general con acción enzimática sobre residuo orgánico.', sector: 'Superficies con biocarga alta y uso frecuente.' },
+      { name: 'Detergentes enzimáticos para ropa', desc: 'Detergentes con enzimas para manchas proteicas y grasas en textil.', sector: 'Hospitales, hotelería y lavandería industrial.' },
+      { name: 'Control enzimático de olores', desc: 'Neutralización de las moléculas orgánicas que originan el olor, sin enmascararlo.', sector: 'Sanitarios, drenajes y áreas de residuos.' },
     ],
   },
   {
@@ -42,58 +51,108 @@ const TAB_DATA = [
     body: 'Familia completa de desinfectantes con cobertura regulatoria. Selección por concentración, ingrediente activo y nivel de criticidad.',
     note: 'Disponibles en altas concentraciones y listos para usar (LPU).',
     sub: [
-      { name: 'Desinfectantes convencionales',  desc: 'Cuaternarios, peroxídicos y clorados con cumplimiento COFEPRIS.', sector: 'Uso diario en comercios, oficinas y operación general.' },
-      { name: 'Desinfectantes especializados',  desc: 'Sanitizantes grado alimenticio y áreas críticas con respaldo FDA/EPA.', sector: 'Procesos regulados, áreas críticas y grado farmacéutico.' },
-      { name: 'Desinfectantes industriales',    desc: 'Alta concentración para dosificación automatizada en procesos.', sector: 'PTAR, torres de enfriamiento y procesos industriales.' },
+      { name: 'Desinfectantes de alto nivel a base de cuaternarios de amonio', desc: 'Amonio cuaternario en distintas generaciones y concentraciones.', sector: 'Superficies de contacto y áreas de uso general.' },
+      { name: 'Desinfectantes a base de glutaraldehído', desc: 'Formulaciones para desinfección de instrumental y superficies críticas.', sector: 'Clínicas, laboratorios y áreas críticas.' },
+      { name: 'Antisépticos a base de alcohol', desc: 'Soluciones alcohólicas para antisepsia de manos y superficies.', sector: 'Puntos de higiene, consultorios y accesos.' },
+      { name: 'Jabones antibacteriales para manos', desc: 'Jabones con agente antibacterial para lavado frecuente.', sector: 'Sanitarios, cocinas y áreas de proceso.' },
+      { name: 'Limpiadores desinfectantes multiusos', desc: 'Producto de un paso que limpia y desinfecta en la misma aplicación.', sector: 'Operación diaria en comercios e instituciones.' },
     ],
   },
   {
-    id: 'bodycare',
-    label: 'Body Care',
+    id: 'banos-cocina',
+    label: 'Baños y cocina',
     short: '04',
     accent: 'green',
-    eyebrow: '04 · Body Care',
-    title: 'Línea de cuidado personal para marca privada y hotelería.',
-    body: 'Formulaciones balanceadas (pH 5.5) con fragancia premium. Disponibles como amenidad hotelera o producto consumer bajo marca privada.',
+    eyebrow: '04 · Baños y cocina',
+    title: 'Producto específico para las dos áreas de mayor exigencia sanitaria.',
+    body: 'Formulaciones diferenciadas por tipo de residuo y material: incrustación mineral en sanitarios, grasa carbonizada en cocina y acabados que exigen producto no abrasivo.',
     sub: [
-      { name: 'Jabones corporales',  desc: 'Surfactantes suaves con fragancia premium y respaldo dermatológico.',  sector: 'Hotelería, gimnasios y marca privada residencial.' },
-      { name: 'Shampoo corporal',    desc: 'Formulación pH 5.5 sin sulfatos agresivos. Amenidad o consumer.',     sector: 'Amenidad hotelera o marca privada premium.' },
-      { name: 'Acondicionador',      desc: 'Misma fragancia que el shampoo, con perfil de cabello variable.',     sector: 'Línea completa hotelera o consumer.' },
-      { name: 'Cremas corporales',   desc: 'Hidratación con activos naturales y fragancia coordinada.',           sector: 'Amenidad premium y marca privada.' },
+      { name: 'Removedores de sarro y depósitos minerales', desc: 'Ácidos formulados para incrustación calcárea en sanitarios y tuberías.', sector: 'Baños de alta rotación, regaderas y mingitorios.' },
+      { name: 'Limpiadores de hornos y estufas', desc: 'Alcalinos para grasa carbonizada y residuo horneado.', sector: 'Cocinas industriales y equipo de cocción.' },
+      { name: 'Lavatrastes y utensilios', desc: 'Detergentes para lavado manual y automático de loza y utensilio.', sector: 'Cocinas, comedores y áreas de lavado.' },
+      { name: 'Lavado de frutas y verduras', desc: 'Producto para desinfección de vegetal crudo previo a preparación.', sector: 'Cocinas de proceso alimenticio y comedores.' },
+      { name: 'Limpiadores de acero inoxidable', desc: 'Limpieza y abrillantado sin dejar película ni marcar el acabado.', sector: 'Mobiliario y equipo de cocina en acero.' },
+      { name: 'Limpiadores en polvo abrasivos', desc: 'Acción mecánica para residuo adherido en superficies resistentes.', sector: 'Tarjas, pisos y superficies no delicadas.' },
     ],
   },
   {
-    id: 'mascotas',
-    label: 'Mascotas',
+    id: 'lavanderia',
+    label: 'Lavandería',
     short: '05',
-    accent: 'green',
-    eyebrow: '05 · Mascotas',
-    title: 'Cuidado especializado para tus animales.',
-    body: 'Formulaciones específicas para piel animal, sin tensoactivos agresivos. Disponible como marca propia o privada.',
+    accent: 'blue',
+    eyebrow: '05 · Lavandería',
+    title: 'Ciclo completo de lavado para textil de alto volumen.',
+    body: 'Producto por etapa del proceso: lavado, suavizado, tratamiento puntual de mancha y aromatización final. Para dosificación manual o automatizada.',
     sub: [
-      { name: 'Shampoo para mascotas', desc: 'Formulación específica para piel canina y equina, pH neutro.', sector: 'Estéticas caninas, criaderos y consumer.' },
+      { name: 'Detergentes líquidos para ropa', desc: 'Formulación líquida para dosificación automática o manual.', sector: 'Lavandería industrial, hotelería y hospitales.' },
+      { name: 'Detergentes en polvo', desc: 'Detergente sólido para lavado de alto volumen.', sector: 'Lavanderías y operación de textil institucional.' },
+      { name: 'Suavizantes y acondicionadores de telas', desc: 'Acondicionamiento de la fibra en el ciclo de enjuague.', sector: 'Blancos de hotelería y uniformes.' },
+      { name: 'Quitamanchas', desc: 'Tratamiento puntual previo al lavado según el tipo de mancha.', sector: 'Textil con mancha proteica, grasa o pigmento.' },
+      { name: 'Aromatizantes para ropa', desc: 'Fragancia residual aplicada en el ciclo final.', sector: 'Blancos, uniformes y textil de servicio.' },
+    ],
+  },
+  {
+    id: 'automotriz',
+    label: 'Automotriz',
+    short: '06',
+    accent: 'green',
+    eyebrow: '06 · Automotriz',
+    title: 'Línea para lavado y detallado de vehículo.',
+    body: 'Producto para operación de autolavado y mantenimiento de flota: lavado de carrocería, tratamiento de llanta y protección de superficies interiores.',
+    sub: [
+      { name: 'Detergentes concentrados para lavado de vehículos', desc: 'Shampoo concentrado con formulación a base de cera de carnauba.', sector: 'Autolavados, agencias y flotas.' },
+      { name: 'Abrillantadores y protectores de llantas', desc: 'Acabado y protección del hule frente a resequedad y decoloración.', sector: 'Detallado vehicular y mantenimiento de flota.' },
+      { name: 'Protectores de vinil y superficies plásticas', desc: 'Tratamiento de tablero, molduras y plástico interior.', sector: 'Interiores de vehículo y detallado.' },
     ],
   },
   {
     id: 'aroma',
     label: 'Aroma Experience',
-    short: '06',
+    short: '07',
     accent: 'blue',
-    eyebrow: '06 · Aroma Experience',
+    eyebrow: '07 · Aroma Experience',
     title: 'Aromatización profesional de espacios comerciales e institucionales.',
     body: 'No solo perfumamos: combinamos enzimas neutralizadoras con fragancias profesionales. Equipo + aroma + mantenimiento, en venta o modalidad mensual.',
     sub: [
-      { name: 'Fragancias',                                    desc: 'Aromas profesionales en concentración técnica: cítricos, florales, amaderados, marca propia exclusiva.', sector: 'Hoteles, lobbies, retail y espacios comerciales.' },
-      { name: 'Difusores de aroma',                            desc: 'Equipos de aromatización continua: nebulizadores, dispersores eléctricos, sistemas centralizados.',     sector: 'Lobbies, áreas comunes y baños de alto tráfico.' },
-      { name: 'Servicio de aromatización de espacios',         desc: 'Venta de equipo o modalidad mensual con servicio incluido (equipo + aroma + mantenimiento).',          sector: 'Cadenas, hoteles boutique y operación institucional.' },
+      { name: 'Aromatizantes concentrados de ambiente', desc: 'Fragancia en concentración técnica para dilución o equipo de difusión.', sector: 'Lobbies, retail y espacios comerciales.' },
+      { name: 'Equipos de difusión de aceites esenciales', desc: 'Nebulizadores y difusores para aromatización continua del espacio.', sector: 'Áreas comunes, recepciones y baños de alto tráfico.' },
+      { name: 'Aromatizantes en aerosol y repuestos', desc: 'Presentación en aerosol y cartuchos de reposición para dispensador.', sector: 'Sanitarios y áreas de servicio.' },
     ],
   },
   {
-    id: 'jarciera',
-    label: 'Jarciería e institucional',
-    short: '07',
+    id: 'bodycare',
+    label: 'Body Care',
+    short: '08',
+    accent: 'green',
+    eyebrow: '08 · Body Care',
+    title: 'Línea de cuidado personal para marca privada y hotelería.',
+    body: 'Formulaciones balanceadas (pH 5.5) con fragancia premium. Disponibles como amenidad hotelera o producto consumer bajo marca privada.',
+    sub: [
+      { name: 'Shampoo capilar', desc: 'Formulación para cabello, disponible como amenidad o marca privada.', sector: 'Hotelería, gimnasios y marca privada.' },
+      { name: 'Acondicionadores y enjuagues', desc: 'Acondicionamiento posterior al lavado, con fragancia coordinada.', sector: 'Línea completa hotelera o consumer.' },
+      { name: 'Jabón corporal', desc: 'Surfactantes suaves para uso corporal frecuente.', sector: 'Amenidad hotelera, gimnasios y consumer.' },
+    ],
+  },
+  {
+    id: 'mascotas',
+    label: 'Mascotas',
+    short: '09',
     accent: 'blue',
-    eyebrow: '07 · Jarciería e institucional',
+    eyebrow: '09 · Mascotas',
+    title: 'Cuidado especializado para tus animales.',
+    body: 'Formulaciones específicas para piel animal, sin tensoactivos agresivos. Disponible como marca propia o privada.',
+    sub: [
+      { name: 'Shampoo para baño de mascotas', desc: 'Formulación con pH adecuado para piel animal.', sector: 'Estéticas caninas, criaderos y consumer.' },
+      { name: 'Control enzimático de olores', desc: 'Neutralización de olor de origen orgánico en áreas de estancia animal.', sector: 'Criaderos, veterinarias y hogares con mascota.' },
+      { name: 'Limpieza de alfombras y tapicería', desc: 'Remoción de residuo orgánico en textil de piso y mueble.', sector: 'Interiores con mascota y áreas de estancia.' },
+    ],
+  },
+  {
+    id: 'jarcieria',
+    label: 'Jarciería e institucional',
+    short: '10',
+    accent: 'green',
+    eyebrow: '10 · Jarciería e institucional',
     title: 'Todo el material de limpieza para operación profesional.',
     body: 'Inventario activo en planta SLP. Cubre 100 % de la canasta operativa: químicos, accesorios, consumibles, protección y desechables.',
     sub: [
@@ -107,6 +166,7 @@ const TAB_DATA = [
       { name: 'Protección y uso personal',   desc: 'Guantes, cubrebocas, lentes, mandiles y botas industriales.',                        sector: 'Operación con normativa de seguridad.' },
       { name: 'Textiles de limpieza',        desc: 'Microfibras, paños técnicos y toallas industriales.',                                sector: 'Housekeeping y limpieza fina.' },
       { name: 'WC y sanitarios',             desc: 'Desinfectantes específicos para WC, escobillas y dispensadores sanitarios.',         sector: 'Baños públicos y de alta rotación.' },
+      { name: 'Dispensadores y dosificadores', desc: 'Equipo para suministro controlado de producto e insumos en el punto de uso.', sector: 'Sanitarios, cocinas y áreas de limpieza.' },
     ],
   },
 ];
@@ -303,9 +363,13 @@ function ProductosTabs() {
   const initial = (() => {
     if (typeof window === 'undefined') return 'convencional';
     const ids = TAB_DATA.map(t => t.id);
-    const hash = (window.location.hash || '').replace('#', '');
+    // El alias se aplica ANTES de validar: así un enlace viejo con
+    // ?tab=jarciera#jarciera sigue abriendo la pestaña de Jarciería en vez de
+    // caer al default. Esos enlaces están publicados en el Footer del sitio.
+    const alias = (v) => ALIAS_TABS[v] || v;
+    const hash = alias((window.location.hash || '').replace('#', ''));
     const params = new URLSearchParams(window.location.search);
-    const q = params.get('tab') || params.get('linea');
+    const q = alias(params.get('tab') || params.get('linea'));
     return ids.includes(hash) ? hash : (ids.includes(q) ? q : 'convencional');
   })();
   const [active, setActive] = useStateTabs(initial);
